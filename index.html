@@ -884,6 +884,17 @@
         text-transform: uppercase;
         font-size: 80px;
     }
+    /* "NOT" highlight — same red-block treatment as the manifesto's
+       CUTE, but the hard shadow is cream (var(--fg)) so it shows up on
+       this section's dark background. */
+    .features-h2 .hl-red {
+        background: #E63946;
+        color: #FFFFFF;
+        padding: 0 14px 4px;
+        display: inline-block;
+        transform: rotate(2deg);
+        box-shadow: 4px 4px 0 var(--fg);
+    }
     .features-side {
         font-family: 'JetBrains Mono', monospace;
         font-size: 13px;
@@ -1672,7 +1683,7 @@
     <div class="features-head">
         <div>
             <div class="mockup-tag">// SECTION 05 / FEATURES</div>
-            <h2 class="features-h2">NINE<br>WAYS TO<br>NOT ROT.</h2>
+            <h2 class="features-h2">NINE<br>WAYS TO<br><span class="hl-red">NOT</span> ROT.</h2>
         </div>
         <div class="features-side">FOUR TABS, THREE SHIELDS, TWO LANGUAGES, ONE CRANKY KRAKEN.</div>
     </div>
