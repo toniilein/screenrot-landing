@@ -525,7 +525,11 @@
         flex-direction: column;
         align-items: center;
         gap: 8px;
+        cursor: pointer;
+        transition: background .15s;
     }
+    /* Hovering a cell drives the hero mood card (see JS). */
+    .moods-grid-cell:hover { background: rgba(242, 239, 230, 0.07); }
     .moods-grid-cell .label {
         font-family: 'JetBrains Mono', monospace;
         font-size: 9px;
@@ -1346,10 +1350,10 @@
             <stop offset="100%" stop-color="#C29A4E"/>
         </linearGradient>
         <linearGradient id="ghostGrad-sad" x1="0.30" y1="0" x2="0.70" y2="1">
-            <stop offset="0%"   stop-color="#FFD9E0"/>
-            <stop offset="33%"  stop-color="#F7A8BF"/>
-            <stop offset="66%"  stop-color="#C76987"/>
-            <stop offset="100%" stop-color="#4A2138"/>
+            <stop offset="0%"   stop-color="#FAD9D3"/>
+            <stop offset="33%"  stop-color="#EB948C"/>
+            <stop offset="66%"  stop-color="#D4756B"/>
+            <stop offset="100%" stop-color="#A04A40"/>
         </linearGradient>
         <linearGradient id="ghostGrad-zombie" x1="0.30" y1="0" x2="0.70" y2="1">
             <stop offset="0%"   stop-color="#E8EDF2"/>
@@ -2004,13 +2008,14 @@
     };
     let moodIdx = 0;
 
-    function setHeroMood(idx) {
+    function setHeroMood(idx, forceMascot) {
         const mood = MOODS[idx];
         // Mascot rotation: happy + sad → kraken, ecstatic + zombie → ghost.
-        // Picks the mascot whose face/color contrasts best with each
-        // mood-tinted card (yellow + coral cards stay warm with the
-        // kraken; the mint and grey cards get the ghost's cool gradient).
-        const useKraken = mood === 'happy' || mood === 'sad';
+        // `forceMascot` ('kraken' | 'ghost') overrides the rotation — used
+        // when a mood swatch in the team section is hovered.
+        const useKraken = forceMascot
+            ? forceMascot === 'kraken'
+            : (mood === 'happy' || mood === 'sad');
 
         const card = document.getElementById('moodCard');
         card.dataset.mood = mood;
@@ -2032,8 +2037,11 @@
         stage.innerHTML = useKraken ? krakenSVG(mood) : ghostSVG(mood);
     }
 
+    // Hovering a team-section mood swatch pauses this auto-cycle.
+    let heroHover = false;
     setHeroMood(0);
     setInterval(() => {
+        if (heroHover) return;
         moodIdx = (moodIdx + 1) % MOODS.length;
         setHeroMood(moodIdx);
     }, 1600);
@@ -2049,16 +2057,28 @@
        4-MOODS GRIDS — small mascots, one per mood, framed with
        label below.
        ────────────────────────────────────────────────────────────── */
-    function moodCell(svg, mood) {
-        return `<div class="moods-grid-cell">
+    function moodCell(svg, mood, mascot) {
+        return `<div class="moods-grid-cell" data-mood="${mood}" data-mascot="${mascot}">
             <div style="width: 90px; height: 90px;">${svg}</div>
             <div class="label">${mood.toUpperCase()}</div>
         </div>`;
     }
     document.getElementById('krakenMoodsGrid').innerHTML =
-        MOODS.map(m => moodCell(krakenSVG(m), m)).join('');
+        MOODS.map(m => moodCell(krakenSVG(m), m, 'kraken')).join('');
     document.getElementById('ghostMoodsGrid').innerHTML =
-        MOODS.map(m => moodCell(ghostSVG(m), m)).join('');
+        MOODS.map(m => moodCell(ghostSVG(m), m, 'ghost')).join('');
+
+    // Hovering a mood swatch drives the hero mood card — it shows that
+    // mascot in that mood and pauses the auto-cycle until the mouse
+    // leaves. moodIdx is synced so the cycle resumes from the hovered mood.
+    document.querySelectorAll('.moods-grid-cell').forEach(cell => {
+        cell.addEventListener('mouseenter', () => {
+            heroHover = true;
+            moodIdx = MOODS.indexOf(cell.dataset.mood);
+            setHeroMood(moodIdx, cell.dataset.mascot);
+        });
+        cell.addEventListener('mouseleave', () => { heroHover = false; });
+    });
 
     /* ──────────────────────────────────────────────────────────────
        PHONE MOCKUP — mini ghost in Brainrot mood inside the Overview
