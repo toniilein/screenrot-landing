@@ -2059,28 +2059,25 @@
     // ── Mood cycle, driven by the loading bar ──
     // The .mood-progress-fill runs a `moodProgress` width animation for
     // HERO_CYCLE_MS; when it finishes, the hero advances to the next
-    // mood and the bar refills. Hovering a team mood swatch pauses it.
+    // mood and the bar refills.
     const HERO_CYCLE_MS = 1600;
     const moodProgressFill = document.getElementById('moodProgressFill');
-    let heroHover = false;
 
-    function runProgress(paused) {
+    function runProgress() {
         // Restart the fill animation from 0%.
         moodProgressFill.style.animation = 'none';
         void moodProgressFill.offsetWidth;  // reflow so the restart registers
         moodProgressFill.style.animation = `moodProgress ${HERO_CYCLE_MS}ms linear forwards`;
-        moodProgressFill.style.animationPlayState = paused ? 'paused' : 'running';
     }
 
     moodProgressFill.addEventListener('animationend', () => {
-        if (heroHover) return;
         moodIdx = (moodIdx + 1) % MOODS.length;
         setHeroMood(moodIdx);
-        runProgress(false);
+        runProgress();
     });
 
     setHeroMood(0);
-    runProgress(false);
+    runProgress();
 
     /* ──────────────────────────────────────────────────────────────
        TEAM CARDS — single ecstatic mascot per team (no animation
@@ -2104,20 +2101,15 @@
     document.getElementById('ghostMoodsGrid').innerHTML =
         MOODS.map(m => moodCell(ghostSVG(m), m, 'ghost')).join('');
 
-    // Hovering a mood swatch drives the hero mood card — it shows that
-    // mascot in that mood and freezes the loading bar at 0% until the
-    // mouse leaves, then the bar fills and the cycle resumes from there.
+    // Hovering a mood swatch previews that mood on the big team mascot
+    // directly above its grid; leaving reverts it to ecstatic.
     document.querySelectorAll('.moods-grid-cell').forEach(cell => {
-        cell.addEventListener('mouseenter', () => {
-            heroHover = true;
-            moodIdx = MOODS.indexOf(cell.dataset.mood);
-            setHeroMood(moodIdx, cell.dataset.mascot);
-            runProgress(true);   // reset the bar to 0%, paused
-        });
-        cell.addEventListener('mouseleave', () => {
-            heroHover = false;
-            moodProgressFill.style.animationPlayState = 'running';
-        });
+        const mood = cell.dataset.mood;
+        const isKraken = cell.dataset.mascot === 'kraken';
+        const target = document.getElementById(isKraken ? 'teamKrakenMascot' : 'teamGhostMascot');
+        const render = isKraken ? krakenSVG : ghostSVG;
+        cell.addEventListener('mouseenter', () => { target.innerHTML = render(mood); });
+        cell.addEventListener('mouseleave', () => { target.innerHTML = render('ecstatic'); });
     });
 
     /* ──────────────────────────────────────────────────────────────
