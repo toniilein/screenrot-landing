@@ -518,20 +518,14 @@
         grid-template-columns: repeat(4, 1fr);
         gap: 12px;
     }
-    /* Each mood cell is filled with that mood's own color (same palette
-       as the hero cards) instead of a grey outline. */
     .moods-grid-cell {
-        padding: 14px 12px;
+        border: 2px solid var(--fg);
+        padding: 12px;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 8px;
-        background: var(--m-ecstatic-bg);
-        color: var(--m-ecstatic-fg);
     }
-    .moods-grid-cell[data-mood="happy"]  { background: var(--m-happy-bg);  color: var(--m-happy-fg); }
-    .moods-grid-cell[data-mood="sad"]    { background: var(--m-sad-bg);    color: var(--m-sad-fg); }
-    .moods-grid-cell[data-mood="zombie"] { background: var(--m-zombie-bg); color: var(--m-zombie-fg); }
     .moods-grid-cell .label {
         font-family: 'JetBrains Mono', monospace;
         font-size: 9px;
@@ -2056,7 +2050,7 @@
        label below.
        ────────────────────────────────────────────────────────────── */
     function moodCell(svg, mood) {
-        return `<div class="moods-grid-cell" data-mood="${mood}">
+        return `<div class="moods-grid-cell">
             <div style="width: 90px; height: 90px;">${svg}</div>
             <div class="label">${mood.toUpperCase()}</div>
         </div>`;
