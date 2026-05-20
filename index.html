@@ -616,7 +616,7 @@
         padding: 20px 0;
     }
     .phone-tilt-l {
-        transform: rotate(-2deg) scale(0.85);
+        transform: rotate(-6deg) scale(0.85);
         transform-origin: center;
         filter: drop-shadow(8px 8px 0 var(--fg));
         position: relative;
@@ -625,10 +625,10 @@
     /* Right phone slides left to overlap the left one — fanned-deck look.
        z-index puts it in front. */
     .phone-tilt-r {
-        transform: rotate(2deg) scale(0.85) translateY(30px);
+        transform: rotate(6deg) scale(0.85) translateY(30px);
         transform-origin: center;
         filter: drop-shadow(8px 8px 0 var(--accent));
-        margin-left: -90px;
+        margin-left: -180px;
         position: relative;
         z-index: 2;
     }
@@ -1230,24 +1230,24 @@
         .cta-h2 { font-size: 72px; }
         .mood-card-stage { height: 240px; }
         .mascot-stage { width: 260px; height: 260px; }
-        /* Stack the two iPhone mockups. Each wrapper is sized to the
-           SCALED phone footprint (320×680 × 0.7 = 224×476); the
-           .ios-device inside is scaled from its top-left corner so it
-           fills the wrapper exactly. No negative-margin hacks — those
-           don't collapse inside a flex container, they sum, which is
-           what caused the clipped/overlapping phones. */
-        .phones { flex-direction: column; gap: 36px; align-items: center; }
+        /* Keep the two iPhone mockups on ONE line — same overlapping,
+           angled fan as desktop, just scaled down. Each wrapper is the
+           scaled footprint (320×680 × 0.5 = 160×340); the .ios-device
+           inside scales from its top-left corner to fill it. The right
+           phone slides left to overlap; both wrappers are rotated. */
+        .phones { flex-direction: row; gap: 0; justify-content: center; align-items: center; }
         .phone-tilt-l, .phone-tilt-r {
-            transform: none;
             margin: 0;
-            width: 224px;
-            height: 476px;
+            width: 160px;
+            height: 340px;
         }
         .phone-tilt-l .ios-device,
         .phone-tilt-r .ios-device {
-            transform: scale(0.7);
+            transform: scale(0.5);
             transform-origin: top left;
         }
+        .phone-tilt-l { transform: rotate(-6deg); }
+        .phone-tilt-r { transform: rotate(6deg); margin-left: -82px; }
     }
     @media (max-width: 400px) {
         /* Tightest phones — shrink the display headings whose longest
