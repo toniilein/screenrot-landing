@@ -1,0 +1,2066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScreenRot — Stop the Rot.</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+    /* ──────────────────────────────────────────────────────────────
+       BRUTALIST REDESIGN — Direction B from ScreenRot Redesign.html
+       Heavy display type, sharp edges, hard color blocks, ticker tape,
+       dark base. Single mood card alternates kraken/ghost per mood tick.
+       ────────────────────────────────────────────────────────────── */
+
+    :root {
+        --bg: #0A0A0A;
+        --fg: #F2EFE6;
+        --accent: #8CE0B3;        /* toxic mint */
+        --accent-name: 'TOXIC MINT';
+
+        /* Mood palette — matches BrutalistDirection.moodPalette.
+           Ecstatic mood card shows the GHOST now (purple-blue gradient),
+           so the bg can be a brighter mint without the green-on-green
+           camouflage we had when the kraken sat on it. */
+        --m-ecstatic-bg: #6FC18C; --m-ecstatic-fg: #0A1F12;
+        /* Happy + sad cards show the kraken. Bg stays LIGHTER than the
+           kraken's mid-body (so the mascot pops) but is now a notch
+           darker than the previous very-pale wash so the cards still
+           read as their mood color. */
+        --m-happy-bg:    #FBE5A0; --m-happy-fg:    #1F180A;
+        --m-sad-bg:      #F4C5B8; --m-sad-fg:      #1F0A0A;
+        --m-zombie-bg:   #C9C2BD; --m-zombie-fg:   #0A0A0A;
+
+        /* Team palette — kraken on pastel mint that's LIGHTER than the
+           mascot's body (#8CE0B3) so the mid-tone kraken pops as the
+           darker accent. Ghost stays on violet. */
+        --team-kraken-bg: #BFEED4; --team-kraken-fg: #0A1F12;
+        --team-ghost-bg:  #A18CFF; --team-ghost-fg:  #0A0A1F;
+
+        /* Feature card hover colors */
+        --c-yellow: #F7D866;
+        --c-coral:  #F08C72;
+        --c-paper:  #F2EFE6;
+        --c-gray:   #C9C2BD;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+        background: var(--bg);
+        color: var(--fg);
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.45;
+        overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* Typography utilities */
+    .br-display {
+        font-family: 'Archivo Black', 'Inter', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        line-height: 0.85;
+        text-transform: uppercase;
+    }
+    .br-mono {
+        font-family: 'JetBrains Mono', 'Courier New', monospace;
+    }
+
+    /* CTA buttons — solid fill, hard shadow on hover */
+    .br-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        padding: 22px 36px;
+        background: var(--fg);
+        color: var(--bg);
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 900;
+        font-size: 18px;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        text-decoration: none;
+        border: 4px solid var(--fg);
+        transition: transform .15s, box-shadow .15s, background .15s, color .15s;
+        cursor: pointer;
+    }
+    .br-cta:hover {
+        background: transparent;
+        color: var(--fg);
+        transform: translate(-3px, -3px);
+        box-shadow: 6px 6px 0 var(--fg);
+    }
+    .br-cta-alt {
+        background: transparent;
+        color: var(--fg);
+    }
+    .br-cta-alt:hover {
+        background: var(--fg);
+        color: var(--bg);
+    }
+
+    /* ── NAV ── */
+    nav {
+        border-bottom: 4px solid var(--fg);
+        padding: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--bg);
+    }
+    .nav-logo {
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        line-height: 0.85;
+        text-transform: uppercase;
+        font-size: 28px;
+    }
+    .nav-logo .star { color: var(--accent); }
+    .nav-links {
+        display: flex;
+        gap: 4px;
+        list-style: none;
+        align-items: center;
+    }
+    .nav-links a {
+        padding: 8px 14px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--fg);
+        text-decoration: none;
+        border: 2px solid transparent;
+        transition: border-color .15s;
+    }
+    .nav-links a:hover { border-color: var(--fg); }
+    .nav-links a.nav-cta {
+        background: var(--fg);
+        color: var(--bg);
+        margin-left: 8px;
+    }
+    .nav-links a.nav-cta:hover { background: var(--accent); color: var(--bg); border-color: transparent; }
+
+    /* ── TICKER ── */
+    .ticker-row {
+        border-top: 4px solid var(--fg);
+        border-bottom: 4px solid var(--fg);
+        background: var(--accent);
+        color: var(--m-ecstatic-fg);
+        overflow: hidden;
+        white-space: nowrap;
+        padding: 10px 0;
+    }
+    .ticker-inner {
+        display: inline-block;
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        line-height: 0.85;
+        text-transform: uppercase;
+        font-size: 18px;
+        animation: ticker-scroll 40s linear infinite;
+    }
+    .ticker-inner span { margin-right: 40px; }
+    @keyframes ticker-scroll {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-50%); }
+    }
+
+    /* ── HERO ── */
+    .hero {
+        padding: 60px 40px 80px;
+        position: relative;
+        background-image: linear-gradient(to right, rgba(242, 239, 230, 0.06) 1px, transparent 1px);
+        background-size: 80px 100%;
+    }
+    .hero-inner {
+        display: grid;
+        grid-template-columns: 1fr 420px;
+        gap: 40px;
+        align-items: start;
+    }
+    .hero-tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        opacity: 0.6;
+        margin-bottom: 24px;
+    }
+    .hero-h1 {
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        line-height: 0.85;
+        text-transform: uppercase;
+        font-size: 180px;
+        margin-bottom: 24px;
+    }
+    .hero-mood-word { transition: color .4s; }
+    .hero-p-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        margin-top: 40px;
+        max-width: 720px;
+    }
+    .hero-p {
+        font-size: 17px;
+        line-height: 1.5;
+        opacity: 0.85;
+        text-transform: uppercase;
+    }
+    .hero-ctas {
+        margin-top: 48px;
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    /* Mood card — right side of hero, mascot inside */
+    .mood-card {
+        background: var(--m-ecstatic-bg);
+        color: var(--m-ecstatic-fg);
+        border: 4px solid var(--fg);
+        padding: 28px;
+        transition: background .4s, color .4s;
+    }
+    .mood-card[data-mood="happy"]   { background: var(--m-happy-bg);   color: var(--m-happy-fg); }
+    .mood-card[data-mood="sad"]     { background: var(--m-sad-bg);     color: var(--m-sad-fg); }
+    .mood-card[data-mood="zombie"]  { background: var(--m-zombie-bg);  color: var(--m-zombie-fg); }
+
+    .mood-feed-row {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        font-weight: 700;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+    }
+    .mood-card-stage {
+        border-top: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        margin: 8px 0 16px;
+        height: 320px;
+        position: relative;
+        overflow: hidden;
+    }
+    .mood-card-label {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        font-weight: 700;
+        opacity: 0.7;
+        letter-spacing: 0.1em;
+        z-index: 2;
+    }
+    .mascot-stage {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        /* Default is the kraken position: -42% pulls the body up so the
+           tentacles sit at the bottom edge of the stage. */
+        transform: translate(-50%, -42%);
+        pointer-events: none;
+        width: 340px;
+        height: 340px;
+    }
+    /* The ghost has no tentacles — body fills more of its viewBox, so
+       it needs a slightly bigger upward shift than the kraken to sit
+       visually centered. -48% lands between the kraken's -42% (which
+       leaves the ghost crowding the BRAINROT label) and -55% (which
+       pushed it too high, leaving too much air below). */
+    .mascot-stage[data-mascot="ghost"] {
+        transform: translate(-50%, -48%);
+    }
+    .mood-card-tier {
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        line-height: 0.85;
+        text-transform: uppercase;
+        font-size: 28px;
+        margin-bottom: 4px;
+    }
+    .mood-card-meta {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    /* ── MANIFESTO BAND ── */
+    .manifesto {
+        background: var(--fg);
+        color: var(--bg);
+        border-top: 4px solid var(--fg);
+        border-bottom: 4px solid var(--fg);
+        padding: 80px 40px;
+    }
+    .manifesto-tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        margin-bottom: 24px;
+        letter-spacing: 0.1em;
+    }
+    .manifesto h2 {
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        text-transform: uppercase;
+        font-size: 88px;
+        line-height: 0.9;
+    }
+    .manifesto h2 .cute {
+        /* Highlighter-pen treatment in a punchy red — picks up more
+           visual weight than the previous coral .sad mood color, so
+           CUTE pops as a strong warning-contrast against RIZZ's
+           mint. Tilted +2deg to counter-balance RIZZ's -2deg. */
+        background: #E63946;
+        color: #FFFFFF;
+        padding: 0 14px 4px;
+        display: inline-block;
+        transform: rotate(2deg);
+        box-shadow: 4px 4px 0 var(--bg);
+    }
+    .manifesto h2 .tents {
+        background: var(--bg);
+        color: var(--fg);
+        padding: 0 12px;
+    }
+
+    /* ── TEAMS (PICK A SIDE) ── */
+    .teams { border-top: 4px solid var(--fg); }
+    .teams-head { padding: 80px 40px 40px; }
+    .teams-tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        opacity: 0.6;
+        margin-bottom: 12px;
+    }
+    .teams-h2 {
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        line-height: 0.85;
+        text-transform: uppercase;
+        font-size: 96px;
+        margin-bottom: 16px;
+    }
+    .teams-p {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 14px;
+        opacity: 0.7;
+        max-width: 720px;
+        line-height: 1.5;
+        text-transform: uppercase;
+    }
+    .teams-split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border-top: 4px solid var(--fg);
+    }
+    .team-cell {
+        padding: 56px 48px;
+        min-height: 640px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        overflow: hidden;
+    }
+    .team-cell.kraken {
+        background: var(--team-kraken-bg);
+        color: var(--team-kraken-fg);
+        border-right: 4px solid var(--fg);
+    }
+    .team-cell.ghost {
+        background: var(--team-ghost-bg);
+        color: var(--team-ghost-fg);
+    }
+    .team-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    .team-cell-h3 {
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        text-transform: uppercase;
+        font-size: 84px;
+        line-height: 0.85;
+        margin-top: 12px;
+    }
+    .team-fig {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        font-weight: 700;
+        text-align: right;
+        line-height: 1.5;
+    }
+    .team-mascot {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        margin: 24px 0;
+    }
+    .team-footer {
+        border-top: 3px solid currentColor;
+        padding-top: 16px;
+    }
+    .team-footer-h {
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        text-transform: uppercase;
+        font-size: 18px;
+        margin-bottom: 6px;
+    }
+    .team-footer-p {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1.5;
+        text-transform: uppercase;
+    }
+    .team-tags {
+        display: flex;
+        gap: 6px;
+        margin-top: 16px;
+        flex-wrap: wrap;
+    }
+    .team-tag {
+        font-family: 'JetBrains Mono', monospace;
+        padding: 4px 10px;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    .team-cell.kraken .team-tag { background: var(--team-kraken-fg); color: var(--team-kraken-bg); }
+    .team-cell.ghost  .team-tag { background: var(--team-ghost-fg);  color: var(--team-ghost-bg); }
+    /* Highlighter-pen tag — toxic mint variant. Same vibe as the
+       manifesto's RIZZ pill. Higher specificity (.team-tag.team-
+       tag--rizz) so it overrides the per-team rules above. */
+    .team-cell .team-tag.team-tag--rizz {
+        background: var(--accent);
+        color: var(--m-ecstatic-fg);
+        padding: 5px 12px 7px;
+        display: inline-block;
+        transform: rotate(-2deg);
+        box-shadow: 3px 3px 0 var(--bg);
+    }
+    /* Purple variant — same style, Team Ghost palette. */
+    .team-cell .team-tag.team-tag--rizz-purple {
+        background: var(--team-ghost-bg);
+        color: var(--team-ghost-fg);
+        padding: 5px 12px 7px;
+        display: inline-block;
+        transform: rotate(-2deg);
+        box-shadow: 3px 3px 0 var(--bg);
+    }
+    .team-number {
+        position: absolute;
+        bottom: -30px;
+        right: -30px;
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 900;
+        font-size: 280px;
+        opacity: 0.08;
+        line-height: 0.8;
+        letter-spacing: -0.05em;
+        pointer-events: none;
+    }
+
+    /* 4-moods grid for each mascot */
+    .teams-moods {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border-top: 4px solid var(--fg);
+    }
+    .moods-cell { padding: 32px 24px; }
+    .moods-cell.first { border-right: 4px solid var(--fg); }
+    .moods-tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        font-weight: 700;
+        opacity: 0.6;
+        margin-bottom: 16px;
+        letter-spacing: 0.1em;
+    }
+    .moods-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+    }
+    .moods-grid-cell {
+        border: 2px solid var(--fg);
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+    .moods-grid-cell .label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 9px;
+        font-weight: 700;
+        opacity: 0.8;
+        text-transform: uppercase;
+    }
+
+    /* ── PRODUCT MOCKUP ── */
+    .mockup {
+        padding: 100px 40px;
+        position: relative;
+        border-top: 4px solid var(--fg);
+        border-bottom: 4px solid var(--fg);
+    }
+    .mockup-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+    }
+    .mockup-tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        opacity: 0.6;
+        margin-bottom: 12px;
+    }
+    .mockup-h2 {
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        line-height: 0.85;
+        text-transform: uppercase;
+        font-size: 88px;
+        margin-bottom: 24px;
+    }
+    .mockup-h2 .big-type { color: var(--accent); }
+    .mockup-p {
+        font-size: 17px;
+        line-height: 1.5;
+        opacity: 0.85;
+        max-width: 480px;
+        margin-bottom: 32px;
+        text-transform: uppercase;
+    }
+    .mockup-list {
+        display: flex;
+        flex-direction: column;
+        border: 2px solid var(--fg);
+    }
+    .mockup-list-row {
+        display: flex;
+        align-items: center;
+    }
+    .mockup-list-row + .mockup-list-row { border-top: 2px solid var(--fg); }
+    .mockup-list-num {
+        width: 60px;
+        padding: 14px 0;
+        text-align: center;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 13px;
+        font-weight: 700;
+        border-right: 2px solid var(--fg);
+    }
+    .mockup-list-body { padding: 12px 16px; flex: 1; }
+    .mockup-list-t {
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        text-transform: uppercase;
+        font-size: 18px;
+    }
+    .mockup-list-d {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        font-weight: 700;
+        opacity: 0.6;
+        margin-top: 2px;
+    }
+
+    .phones {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        align-items: center;
+        position: relative;
+        padding: 20px 0;
+    }
+    .phone-tilt-l {
+        transform: rotate(-2deg) scale(0.85);
+        transform-origin: center;
+        filter: drop-shadow(8px 8px 0 var(--fg));
+    }
+    .phone-tilt-r {
+        transform: rotate(2deg) scale(0.85) translateY(30px);
+        transform-origin: center;
+        filter: drop-shadow(8px 8px 0 var(--accent));
+    }
+
+    /* iOS device frame */
+    .ios-device {
+        width: 320px;
+        height: 680px;
+        border-radius: 48px;
+        overflow: hidden;
+        position: relative;
+        background: #F2F2F7;
+        box-shadow: 0 0 0 1px rgba(0,0,0,0.12);
+        font-family: -apple-system, system-ui, sans-serif;
+    }
+    .ios-island {
+        position: absolute;
+        top: 11px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 126px;
+        height: 37px;
+        border-radius: 24px;
+        background: #000;
+        z-index: 50;
+    }
+    .ios-screen {
+        width: 100%;
+        height: 100%;
+        background: var(--fg);
+        color: var(--bg);
+        padding: 54px 16px 24px;
+        font-family: 'Archivo Black', 'Inter', sans-serif;
+        overflow: hidden;
+    }
+    .ios-home {
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 139px;
+        height: 5px;
+        border-radius: 100px;
+        background: rgba(0,0,0,0.25);
+        z-index: 60;
+    }
+    .ios-section-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        font-weight: 700;
+        opacity: 0.5;
+        letter-spacing: 0.1em;
+        margin-bottom: 4px;
+    }
+    .ios-section-h {
+        font-size: 24px;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        font-family: 'Archivo Black', sans-serif;
+    }
+
+    /* Overview phone screen specifics */
+    .phone-card {
+        background: var(--bg);
+        color: var(--fg);
+        border: 3px solid var(--bg);
+        padding: 16px;
+        margin-bottom: 10px;
+    }
+    .phone-mascot-row {
+        display: flex;
+        justify-content: center;
+        height: 130px;
+        align-items: center;
+    }
+    .phone-mood-pill {
+        /* Mockup shows the worst-case mood (Brainrot / zombie) to
+           sell the "fights back" idea — pill flips to the zombie
+           palette. */
+        background: var(--m-zombie-bg);
+        color: var(--m-zombie-fg);
+        padding: 6px 10px;
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.1em;
+        text-align: center;
+        margin-top: 4px;
+        text-transform: uppercase;
+        font-family: 'Archivo Black', sans-serif;
+    }
+    .phone-time-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-top: 8px;
+    }
+    .phone-time {
+        font-size: 32px;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        font-family: 'Archivo Black', sans-serif;
+    }
+    .phone-time-sub {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        font-weight: 700;
+    }
+    .phone-bars {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 3px;
+        margin-bottom: 12px;
+    }
+    .phone-bar {
+        border: 2px solid var(--bg);
+        height: 44px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+    .phone-bar-fill { background: var(--bg); }
+    .phone-bar.active .phone-bar-fill { background: var(--accent); }
+    .phone-app-row {
+        border: 2px solid var(--bg);
+        display: flex;
+        align-items: center;
+        margin-bottom: 6px;
+    }
+    .phone-app-tile { width: 36px; height: 36px; border-right: 2px solid var(--bg); }
+    .phone-app-name {
+        padding: 0 10px;
+        font-size: 13px;
+        font-weight: 900;
+        flex: 1;
+        letter-spacing: -0.01em;
+        font-family: 'Archivo Black', sans-serif;
+    }
+    .phone-app-time {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 0 10px;
+    }
+
+    /* Shield phone screen specifics */
+    .phone-panic {
+        background: var(--c-coral);
+        color: var(--bg);
+        border: 3px solid var(--bg);
+        padding: 16px;
+        margin-bottom: 12px;
+        position: relative;
+        overflow: hidden;
+    }
+    .phone-panic-tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+    }
+    .phone-panic-h {
+        font-size: 32px;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        margin-top: 4px;
+        line-height: 0.95;
+        font-family: 'Archivo Black', sans-serif;
+        text-transform: uppercase;
+    }
+    .phone-panic-sub {
+        font-size: 11px;
+        font-weight: 700;
+        margin-top: 8px;
+        letter-spacing: 0.05em;
+        font-family: 'JetBrains Mono', monospace;
+    }
+    .phone-panic-bang {
+        position: absolute;
+        bottom: -20px;
+        right: -10px;
+        font-size: 80px;
+        font-weight: 900;
+        opacity: 0.15;
+        font-family: 'Archivo Black', sans-serif;
+    }
+    .phone-shield-row {
+        border: 3px solid var(--bg);
+        margin-bottom: 8px;
+        display: flex;
+    }
+    .phone-shield-tile { width: 44px; border-right: 3px solid var(--bg); }
+    .phone-shield-body { flex: 1; padding: 10px 12px; }
+    .phone-shield-t {
+        font-size: 14px;
+        font-weight: 900;
+        letter-spacing: -0.01em;
+        font-family: 'Archivo Black', sans-serif;
+        text-transform: uppercase;
+    }
+    .phone-shield-d {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        font-weight: 700;
+        opacity: 0.7;
+        text-transform: uppercase;
+    }
+    .phone-shield-arrow {
+        width: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        font-weight: 900;
+    }
+
+    /* ── FEATURES (NINE WAYS TO NOT ROT) ── */
+    .features { padding: 80px 40px; }
+    .features-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 48px;
+    }
+    .features-h2 {
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        line-height: 0.85;
+        text-transform: uppercase;
+        font-size: 80px;
+    }
+    .features-side {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 13px;
+        opacity: 0.6;
+        max-width: 320px;
+        line-height: 1.5;
+        text-transform: uppercase;
+    }
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border: 2px solid var(--fg);
+    }
+    .feature-cell {
+        padding: 28px;
+        min-height: 240px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: background .15s, color .15s;
+        cursor: default;
+    }
+    .feature-cell:nth-child(3n+1),
+    .feature-cell:nth-child(3n+2) { border-right: 2px solid var(--fg); }
+    .feature-cell:nth-child(-n+6) { border-bottom: 2px solid var(--fg); }
+    .feature-cell:hover { color: var(--bg) !important; }
+    .feature-cell[data-color="mint"]:hover   { background: var(--accent); }
+    .feature-cell[data-color="yellow"]:hover { background: var(--c-yellow); }
+    .feature-cell[data-color="coral"]:hover  { background: var(--c-coral); }
+    .feature-cell[data-color="paper"]:hover  { background: var(--c-paper); }
+    .feature-cell-num {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 14px;
+        font-weight: 700;
+    }
+    .feature-cell-h {
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        text-transform: uppercase;
+        font-size: 36px;
+        margin-bottom: 12px;
+    }
+    .feature-cell-d {
+        font-size: 13px;
+        line-height: 1.5;
+        opacity: 0.85;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how {
+        padding: 100px 40px;
+        border-top: 4px solid var(--fg);
+    }
+    .how-tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        opacity: 0.6;
+        margin-bottom: 12px;
+    }
+    .how-h2 {
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        line-height: 0.85;
+        text-transform: uppercase;
+        font-size: 80px;
+        margin-bottom: 56px;
+    }
+    .how-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border: 2px solid var(--fg);
+    }
+    .how-cell {
+        padding: 32px;
+        min-height: 280px;
+        display: flex;
+        flex-direction: column;
+    }
+    .how-cell + .how-cell { border-left: 2px solid var(--fg); }
+    .how-cell-n {
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        text-transform: uppercase;
+        font-size: 96px;
+        color: var(--accent);
+        margin-bottom: 16px;
+        line-height: 0.8;
+    }
+    .how-cell-h {
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        text-transform: uppercase;
+        font-size: 28px;
+        margin-bottom: 12px;
+    }
+    .how-cell-p {
+        font-size: 13px;
+        line-height: 1.5;
+        opacity: 0.8;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+
+    /* ── GET THE APP ── */
+    .get-app {
+        padding: 100px 40px;
+        background: var(--fg);
+        color: var(--bg);
+        border-top: 4px solid var(--fg);
+        border-bottom: 4px solid var(--fg);
+    }
+    .get-app-inner {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 60px;
+        align-items: center;
+    }
+    .get-app-tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+    .get-app-h2 {
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        text-transform: uppercase;
+        font-size: 120px;
+        line-height: 0.82;
+    }
+    .get-app-p {
+        font-size: 17px;
+        font-weight: 600;
+        margin-top: 24px;
+        max-width: 460px;
+        line-height: 1.5;
+        text-transform: uppercase;
+    }
+    .get-app-meta {
+        display: flex;
+        gap: 16px;
+        margin-top: 24px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        font-weight: 700;
+    }
+    .get-app-btns {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+    .app-btn {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 22px 28px;
+        border: 3px solid var(--bg);
+        text-decoration: none;
+        transition: transform .15s, box-shadow .15s;
+    }
+    .app-btn:hover {
+        transform: translate(-3px, -3px);
+        box-shadow: 6px 6px 0 var(--bg);
+    }
+    .app-btn.primary { background: var(--bg); color: var(--fg); }
+    .app-btn.secondary { background: transparent; color: var(--bg); }
+    .app-btn-icon {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .app-btn-icon svg { width: 36px; height: 36px; }
+    .app-btn-body { flex: 1; }
+    .app-btn-tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        font-weight: 700;
+        opacity: 0.7;
+        letter-spacing: 0.1em;
+    }
+    .app-btn-label {
+        font-family: 'Archivo Black', sans-serif;
+        font-size: 24px;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+    }
+    .app-btn-arrow {
+        font-family: 'Archivo Black', sans-serif;
+        font-size: 22px;
+    }
+
+    /* ── CTA ── */
+    .cta {
+        padding: 120px 40px;
+        text-align: center;
+        border-top: 4px solid var(--fg);
+    }
+    .cta-h2 {
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        text-transform: uppercase;
+        font-size: 200px;
+        line-height: 0.85;
+        margin-bottom: 32px;
+    }
+    /* ROT. matches the CUTE highlight in the manifesto — same red
+       block, white text, tilt + hard offset shadow. Tilted -2deg here
+       (CUTE was +2deg) so the page bookends with mirrored angles. */
+    .cta-h2 .rot {
+        background: #E63946;
+        color: #FFFFFF;
+        padding: 0 28px 12px;
+        display: inline-block;
+        transform: rotate(-2deg);
+        box-shadow: 8px 8px 0 var(--bg);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+        border-top: 4px solid var(--fg);
+        padding: 24px 40px;
+        display: flex;
+        justify-content: space-between;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    /* ── KRAKEN + GHOST SVG STYLES ── */
+    .kraken, .ghost {
+        display: block;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+    }
+    .kraken .m, .ghost .m { display: none; }
+    .kraken[data-mood="ecstatic"] .m-ecstatic { display: block; }
+    .kraken[data-mood="happy"] .m-happy { display: block; }
+    .kraken[data-mood="sad"] .m-sad { display: block; }
+    .kraken[data-mood="zombie"] .m-zombie { display: block; }
+
+    .kraken-body { fill: url(#krakenGrad-ecstatic); transition: fill 0.4s ease; }
+    .kraken[data-mood="happy"] .kraken-body { fill: url(#krakenGrad-happy); }
+    .kraken[data-mood="sad"] .kraken-body { fill: url(#krakenGrad-sad); }
+    .kraken[data-mood="zombie"] .kraken-body { fill: url(#krakenGrad-zombie); }
+    /* Zombie / Brainrot mascots rotate 90° clockwise so they look
+       like they've collapsed onto the floor — matches the same
+       effect baked into OctopusMascotView/GhostMascotView in the
+       iOS app. Animated with ease-out so the moment we land on
+       zombie reads as a slow keel-over. */
+    .kraken,
+    .ghost {
+        transform-origin: 50% 50%;
+        transition: transform 0.45s ease-out;
+    }
+    .kraken[data-mood="zombie"],
+    .ghost[data-mood="zombie"] {
+        transform: rotate(90deg);
+    }
+
+    .kraken-tentacles { stroke: url(#krakenTent-ecstatic); transition: stroke 0.4s ease; }
+    .kraken[data-mood="happy"] .kraken-tentacles { stroke: url(#krakenTent-happy); }
+    .kraken[data-mood="sad"] .kraken-tentacles { stroke: url(#krakenTent-sad); }
+    .kraken[data-mood="zombie"] .kraken-tentacles { stroke: url(#krakenTent-zombie); }
+
+    .kraken-spots circle:nth-child(1) { fill-opacity: 0.4; }
+    .kraken-spots circle:nth-child(2) { fill-opacity: 0.3; }
+    .kraken-spots circle:nth-child(3) { fill-opacity: 0.35; }
+    .kraken-spots circle { fill: #73C794; }
+    .kraken[data-mood="happy"] .kraken-spots circle { fill: #EBBF73; }
+    .kraken[data-mood="sad"] .kraken-spots circle { fill: #D98077; }
+    .kraken[data-mood="zombie"] .kraken-spots circle { fill: #948C87; }
+
+    .kraken[data-mood="sad"] .kraken-tear { animation: krakenTear 2.5s ease-in-out infinite; }
+    @keyframes krakenTear {
+        0%, 100% { transform: translateY(0); opacity: 0.85; }
+        50%      { transform: translateY(4px); opacity: 0.55; }
+    }
+
+    .ghost-body, .ghost-arm { transition: fill 0.4s ease; }
+    .ghost[data-mood="ecstatic"] .ghost-body,
+    .ghost[data-mood="ecstatic"] .ghost-arm { fill: url(#ghostGrad-ecstatic); }
+    .ghost[data-mood="happy"] .ghost-body,
+    .ghost[data-mood="happy"] .ghost-arm { fill: url(#ghostGrad-happy); }
+    .ghost[data-mood="sad"] .ghost-body,
+    .ghost[data-mood="sad"] .ghost-arm { fill: url(#ghostGrad-sad); }
+    .ghost[data-mood="zombie"] .ghost-body,
+    .ghost[data-mood="zombie"] .ghost-arm { fill: url(#ghostGrad-zombie); }
+    .ghost-body { fill: url(#ghostGrad-ecstatic); }
+    .ghost-arm  { fill: url(#ghostGrad-ecstatic); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+        .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+        .hero-h1 { font-size: 100px; }
+        .manifesto h2 { font-size: 56px; }
+        .teams-split { grid-template-columns: 1fr; }
+        .team-cell.kraken { border-right: none; border-bottom: 4px solid var(--fg); }
+        .mockup-inner { grid-template-columns: 1fr; gap: 40px; }
+        .mockup-h2 { font-size: 56px; }
+        .features-h2 { font-size: 56px; }
+        .how-h2 { font-size: 56px; }
+        .get-app-inner { grid-template-columns: 1fr; gap: 40px; }
+        .get-app-h2 { font-size: 88px; }
+        .cta-h2 { font-size: 120px; }
+        .features-grid { grid-template-columns: 1fr 1fr; }
+        .feature-cell:nth-child(3n+1),
+        .feature-cell:nth-child(3n+2) { border-right: none; }
+        .feature-cell { border-right: 2px solid var(--fg); border-bottom: 2px solid var(--fg); }
+        .feature-cell:nth-child(2n) { border-right: none; }
+        .how-grid { grid-template-columns: 1fr; }
+        .how-cell + .how-cell { border-left: none; border-top: 2px solid var(--fg); }
+    }
+    @media (max-width: 640px) {
+        nav { padding: 16px 20px; flex-wrap: wrap; gap: 12px; }
+        .nav-links { gap: 0; flex-wrap: wrap; }
+        .hero { padding: 40px 20px; }
+        .hero-h1 { font-size: 52px; }
+        .hero-p-grid { grid-template-columns: 1fr; gap: 16px; }
+        .manifesto, .teams-head, .mockup, .features, .how, .get-app, .cta { padding: 60px 20px; }
+        .manifesto h2 { font-size: 36px; }
+        .teams-h2 { font-size: 52px; }
+        .team-cell { padding: 32px 24px; min-height: 480px; }
+        .team-cell-h3 { font-size: 52px; }
+        /* Stack the two mood grids — side-by-side put 8 mascots across. */
+        .teams-moods { grid-template-columns: 1fr; }
+        .moods-cell.first { border-right: none; border-bottom: 4px solid var(--fg); }
+        .moods-grid { grid-template-columns: repeat(2, 1fr); }
+        .mockup-h2 { font-size: 44px; }
+        .features-h2 { font-size: 44px; }
+        .how-h2 { font-size: 40px; }
+        .get-app-h2 { font-size: 64px; }
+        .features-grid { grid-template-columns: 1fr; }
+        .feature-cell { border-right: none; }
+        .features-head { flex-direction: column; gap: 16px; align-items: flex-start; }
+        .cta-h2 { font-size: 72px; }
+        .mood-card-stage { height: 240px; }
+        .mascot-stage { width: 260px; height: 260px; }
+        /* Stack the two iPhone mockups (fixed 320×680) and scale them
+           down to fit narrow screens. Negative margins collapse the
+           empty space the transform-scale leaves around each box. */
+        .phones { flex-direction: column; gap: 0; }
+        .phone-tilt-l, .phone-tilt-r {
+            transform: scale(0.7);
+            margin: -100px 0;
+        }
+    }
+    @media (max-width: 400px) {
+        /* Tightest phones — shrink the display headings whose longest
+           single word (e.g. "WITNESS.") can't wrap and would clip. */
+        .hero-h1 { font-size: 42px; }
+        .manifesto h2 { font-size: 30px; }
+        .teams-h2 { font-size: 42px; }
+        .team-cell-h3 { font-size: 42px; }
+        .mockup-h2 { font-size: 36px; }
+        .features-h2 { font-size: 36px; }
+        .how-h2 { font-size: 32px; }
+        .get-app-h2 { font-size: 52px; }
+        .cta-h2 { font-size: 58px; }
+    }
+</style>
+</head>
+<body>
+
+<!-- ────────────────────────────────────────────────────────────────
+     HIDDEN SVG GRADIENT DEFS — preserved from previous build, used
+     by every kraken + ghost instance.
+     ──────────────────────────────────────────────────────────────── -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+        <!-- Kraken body radial gradients (per mood).
+             Stops are FULLY OPAQUE on the dark theme — the previous
+             white@0.55 inner stop blended with the #0A0A0A page bg
+             through the body and read as a grey patch on the head.
+             Inner stop is now a light tint of each mood's body color,
+             which gives the same "plushie sheen" without bleeding. -->
+        <radialGradient id="krakenGrad-ecstatic" cx="38%" cy="30%" r="70%">
+            <stop offset="0%"   stop-color="#C5EFD9"/>
+            <stop offset="50%"  stop-color="#8CE0B3"/>
+            <stop offset="85%"  stop-color="#7BCF9F"/>
+            <stop offset="100%" stop-color="#66BF8C"/>
+        </radialGradient>
+        <radialGradient id="krakenGrad-happy" cx="38%" cy="30%" r="70%">
+            <stop offset="0%"   stop-color="#FAEAC6"/>
+            <stop offset="50%"  stop-color="#F5D48C"/>
+            <stop offset="85%"  stop-color="#ECC679"/>
+            <stop offset="100%" stop-color="#E0B361"/>
+        </radialGradient>
+        <radialGradient id="krakenGrad-sad" cx="38%" cy="30%" r="70%">
+            <stop offset="0%"   stop-color="#F5CAC6"/>
+            <stop offset="50%"  stop-color="#EB948C"/>
+            <stop offset="85%"  stop-color="#DC8379"/>
+            <stop offset="100%" stop-color="#CC736B"/>
+        </radialGradient>
+        <radialGradient id="krakenGrad-zombie" cx="38%" cy="30%" r="70%">
+            <stop offset="0%"   stop-color="#D6D3D0"/>
+            <stop offset="50%"  stop-color="#ADA6A1"/>
+            <stop offset="85%"  stop-color="#99938D"/>
+            <stop offset="100%" stop-color="#85807A"/>
+        </radialGradient>
+
+        <!-- Tentacle gradients — top→bottom dark → 0.35 alpha.
+             userSpaceOnUse so zero-width zombie strands still render. -->
+        <linearGradient id="krakenTent-ecstatic" x1="0" y1="124" x2="0" y2="200" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#66BF8C"/>
+            <stop offset="100%" stop-color="#66BF8C" stop-opacity="0.35"/>
+        </linearGradient>
+        <linearGradient id="krakenTent-happy" x1="0" y1="124" x2="0" y2="200" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#E0B361"/>
+            <stop offset="100%" stop-color="#E0B361" stop-opacity="0.35"/>
+        </linearGradient>
+        <linearGradient id="krakenTent-sad" x1="0" y1="124" x2="0" y2="200" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#CC736B"/>
+            <stop offset="100%" stop-color="#CC736B" stop-opacity="0.35"/>
+        </linearGradient>
+        <linearGradient id="krakenTent-zombie" x1="0" y1="124" x2="0" y2="200" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#85807A"/>
+            <stop offset="100%" stop-color="#85807A" stop-opacity="0.35"/>
+        </linearGradient>
+
+        <!-- Sad-eye details. -->
+        <radialGradient id="krakenSadPupil" cx="50%" cy="50%" r="60%">
+            <stop offset="0%" stop-color="#5A526A"/>
+            <stop offset="100%" stop-color="#332E40"/>
+        </radialGradient>
+        <linearGradient id="krakenTear" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#A6D1FA"/>
+            <stop offset="100%" stop-color="#80B7F2"/>
+        </linearGradient>
+
+        <!-- Ghost body gradients (4-stop diagonal). -->
+        <linearGradient id="ghostGrad-ecstatic" x1="0.30" y1="0" x2="0.70" y2="1">
+            <stop offset="0%"   stop-color="#BDF0D6"/>
+            <stop offset="33%"  stop-color="#9EDBC7"/>
+            <stop offset="66%"  stop-color="#80BDDB"/>
+            <stop offset="100%" stop-color="#6B85BD"/>
+        </linearGradient>
+        <linearGradient id="ghostGrad-happy" x1="0.30" y1="0" x2="0.70" y2="1">
+            <stop offset="0%"   stop-color="#FFD9A6"/>
+            <stop offset="33%"  stop-color="#FABD9E"/>
+            <stop offset="66%"  stop-color="#EB9EB8"/>
+            <stop offset="100%" stop-color="#8C7AB8"/>
+        </linearGradient>
+        <linearGradient id="ghostGrad-sad" x1="0.30" y1="0" x2="0.70" y2="1">
+            <stop offset="0%"   stop-color="#FFD9E0"/>
+            <stop offset="33%"  stop-color="#F7A8BF"/>
+            <stop offset="66%"  stop-color="#C76987"/>
+            <stop offset="100%" stop-color="#4A2138"/>
+        </linearGradient>
+        <linearGradient id="ghostGrad-zombie" x1="0.30" y1="0" x2="0.70" y2="1">
+            <stop offset="0%"   stop-color="#E8EDF2"/>
+            <stop offset="33%"  stop-color="#B8BDC7"/>
+            <stop offset="66%"  stop-color="#78808C"/>
+            <stop offset="100%" stop-color="#292E33"/>
+        </linearGradient>
+        <linearGradient id="ghostRim" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%"   stop-color="#fff" stop-opacity="0"/>
+            <stop offset="85%"  stop-color="#fff" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#fff" stop-opacity="0.45"/>
+        </linearGradient>
+    </defs>
+</svg>
+
+<!-- ────────────────────────────────────────────────────────────────
+     TOP NAV
+     ──────────────────────────────────────────────────────────────── -->
+<nav>
+    <div class="nav-logo">SCREENROT<span class="star">*</span></div>
+    <ul class="nav-links">
+        <li><a href="#features">FEATURES</a></li>
+        <li><a href="#teams">TEAMS</a></li>
+        <li><a href="#how">HOW</a></li>
+        <li><a href="#privacy">PRIVACY</a></li>
+        <li><a href="#get" class="nav-cta">GET THE APP →</a></li>
+    </ul>
+</nav>
+
+<!-- ────────────────────────────────────────────────────────────────
+     HERO — left big type, right mood card with auto-swapping mascot.
+     Mascot alternates: kraken on ecstatic+sad, ghost on happy+zombie.
+     ──────────────────────────────────────────────────────────────── -->
+<section class="hero">
+    <div class="hero-inner">
+        <div>
+            <div class="hero-tag">[01] ▸ INDEX/01 ▸ THE PRODUCT ▸ 2026.05</div>
+            <h1 class="hero-h1">
+                YOUR<br>
+                SCROLL<br>
+                HAS A<br>
+                <span class="hero-mood-word" id="moodWord">WITNESS.</span>
+            </h1>
+            <div class="hero-p-grid">
+                <p class="hero-p">A KRAKEN (OR GHOST) THAT FEELS YOUR DOOM SCROLL AND FIGHTS BACK. FOUR MOODS. THREE BLOCKING TOOLS. ZERO TELEMETRY.</p>
+                <p class="hero-p">BUILT ON APPLE'S FAMILY CONTROLS STACK. RUNS ENTIRELY ON YOUR DEVICE. NO SERVER. NO ACCOUNT. NO ADS.</p>
+            </div>
+            <div class="hero-ctas">
+                <a href="#get" class="br-cta">GET THE APP →</a>
+                <a href="#how" class="br-cta br-cta-alt">HOW IT WORKS</a>
+            </div>
+        </div>
+
+        <!-- MOOD CARD — single mascot stage, kraken/ghost alternating per mood -->
+        <div class="mood-card" id="moodCard" data-mood="ecstatic">
+            <div class="mood-feed-row">
+                <span>LIVE FEED ●</span>
+                <span>2026.05.12</span>
+            </div>
+            <div class="mood-card-stage">
+                <div class="mood-card-label" id="moodCardLabel">● KRAKEN</div>
+                <div class="mascot-stage" id="heroMascot"><!-- populated by JS --></div>
+            </div>
+            <div class="mood-card-tier" id="moodCardTier">ZEN MASTER</div>
+            <div class="mood-card-meta">
+                <span id="moodCardStatus">STATUS: UNDER 80%</span>
+                <span id="moodCardFig">FIG. 01/04</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ────────────────────────────────────────────────────────────────
+     TICKER — animated horizontal scroll, sits at the end of section 01.
+     Content is hard-coded (not JS-injected) so it renders even if
+     scripts are blocked/stale. Two identical spans → the CSS
+     translateX(-50%) loop has an invisible seam.
+     ──────────────────────────────────────────────────────────────── -->
+<div class="ticker-row">
+    <div class="ticker-inner">
+        <span>★ NOW ON THE APP STORE ★ STOP THE ROT ★ FEED THE KRAKEN ★ 100% ON-DEVICE ★ NO ADS ★ NO TRACKING ★ APPLE SCREEN TIME ★ ACCENT: TOXIC MINT ★ NOW ON THE APP STORE ★ STOP THE ROT ★ FEED THE KRAKEN ★ 100% ON-DEVICE ★ NO ADS ★ NO TRACKING ★ APPLE SCREEN TIME ★ ACCENT: TOXIC MINT ★ NOW ON THE APP STORE ★ STOP THE ROT ★ FEED THE KRAKEN ★ 100% ON-DEVICE ★ NO ADS ★ NO TRACKING ★ APPLE SCREEN TIME ★ ACCENT: TOXIC MINT</span>
+        <span>★ NOW ON THE APP STORE ★ STOP THE ROT ★ FEED THE KRAKEN ★ 100% ON-DEVICE ★ NO ADS ★ NO TRACKING ★ APPLE SCREEN TIME ★ ACCENT: TOXIC MINT ★ NOW ON THE APP STORE ★ STOP THE ROT ★ FEED THE KRAKEN ★ 100% ON-DEVICE ★ NO ADS ★ NO TRACKING ★ APPLE SCREEN TIME ★ ACCENT: TOXIC MINT ★ NOW ON THE APP STORE ★ STOP THE ROT ★ FEED THE KRAKEN ★ 100% ON-DEVICE ★ NO ADS ★ NO TRACKING ★ APPLE SCREEN TIME ★ ACCENT: TOXIC MINT</span>
+    </div>
+</div>
+
+<!-- ────────────────────────────────────────────────────────────────
+     MANIFESTO BAND
+     ──────────────────────────────────────────────────────────────── -->
+<section class="manifesto">
+    <div class="manifesto-tag">// SECTION 02 / THE THESIS</div>
+    <h2>WILLPOWER IS A SCAM.<br><span class="cute">CUTE</span> WORKS BETTER.<br>WE GAVE IT <span class="tents">RIZZ.</span></h2>
+</section>
+
+<!-- ────────────────────────────────────────────────────────────────
+     PICK A SIDE — Team Kraken vs Team Ghost, with 4-moods grids.
+     ──────────────────────────────────────────────────────────────── -->
+<section class="teams" id="teams">
+    <div class="teams-head">
+        <div class="teams-tag">// SECTION 03 / ALLEGIANCE</div>
+        <h2 class="teams-h2">PICK A<br>SIDE.</h2>
+        <p class="teams-p">TWO MASCOTS. SAME FOUR MOOD TIERS. SAME MOOD MATH. DIFFERENT VIBE. SWAP ANY TIME IN SETTINGS — THE WIDGET, SHARE CARD, AND ON-STRIKE POSTER ALL FOLLOW.</p>
+    </div>
+
+    <div class="teams-split">
+        <!-- TEAM KRAKEN -->
+        <div class="team-cell kraken">
+            <div class="team-header">
+                <div>
+                    <div class="teams-tag" style="opacity: 1;">// TEAM 01</div>
+                    <h3 class="team-cell-h3">TEAM<br>KRAKEN.</h3>
+                </div>
+                <div class="team-fig">FIG. 01/02<br>OG MASCOT<br>EST. 2026</div>
+            </div>
+            <div class="team-mascot" id="teamKrakenMascot" style="width: 260px; height: 260px; margin: 24px auto;"></div>
+            <div class="team-footer">
+                <div class="team-footer-h">FIVE WIGGLY TENTACLES.</div>
+                <div class="team-footer-p">STAR EYES → SOFT EYES → TEARY EYES → X EYES. ANIMATED SWAY. NOISIER ENERGY. FOR THE PEOPLE WHO LIKE A CRANKY ROOMMATE.</div>
+                <div class="team-tags">
+                    <span class="team-tag">ANIMATED</span>
+                    <span class="team-tag">LOUDER</span>
+                    <span class="team-tag team-tag--rizz-purple">BUSIER</span>
+                </div>
+            </div>
+            <div class="team-number">01</div>
+        </div>
+
+        <!-- TEAM GHOST -->
+        <div class="team-cell ghost">
+            <div class="team-header">
+                <div>
+                    <div class="teams-tag" style="opacity: 1;">// TEAM 02</div>
+                    <h3 class="team-cell-h3">TEAM<br>GHOST.</h3>
+                </div>
+                <div class="team-fig">FIG. 02/02<br>NEW IN v1.1<br>EST. 2026</div>
+            </div>
+            <div class="team-mascot" id="teamGhostMascot" style="width: 260px; height: 260px; margin: 24px auto;"></div>
+            <div class="team-footer">
+                <div class="team-footer-h">FLOATING BLOB. ANIME EYES.</div>
+                <div class="team-footer-p">SPARKLE EYES → DOT EYES → FROWN → X EYES. SOFT HOVER. PINK CHEEKS. FOR PEOPLE WHO PREFER A QUIETER JUDGEMENT.</div>
+                <div class="team-tags">
+                    <span class="team-tag">SOFTER</span>
+                    <span class="team-tag">QUIETER</span>
+                    <span class="team-tag team-tag--rizz">CUTER</span>
+                </div>
+            </div>
+            <div class="team-number">02</div>
+        </div>
+    </div>
+
+    <!-- All 4 moods, side by side, for each mascot -->
+    <div class="teams-moods">
+        <div class="moods-cell first">
+            <div class="moods-tag">// KRAKEN · FOUR MOODS</div>
+            <div class="moods-grid" id="krakenMoodsGrid"><!-- populated by JS --></div>
+        </div>
+        <div class="moods-cell">
+            <div class="moods-tag">// GHOST · FOUR MOODS</div>
+            <div class="moods-grid" id="ghostMoodsGrid"><!-- populated by JS --></div>
+        </div>
+    </div>
+</section>
+
+<!-- ────────────────────────────────────────────────────────────────
+     PRODUCT MOCKUP — feature list + tilted iPhone mockups (Overview + Shield).
+     ──────────────────────────────────────────────────────────────── -->
+<section class="mockup">
+    <div class="mockup-inner">
+        <div>
+            <div class="mockup-tag">// SECTION 04 / PRODUCT</div>
+            <h2 class="mockup-h2">RAW<br>NUMBERS.<br><span class="big-type">BIG TYPE.</span></h2>
+            <p class="mockup-p">EVERY SCREEN PUTS THE COLD FACT FIRST. HOW MANY HOURS. WHICH APP. HOW FAR PAST THE GOAL. THE KRAKEN HANDLES THE FEELINGS.</p>
+            <div class="mockup-list">
+                <div class="mockup-list-row">
+                    <div class="mockup-list-num">[01]</div>
+                    <div class="mockup-list-body">
+                        <div class="mockup-list-t">OVERVIEW</div>
+                        <div class="mockup-list-d">7-DAY DAY STRIP + PER-APP DEEP DIVE</div>
+                    </div>
+                </div>
+                <div class="mockup-list-row">
+                    <div class="mockup-list-num">[02]</div>
+                    <div class="mockup-list-body">
+                        <div class="mockup-list-t">BRAIN HEALTH</div>
+                        <div class="mockup-list-d">BRAINROT DEBT + WEEKLY SPARKLINES</div>
+                    </div>
+                </div>
+                <div class="mockup-list-row">
+                    <div class="mockup-list-num">[03]</div>
+                    <div class="mockup-list-body">
+                        <div class="mockup-list-t">SHIELD</div>
+                        <div class="mockup-list-d">QUICK BLOCK + LIMITS + ROUTINES</div>
+                    </div>
+                </div>
+                <div class="mockup-list-row">
+                    <div class="mockup-list-num">[04]</div>
+                    <div class="mockup-list-body">
+                        <div class="mockup-list-t">SETTINGS</div>
+                        <div class="mockup-list-d">GOAL · ICONS · LANGUAGE · THEME</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="phones">
+            <!-- Overview phone -->
+            <div class="phone-tilt-l">
+                <div class="ios-device">
+                    <div class="ios-island"></div>
+                    <div class="ios-screen">
+                        <div class="ios-section-label">// TODAY · 2026.05.12</div>
+                        <div class="ios-section-h">OVERVIEW</div>
+                        <div class="phone-card">
+                            <div class="phone-mascot-row" id="phoneKrakenSlot"><!-- mini ghost — zombie/Brainrot --></div>
+                            <div class="phone-mood-pill">BRAINROT</div>
+                            <div class="phone-time-row">
+                                <div class="phone-time">8H 15M</div>
+                                <div class="phone-time-sub">138% / 6H</div>
+                            </div>
+                        </div>
+                        <div class="phone-bars">
+                            <div class="phone-bar"><div class="phone-bar-fill" style="height: 35%"></div></div>
+                            <div class="phone-bar"><div class="phone-bar-fill" style="height: 50%"></div></div>
+                            <div class="phone-bar"><div class="phone-bar-fill" style="height: 70%"></div></div>
+                            <div class="phone-bar"><div class="phone-bar-fill" style="height: 45%"></div></div>
+                            <div class="phone-bar active"><div class="phone-bar-fill" style="height: 62%"></div></div>
+                            <div class="phone-bar"><div class="phone-bar-fill" style="height: 80%"></div></div>
+                            <div class="phone-bar"><div class="phone-bar-fill" style="height: 30%"></div></div>
+                        </div>
+                        <div class="phone-app-row">
+                            <div class="phone-app-tile" style="background: #F08C72"></div>
+                            <div class="phone-app-name">TIKTOK</div>
+                            <div class="phone-app-time">1H 24M</div>
+                        </div>
+                        <div class="phone-app-row">
+                            <div class="phone-app-tile" style="background: #F7D866"></div>
+                            <div class="phone-app-name">INSTAGRAM</div>
+                            <div class="phone-app-time">52M</div>
+                        </div>
+                        <div class="phone-app-row">
+                            <div class="phone-app-tile" style="background: #8CE0B3"></div>
+                            <div class="phone-app-name">SAFARI</div>
+                            <div class="phone-app-time">38M</div>
+                        </div>
+                    </div>
+                    <div class="ios-home"></div>
+                </div>
+            </div>
+
+            <!-- Shield phone -->
+            <div class="phone-tilt-r">
+                <div class="ios-device">
+                    <div class="ios-island"></div>
+                    <div class="ios-screen">
+                        <div class="ios-section-label">// TAB 03 · SHIELD</div>
+                        <div class="ios-section-h">BLOCK CTRL</div>
+                        <div class="phone-panic">
+                            <div class="phone-panic-tag">// PANIC</div>
+                            <div class="phone-panic-h">QUICK<br>BLOCK</div>
+                            <div class="phone-panic-sub">4 APPS · SYSTEM-WIDE</div>
+                            <div class="phone-panic-bang">!</div>
+                        </div>
+                        <div class="phone-shield-row">
+                            <div class="phone-shield-tile" style="background: #8CE0B3"></div>
+                            <div class="phone-shield-body">
+                                <div class="phone-shield-t">USAGE LIMITS</div>
+                                <div class="phone-shield-d">3 ACTIVE</div>
+                            </div>
+                            <div class="phone-shield-arrow">→</div>
+                        </div>
+                        <div class="phone-shield-row">
+                            <div class="phone-shield-tile" style="background: #F7D866"></div>
+                            <div class="phone-shield-body">
+                                <div class="phone-shield-t">BLOCK ROUTINES</div>
+                                <div class="phone-shield-d">SCHOOL · SLEEP</div>
+                            </div>
+                            <div class="phone-shield-arrow">→</div>
+                        </div>
+                        <div class="phone-shield-row">
+                            <div class="phone-shield-tile" style="background: #C9C2BD"></div>
+                            <div class="phone-shield-body">
+                                <div class="phone-shield-t">"ON STRIKE"</div>
+                                <div class="phone-shield-d">POSTER: ON</div>
+                            </div>
+                            <div class="phone-shield-arrow">→</div>
+                        </div>
+                    </div>
+                    <div class="ios-home"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ────────────────────────────────────────────────────────────────
+     FEATURES — 9 cards as hard blocks with hover-to-color.
+     Card 09 swapped from COMMUNITY → PICK YOUR MASCOT (community feature
+     was removed from the app in commit 0cc880c).
+     ──────────────────────────────────────────────────────────────── -->
+<section class="features" id="features">
+    <div class="features-head">
+        <div>
+            <div class="mockup-tag">// SECTION 05 / FEATURES</div>
+            <h2 class="features-h2">NINE<br>WAYS TO<br>NOT ROT.</h2>
+        </div>
+        <div class="features-side">FOUR TABS, THREE SHIELDS, TWO LANGUAGES, ONE CRANKY KRAKEN.</div>
+    </div>
+    <div class="features-grid">
+        <div class="feature-cell" data-color="mint">
+            <div class="feature-cell-num">[01]</div>
+            <div>
+                <h3 class="feature-cell-h">OVERVIEW</h3>
+                <p class="feature-cell-d">TODAY'S TIME AS YOUR KRAKEN'S MOOD. 7-DAY DAY STRIP. PER-APP DEEP DIVE.</p>
+            </div>
+        </div>
+        <div class="feature-cell" data-color="yellow">
+            <div class="feature-cell-num">[02]</div>
+            <div>
+                <h3 class="feature-cell-h">BRAIN HEALTH</h3>
+                <p class="feature-cell-d">BRAINROT DEBT IN ONE NUMBER. WEEKLY TREND. PER-APP SPARKLINES.</p>
+            </div>
+        </div>
+        <div class="feature-cell" data-color="coral">
+            <div class="feature-cell-num">[03]</div>
+            <div>
+                <h3 class="feature-cell-h">SHIELD</h3>
+                <p class="feature-cell-d">COMMAND CENTER. QUICK BLOCK + USAGE LIMITS + BLOCK ROUTINES.</p>
+            </div>
+        </div>
+        <div class="feature-cell" data-color="paper">
+            <div class="feature-cell-num">[04]</div>
+            <div>
+                <h3 class="feature-cell-h">QUICK BLOCK</h3>
+                <p class="feature-cell-d">ONE-TAP PANIC BUTTON. APPS, CATEGORIES, OR DOMAINS. SYSTEM-WIDE.</p>
+            </div>
+        </div>
+        <div class="feature-cell" data-color="mint">
+            <div class="feature-cell-num">[05]</div>
+            <div>
+                <h3 class="feature-cell-h">USAGE LIMITS</h3>
+                <p class="feature-cell-d">DAILY CAPS. iOS DEVICEACTIVITYMONITOR DROPS THE SHIELD AUTOMATICALLY.</p>
+            </div>
+        </div>
+        <div class="feature-cell" data-color="yellow">
+            <div class="feature-cell-num">[06]</div>
+            <div>
+                <h3 class="feature-cell-h">BLOCK ROUTINES</h3>
+                <p class="feature-cell-d">TIME-WINDOW BLOCKS. SCHOOL, WORK, SLEEP. OVERNIGHT SCHEDULES SUPPORTED.</p>
+            </div>
+        </div>
+        <div class="feature-cell" data-color="coral">
+            <div class="feature-cell-num">[07]</div>
+            <div>
+                <h3 class="feature-cell-h">"ON STRIKE"</h3>
+                <p class="feature-cell-d">OPEN A BLOCKED APP, GET A POSTER. HAZARD TAPE. ANGRY KRAKEN. PICKET SIGN.</p>
+            </div>
+        </div>
+        <div class="feature-cell" data-color="paper">
+            <div class="feature-cell-num">[08]</div>
+            <div>
+                <h3 class="feature-cell-h">WIDGET</h3>
+                <p class="feature-cell-d">MINI KRAKEN ON THE HOME SCREEN. UPDATES EVERY MINUTE VIA WIDGETKIT.</p>
+            </div>
+        </div>
+        <div class="feature-cell" data-color="mint">
+            <div class="feature-cell-num">[09]</div>
+            <div>
+                <h3 class="feature-cell-h">PICK YOUR MASCOT</h3>
+                <p class="feature-cell-d">KRAKEN OR GHOST. SAME MOOD MATH. SWAP IN SETTINGS — WIDGET, ICONS, SHARE CARD FOLLOW.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ────────────────────────────────────────────────────────────────
+     HOW IT WORKS — 3 steps.
+     ──────────────────────────────────────────────────────────────── -->
+<section class="how" id="how">
+    <div class="how-tag">// SECTION 06 / OPERATION</div>
+    <h2 class="how-h2">THREE STEPS.<br>NO DATA LEAVES.</h2>
+    <div class="how-grid">
+        <div class="how-cell">
+            <div class="how-cell-n">01</div>
+            <h3 class="how-cell-h">GRANT ACCESS</h3>
+            <p class="how-cell-p">OPEN. TAP GET STARTED. iOS HANDLES THE SCREEN-TIME AUTH PROMPT. WE NEVER SEE YOUR DATA.</p>
+        </div>
+        <div class="how-cell">
+            <div class="how-cell-n">02</div>
+            <h3 class="how-cell-h">MEET YOUR MASCOT</h3>
+            <p class="how-cell-p">IT REACTS LIVE. CHECK OVERVIEW FOR STATS, BREAKDOWNS, AND THE MOOD OF THE DAY.</p>
+        </div>
+        <div class="how-cell">
+            <div class="how-cell-n">03</div>
+            <h3 class="how-cell-h">SET YOUR SHIELDS</h3>
+            <p class="how-cell-p">ADD LIMITS. SCHEDULE ROUTINES. QUICK-BLOCK ON DEMAND. THE SHIELD TAB RUNS THE PLACE.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ────────────────────────────────────────────────────────────────
+     GET THE APP BAND — cream block with App Store + QR buttons.
+     ──────────────────────────────────────────────────────────────── -->
+<section class="get-app" id="get">
+    <div class="get-app-inner">
+        <div>
+            <div class="get-app-tag">// SECTION 07 / DOWNLOAD</div>
+            <h2 class="get-app-h2">GET<br>THE APP.</h2>
+            <p class="get-app-p">FREE. iOS 17+. NO ACCOUNT. NO ADS. NO TRACKING. THE KRAKEN MOVES IN, THE SCROLL MOVES OUT.</p>
+            <div class="get-app-meta">
+                <span>iOS 17+</span><span>·</span><span>ENGLISH + DEUTSCH</span><span>·</span><span>v1.0.0</span>
+            </div>
+        </div>
+        <div class="get-app-btns">
+            <a href="#" class="app-btn primary">
+                <div class="app-btn-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 12.5c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.8-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.4 1-4.3 2.6-1.8 3.2-.5 7.9 1.3 10.5.9 1.3 1.9 2.7 3.3 2.6 1.3-.1 1.8-.9 3.4-.9 1.6 0 2.1.9 3.4.8 1.4 0 2.3-1.3 3.2-2.5 1-1.5 1.4-2.9 1.5-3-.1 0-2.8-1.1-2.9-4.2zM15 4.8c.7-.9 1.2-2.1 1.1-3.3-1.1 0-2.4.7-3.1 1.6-.7.8-1.3 2-1.1 3.2 1.2.1 2.4-.6 3.1-1.5z"/></svg>
+                </div>
+                <div class="app-btn-body">
+                    <div class="app-btn-tag">DOWNLOAD ON THE</div>
+                    <div class="app-btn-label">APP STORE</div>
+                </div>
+                <div class="app-btn-arrow">→</div>
+            </a>
+            <a href="#" class="app-btn secondary">
+                <div class="app-btn-icon" style="font-family: 'Archivo Black', sans-serif; font-size: 22px;">⌘</div>
+                <div class="app-btn-body">
+                    <div class="app-btn-tag">SCAN OR TAP</div>
+                    <div class="app-btn-label">QR CODE</div>
+                </div>
+                <div class="app-btn-arrow">→</div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ────────────────────────────────────────────────────────────────
+     CTA — Big "STOP. THE. ROT." line.
+     ──────────────────────────────────────────────────────────────── -->
+<section class="cta">
+    <h2 class="cta-h2">
+        STOP.<br>
+        THE.<br>
+        <span class="rot">ROT.</span>
+    </h2>
+    <a href="#get" class="br-cta" style="font-size: 22px; padding: 28px 48px;">GET THE APP →</a>
+</section>
+
+<!-- ────────────────────────────────────────────────────────────────
+     FOOTER
+     ──────────────────────────────────────────────────────────────── -->
+<footer>
+    <span>© 2026 SCREENROT</span>
+    <span>FEED · THE · KRAKEN</span>
+    <span>v1.0.0</span>
+</footer>
+
+<script>
+    /* ──────────────────────────────────────────────────────────────
+       KRAKEN SVG — 1:1 port of OctopusMascotView from the app.
+       Tentacles use TentaclesShape's sin·t QuadCurve formula and are
+       animated per-frame by tickKrakens.
+       ────────────────────────────────────────────────────────────── */
+
+    const KRAKEN_PROPS = {
+        ecstatic: { amp: 16, period: 2.4, droop: 0  },
+        happy:    { amp: 10, period: 3.2, droop: 4  },
+        sad:      { amp: 5,  period: 5.0, droop: 14 },
+        zombie:   { amp: 0,  period: 12,  droop: 28 },
+    };
+
+    const TENT_X = 25, TENT_Y = 124, TENT_W = 178, TENT_BASE_H = 48;
+    const TENT_COUNT = 6, TENT_SEGMENTS = 4;
+
+    function krakenSVG(mood) {
+        let tents = '';
+        for (let i = 0; i < TENT_COUNT; i++) tents += `<path data-tent="${i}"/>`;
+
+        return `<svg class="kraken" data-mood="${mood}" viewBox="0 14 220 220" xmlns="http://www.w3.org/2000/svg">
+            <g class="kraken-tentacles" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" fill="none">${tents}</g>
+            <path class="kraken-body" d="M114,18 C58,18 38,58 38,98 C38,124 56,140 78,142 L150,142 C172,140 190,124 190,98 C190,58 170,18 114,18 Z"/>
+            <g class="kraken-spots">
+                <circle cx="83" cy="73" r="5"/>
+                <circle cx="148" cy="65" r="3.6"/>
+                <circle cx="152" cy="92" r="4.5"/>
+            </g>
+            <ellipse cx="74" cy="52" rx="22" ry="14" transform="rotate(-25 74 52)" fill="#fff" fill-opacity="0.55"/>
+            <ellipse cx="64" cy="44" rx="7"  ry="4"  transform="rotate(-25 64 44)" fill="#fff" fill-opacity="0.9"/>
+            <ellipse cx="155" cy="60" rx="6"  ry="3"  transform="rotate(20 155 60)" fill="#fff" fill-opacity="0.4"/>
+            <g class="kraken-face">
+                <g class="m m-ecstatic">
+                    <!-- Round eyes underneath, sized to fit fully
+                         inside the 44×30 wayfarer lens so no white
+                         sclera peeks past the lens edges. -->
+                    <circle cx="87"  cy="90" r="11" fill="#fff"/>
+                    <circle cx="87"  cy="90" r="6"  fill="#1A171F"/>
+                    <circle cx="89"  cy="88" r="2"  fill="#fff"/>
+                    <circle cx="141" cy="90" r="11" fill="#fff"/>
+                    <circle cx="141" cy="90" r="6"  fill="#1A171F"/>
+                    <circle cx="143" cy="88" r="2"  fill="#fff"/>
+
+                    <!-- Wayfarer SUNGLASSES — dark opaque lenses
+                         with a polished-glass white slash highlight
+                         on each. The round eyes underneath stay in
+                         markup but are covered by the dark lenses. -->
+                    <line x1="65"  y1="89" x2="50"  y2="83" stroke="#0A0A0A" stroke-width="3" stroke-linecap="round"/>
+                    <line x1="163" y1="89" x2="178" y2="83" stroke="#0A0A0A" stroke-width="3" stroke-linecap="round"/>
+                    <rect x="65"  y="75" width="44" height="30" rx="7" ry="7" fill="#171717" stroke="#0A0A0A" stroke-width="3"/>
+                    <rect x="119" y="75" width="44" height="30" rx="7" ry="7" fill="#171717" stroke="#0A0A0A" stroke-width="3"/>
+                    <line x1="109" y1="90" x2="119" y2="90" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
+                    <rect x="70"  y="79" width="20" height="3" rx="1.5" fill="#FFFFFF" fill-opacity="0.65"/>
+                    <rect x="124" y="79" width="20" height="3" rx="1.5" fill="#FFFFFF" fill-opacity="0.65"/>
+                </g>
+                <g class="m m-happy">
+                    <ellipse cx="87"  cy="90" rx="20" ry="19" fill="#fff"/>
+                    <circle  cx="87"  cy="90" r="11" fill="#403850"/>
+                    <circle  cx="89.5" cy="88" r="4"  fill="#fff"/>
+                    <ellipse cx="141" cy="90" rx="20" ry="19" fill="#fff"/>
+                    <circle  cx="141" cy="90" r="11" fill="#403850"/>
+                    <circle  cx="143.5" cy="88" r="4" fill="#fff"/>
+                </g>
+                <g class="m m-sad">
+                    <ellipse cx="87"  cy="90" rx="20" ry="19" fill="#fff"/>
+                    <circle  cx="87"  cy="92" r="11" fill="url(#krakenSadPupil)"/>
+                    <circle  cx="89.5" cy="89" r="5"  fill="#fff"/>
+                    <circle  cx="83"  cy="93" r="2.5" fill="#fff" fill-opacity="0.6"/>
+                    <ellipse class="kraken-tear" cx="71" cy="103" rx="3.8" ry="5.5" fill="url(#krakenTear)"/>
+                    <ellipse cx="141" cy="90" rx="20" ry="19" fill="#fff"/>
+                    <circle  cx="141" cy="92" r="11" fill="url(#krakenSadPupil)"/>
+                    <circle  cx="143.5" cy="89" r="5"  fill="#fff"/>
+                    <circle  cx="137" cy="93" r="2.5" fill="#fff" fill-opacity="0.6"/>
+                </g>
+                <g class="m m-zombie">
+                    <circle cx="87"  cy="90" r="19" fill="#fff"/>
+                    <line x1="76"  y1="79" x2="98"  y2="101" stroke="#594F47" stroke-width="4" stroke-linecap="round"/>
+                    <line x1="98"  y1="79" x2="76"  y2="101" stroke="#594F47" stroke-width="4" stroke-linecap="round"/>
+                    <circle cx="141" cy="90" r="19" fill="#fff"/>
+                    <line x1="130" y1="79" x2="152" y2="101" stroke="#594F47" stroke-width="4" stroke-linecap="round"/>
+                    <line x1="152" y1="79" x2="130" y2="101" stroke="#594F47" stroke-width="4" stroke-linecap="round"/>
+                </g>
+            </g>
+            <g class="kraken-mouth">
+                <path class="m m-ecstatic" d="M101,123 Q114,140 127,123" stroke="#D9737F" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                <path class="m m-happy"    d="M104,124 Q114,136 124,124" stroke="#fff" stroke-opacity="0.9" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <path class="m m-sad"      d="M105,128 Q114,119 123,128" stroke="#fff" stroke-opacity="0.9" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <line class="m m-zombie" x1="107" y1="124" x2="121" y2="124" stroke="#fff" stroke-opacity="0.8" stroke-width="2.5" stroke-linecap="round"/>
+            </g>
+        </svg>`;
+    }
+
+    /* ──────────────────────────────────────────────────────────────
+       GHOST SVG — 1:1 port of GhostMascotView. No tentacle animation;
+       arms tilt statically based on mood.
+       ────────────────────────────────────────────────────────────── */
+
+    const GHOST_BODY_D = "M100,18 C50,18 30,58 30,108 L30,156 C30,168 38,178 50,176 C60,174 64,164 70,164 C76,164 80,178 92,178 C100,178 102,168 108,168 C114,168 118,178 130,178 C142,178 146,164 150,164 C156,164 160,174 170,176 C182,178 170,168 170,156 L170,108 C170,58 150,18 100,18 Z";
+    const GHOST_ARM_D = "M38,118 C22,118 14,134 22,150 C26,158 36,158 42,150 C46,144 48,134 46,124 C44,118 40,116 38,118 Z";
+    const GHOST_ARM_TILT = {
+        ecstatic: { left: -8,  right:  8  },
+        happy:    { left:  0,  right:  0  },
+        sad:      { left: 12,  right: -12 },
+        zombie:   { left: 18,  right: -18 },
+    };
+
+    function ghostEyes(mood) {
+        if (mood === 'zombie') {
+            return `<g stroke="#1A171F" stroke-width="6" stroke-linecap="round" fill="none">
+                <line x1="64"  y1="82" x2="82"  y2="100"/>
+                <line x1="82"  y1="82" x2="64"  y2="100"/>
+                <line x1="118" y1="82" x2="136" y2="100"/>
+                <line x1="136" y1="82" x2="118" y2="100"/>
+            </g>`;
+        }
+        // Wayfarer frames with CLEAR lenses (no tint) — the black
+        // wireframe sits on top of the regular anime eyes.
+        if (mood === 'ecstatic') {
+            return `<g>
+                <!-- Anime eyes underneath the lenses. -->
+                <ellipse cx="74"  cy="92" rx="11" ry="14" fill="#1A171F"/>
+                <ellipse cx="78"  cy="87" rx="3.8" ry="4.8" fill="#fff"/>
+                <circle  cx="71"  cy="98" r="1.6" fill="#fff" fill-opacity="0.9"/>
+                <ellipse cx="126" cy="92" rx="11" ry="14" fill="#1A171F"/>
+                <ellipse cx="130" cy="87" rx="3.8" ry="4.8" fill="#fff"/>
+                <circle  cx="123" cy="98" r="1.6" fill="#fff" fill-opacity="0.9"/>
+
+                <!-- Wayfarer SUNGLASSES — dark opaque lenses. -->
+                <line x1="52"  y1="91" x2="38"  y2="85" stroke="#0A0A0A" stroke-width="3" stroke-linecap="round"/>
+                <line x1="148" y1="91" x2="162" y2="85" stroke="#0A0A0A" stroke-width="3" stroke-linecap="round"/>
+                <rect x="52"  y="77" width="44" height="30" rx="7" ry="7" fill="#171717" stroke="#0A0A0A" stroke-width="3"/>
+                <rect x="104" y="77" width="44" height="30" rx="7" ry="7" fill="#171717" stroke="#0A0A0A" stroke-width="3"/>
+                <line x1="96"  y1="92" x2="104" y2="92" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
+                <rect x="57"  y="81" width="20" height="3" rx="1.5" fill="#FFFFFF" fill-opacity="0.65"/>
+                <rect x="109" y="81" width="20" height="3" rx="1.5" fill="#FFFFFF" fill-opacity="0.65"/>
+            </g>`;
+        }
+        // Big shiny anime eyes — dark oval + main catchlight + secondary dot
+        return `<g>
+            <ellipse cx="74"  cy="92" rx="11" ry="14" fill="#1A171F"/>
+            <ellipse cx="78"  cy="87" rx="3.8" ry="4.8" fill="#fff"/>
+            <circle  cx="71"  cy="98" r="1.6" fill="#fff" fill-opacity="0.9"/>
+            <ellipse cx="126" cy="92" rx="11" ry="14" fill="#1A171F"/>
+            <ellipse cx="130" cy="87" rx="3.8" ry="4.8" fill="#fff"/>
+            <circle  cx="123" cy="98" r="1.6" fill="#fff" fill-opacity="0.9"/>
+        </g>`;
+    }
+
+    function ghostMouth(mood) {
+        switch (mood) {
+            case 'ecstatic': return `<path fill="#1A171F" d="M88,112 Q100,124 112,112 Q108,120 100,120 Q92,120 88,112 Z"/>`;
+            case 'happy':    return `<ellipse cx="100" cy="116" rx="5" ry="6" fill="#1A171F"/>`;
+            case 'sad':      return `<path d="M91,120 Q100,112 109,120" stroke="#1A171F" stroke-width="3.5" stroke-linecap="round" fill="none"/>`;
+            case 'zombie':   return `<line x1="92" y1="116" x2="108" y2="116" stroke="#1A171F" stroke-width="3.5" stroke-linecap="round"/>`;
+        }
+        return '';
+    }
+
+    function ghostCheeks(mood) {
+        if (mood === 'zombie') return '';
+        return `<g fill="#FF8FA8" fill-opacity="0.65">
+            <ellipse cx="58"  cy="108" rx="9" ry="5"/>
+            <ellipse cx="142" cy="108" rx="9" ry="5"/>
+        </g>`;
+    }
+
+    function ghostSVG(mood) {
+        const tilt = GHOST_ARM_TILT[mood] || GHOST_ARM_TILT.zombie;
+        return `<svg class="ghost" data-mood="${mood}" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+            <g class="ghost-arm" transform="translate(12 116) rotate(${tilt.left} 28 22)">
+                <path d="${GHOST_ARM_D}" transform="translate(-14 -116)"/>
+            </g>
+            <g class="ghost-arm" transform="translate(188 116) rotate(${tilt.right} -4 22) scale(-1 1)">
+                <path d="${GHOST_ARM_D}" transform="translate(-14 -116)"/>
+            </g>
+            <path class="ghost-body" d="${GHOST_BODY_D}"/>
+            <ellipse cx="74" cy="50" rx="28" ry="16" transform="rotate(-25 74 50)" fill="#fff" fill-opacity="0.55"/>
+            <ellipse cx="64" cy="44" rx="8"  ry="4"  transform="rotate(-25 64 44)" fill="#fff" fill-opacity="0.85"/>
+            <path d="${GHOST_BODY_D}" fill="url(#ghostRim)" opacity="0.45"/>
+            ${ghostCheeks(mood)}
+            ${ghostEyes(mood)}
+            ${ghostMouth(mood)}
+        </svg>`;
+    }
+
+    /* TICKER content is now hard-coded in the HTML (see .ticker-row) —
+       no JS needed; the scroll is pure CSS animation. */
+
+    /* ──────────────────────────────────────────────────────────────
+       HERO MOOD CYCLE — single mascot stage, mascot alternates per
+       mood tick (kraken on ecstatic/sad, ghost on happy/zombie).
+       ────────────────────────────────────────────────────────────── */
+    const MOODS = ['ecstatic', 'happy', 'sad', 'zombie'];
+    const MOOD_LABEL = {
+        ecstatic: { tier: 'ZEN MASTER',       reading: 'UNDER 80%'  },
+        happy:    { tier: 'CASUAL SCROLLER',  reading: '80—100%'    },
+        sad:      { tier: 'DOOMSCROLLER',     reading: '100—130%'   },
+        zombie:   { tier: 'BRAINROT',         reading: '130%+'      },
+    };
+    let moodIdx = 0;
+
+    function setHeroMood(idx) {
+        const mood = MOODS[idx];
+        // Mascot rotation: happy + sad → kraken, ecstatic + zombie → ghost.
+        // Picks the mascot whose face/color contrasts best with each
+        // mood-tinted card (yellow + coral cards stay warm with the
+        // kraken; the mint and grey cards get the ghost's cool gradient).
+        const useKraken = mood === 'happy' || mood === 'sad';
+
+        const card = document.getElementById('moodCard');
+        card.dataset.mood = mood;
+
+        document.getElementById('moodCardLabel').textContent = '● ' + (useKraken ? 'KRAKEN' : 'GHOST');
+        document.getElementById('moodCardTier').textContent = MOOD_LABEL[mood].tier;
+        document.getElementById('moodCardStatus').textContent = 'STATUS: ' + MOOD_LABEL[mood].reading;
+        document.getElementById('moodCardFig').textContent = 'FIG. 0' + (idx + 1) + '/04';
+
+        // Update the WITNESS. word color to match mood
+        const moodWord = document.getElementById('moodWord');
+        const moodColors = { ecstatic: '#8CE0B3', happy: '#F7D866', sad: '#F08C72', zombie: '#C9C2BD' };
+        moodWord.style.color = moodColors[mood];
+
+        // Swap mascot — data-mascot attr drives mascot-specific
+        // CSS positioning (ghost sits higher than the tentacled kraken).
+        const stage = document.getElementById('heroMascot');
+        stage.dataset.mascot = useKraken ? 'kraken' : 'ghost';
+        stage.innerHTML = useKraken ? krakenSVG(mood) : ghostSVG(mood);
+    }
+
+    setHeroMood(0);
+    setInterval(() => {
+        moodIdx = (moodIdx + 1) % MOODS.length;
+        setHeroMood(moodIdx);
+    }, 2800);
+
+    /* ──────────────────────────────────────────────────────────────
+       TEAM CARDS — single ecstatic mascot per team (no animation
+       inside them, just static).
+       ────────────────────────────────────────────────────────────── */
+    document.getElementById('teamKrakenMascot').innerHTML = krakenSVG('ecstatic');
+    document.getElementById('teamGhostMascot').innerHTML  = ghostSVG('ecstatic');
+
+    /* ──────────────────────────────────────────────────────────────
+       4-MOODS GRIDS — small mascots, one per mood, framed with
+       label below.
+       ────────────────────────────────────────────────────────────── */
+    function moodCell(svg, mood) {
+        return `<div class="moods-grid-cell">
+            <div style="width: 90px; height: 90px;">${svg}</div>
+            <div class="label">${mood.toUpperCase()}</div>
+        </div>`;
+    }
+    document.getElementById('krakenMoodsGrid').innerHTML =
+        MOODS.map(m => moodCell(krakenSVG(m), m)).join('');
+    document.getElementById('ghostMoodsGrid').innerHTML =
+        MOODS.map(m => moodCell(ghostSVG(m), m)).join('');
+
+    /* ──────────────────────────────────────────────────────────────
+       PHONE MOCKUP — mini ghost in Brainrot mood inside the Overview
+       screen. Renders the zombie ghost (which the global CSS rule
+       rotates 90deg so it looks fallen on the floor) to dramatize the
+       "fights back" idea against the time numbers shown below.
+       ────────────────────────────────────────────────────────────── */
+    document.getElementById('phoneKrakenSlot').innerHTML =
+        `<div style="width: 130px; height: 130px;">${ghostSVG('zombie')}</div>`;
+
+    /* ──────────────────────────────────────────────────────────────
+       TENTACLE SWAY — drives every .kraken on the page.
+       Exact port of TentaclesShape.path(in:) from the iOS app.
+       ────────────────────────────────────────────────────────────── */
+    const krakenStart = performance.now();
+    function tickKrakens(now) {
+        const t = (now - krakenStart) / 1000;
+        const spacing = TENT_W / (TENT_COUNT + 1);
+        document.querySelectorAll('.kraken').forEach(svg => {
+            const props = KRAKEN_PROPS[svg.dataset.mood] || KRAKEN_PROPS.zombie;
+            const length = TENT_BASE_H + props.droop;
+            const phase = props.period > 0 ? (t / props.period) : 0;
+            svg.querySelectorAll('[data-tent]').forEach((path, i) => {
+                const startX = spacing * (i + 1);
+                const offset = i * Math.PI / 3;
+                let d = `M${(TENT_X + startX).toFixed(1)},${TENT_Y}`;
+                for (let seg = 1; seg <= TENT_SEGMENTS; seg++) {
+                    const t1   = seg / TENT_SEGMENTS;
+                    const tMid = (seg - 0.5) / TENT_SEGMENTS;
+                    const wave = (s) => Math.sin(s * Math.PI * 2 + phase * Math.PI * 2 + offset) * props.amp * s;
+                    const cpX  = startX + wave(tMid);
+                    const cpY  = tMid * length;
+                    const endX = startX + wave(t1);
+                    const endY = t1 * length;
+                    d += ` Q${(TENT_X + cpX).toFixed(1)},${(TENT_Y + cpY).toFixed(1)} ${(TENT_X + endX).toFixed(1)},${(TENT_Y + endY).toFixed(1)}`;
+                }
+                path.setAttribute('d', d);
+            });
+        });
+        requestAnimationFrame(tickKrakens);
+    }
+    requestAnimationFrame(tickKrakens);
+</script>
+
+</body>
+</html>
