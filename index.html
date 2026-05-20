@@ -184,9 +184,25 @@
         background-size: 80px 100%;
     }
     .hero-inner {
-        /* Single column: tag → h1 → mood card → CTAs, all stacked. */
-        display: block;
+        /* Desktop: 2 columns — text stack on the left, mood card on the
+           right spanning the full height. Collapses to a single column
+           ≤1024px (see media query), where the card moves between the
+           h1 and the CTAs and the blurb is hidden. */
+        display: grid;
+        grid-template-columns: 1fr 420px;
+        grid-template-areas:
+            "tag  card"
+            "h1   card"
+            "para card"
+            "ctas card";
+        column-gap: 48px;
+        align-items: start;
     }
+    .hero-tag  { grid-area: tag; }
+    .hero-h1   { grid-area: h1; }
+    .hero-p    { grid-area: para; }
+    .mood-card { grid-area: card; }
+    .hero-ctas { grid-area: ctas; }
     .hero-tag {
         font-family: 'JetBrains Mono', monospace;
         font-size: 12px;
@@ -204,6 +220,13 @@
         margin-bottom: 24px;
     }
     .hero-mood-word { transition: color .4s; }
+    .hero-p {
+        font-size: 17px;
+        line-height: 1.5;
+        opacity: 0.85;
+        text-transform: uppercase;
+        max-width: 460px;
+    }
     .hero-ctas {
         margin-top: 48px;
         display: flex;
@@ -212,10 +235,9 @@
         flex-wrap: wrap;
     }
 
-    /* Mood card — sits between the h1 and the CTAs, mascot inside. */
+    /* Mood card — right column on desktop; between h1 and CTAs on mobile. */
     .mood-card {
         max-width: 420px;
-        margin: 8px 0 0;
         background: var(--m-ecstatic-bg);
         color: var(--m-ecstatic-fg);
         border: 4px solid var(--fg);
@@ -1137,7 +1159,23 @@
     .ghost-arm  { fill: url(#ghostGrad-ecstatic); }
 
     /* ── RESPONSIVE ── */
+    /* Mid-width laptops: shrink the h1 so "WITNESS." still fits the
+       left column next to the 420px mood card. */
+    @media (max-width: 1280px) {
+        .hero-h1 { font-size: 132px; }
+    }
     @media (max-width: 1024px) {
+        /* Hero collapses to one column: tag → h1 → mood card → CTAs.
+           The blurb is desktop-only. */
+        .hero-inner {
+            grid-template-columns: 1fr;
+            grid-template-areas:
+                "tag"
+                "h1"
+                "card"
+                "ctas";
+        }
+        .hero-p { display: none; }
         .hero-h1 { font-size: 100px; }
         .manifesto h2 { font-size: 56px; }
         .teams-split { grid-template-columns: 1fr; }
@@ -1347,9 +1385,10 @@
             HAS A<br>
             <span class="hero-mood-word" id="moodWord">WITNESS.</span>
         </h1>
+        <p class="hero-p">A KRAKEN (OR GHOST) THAT FEELS YOUR DOOM SCROLL AND FIGHTS BACK. FOUR MOODS. THREE BLOCKING TOOLS. ZERO TELEMETRY.</p>
 
         <!-- MOOD CARD — single mascot stage, kraken/ghost alternating per
-             mood. Sits between the h1 and the CTA buttons. -->
+             mood. Right column on desktop; between h1 and CTAs on mobile. -->
         <div class="mood-card" id="moodCard" data-mood="ecstatic">
             <div class="mood-feed-row">
                 <span>LIVE FEED ●</span>
