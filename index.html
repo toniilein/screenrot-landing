@@ -1172,8 +1172,12 @@
         .how-cell + .how-cell { border-left: none; border-top: 2px solid var(--fg); }
     }
     @media (max-width: 640px) {
-        nav { padding: 16px 20px; flex-wrap: wrap; gap: 12px; }
-        .nav-links { gap: 0; flex-wrap: wrap; }
+        nav { padding: 16px 20px; }
+        /* Hide the section anchors on mobile — keeps the nav a single
+           clean row (logo + the filled GET THE APP button) instead of
+           wrapping that button onto its own line. */
+        .nav-links { gap: 0; }
+        .nav-links li:not(:last-child) { display: none; }
         .hero { padding: 40px 20px; }
         .hero-h1 { font-size: 52px; }
         .hero-p-grid { grid-template-columns: 1fr; gap: 16px; }
