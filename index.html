@@ -256,6 +256,24 @@
         justify-content: space-between;
         margin-bottom: 12px;
     }
+    /* Loading bar — fills over each mood cycle, then triggers the
+       switch. The dark fill grows over the mood-colored (transparent)
+       track. JS drives the `moodProgress` animation. */
+    .mood-progress {
+        height: 9px;
+        border: 2px solid currentColor;
+        margin-bottom: 10px;
+        overflow: hidden;
+    }
+    .mood-progress-fill {
+        height: 100%;
+        width: 0%;
+        background: currentColor;
+    }
+    @keyframes moodProgress {
+        from { width: 0%; }
+        to   { width: 100%; }
+    }
     .mood-card-stage {
         border-top: 2px solid currentColor;
         border-bottom: 2px solid currentColor;
@@ -1405,6 +1423,7 @@
                 <span>LIVE FEED ●</span>
                 <span>2026.05.12</span>
             </div>
+            <div class="mood-progress"><div class="mood-progress-fill" id="moodProgressFill"></div></div>
             <div class="mood-card-stage">
                 <div class="mood-card-label" id="moodCardLabel">● KRAKEN</div>
                 <div class="mascot-stage" id="heroMascot"><!-- populated by JS --></div>
@@ -2037,14 +2056,31 @@
         stage.innerHTML = useKraken ? krakenSVG(mood) : ghostSVG(mood);
     }
 
-    // Hovering a team-section mood swatch pauses this auto-cycle.
+    // ── Mood cycle, driven by the loading bar ──
+    // The .mood-progress-fill runs a `moodProgress` width animation for
+    // HERO_CYCLE_MS; when it finishes, the hero advances to the next
+    // mood and the bar refills. Hovering a team mood swatch pauses it.
+    const HERO_CYCLE_MS = 1600;
+    const moodProgressFill = document.getElementById('moodProgressFill');
     let heroHover = false;
-    setHeroMood(0);
-    setInterval(() => {
+
+    function runProgress(paused) {
+        // Restart the fill animation from 0%.
+        moodProgressFill.style.animation = 'none';
+        void moodProgressFill.offsetWidth;  // reflow so the restart registers
+        moodProgressFill.style.animation = `moodProgress ${HERO_CYCLE_MS}ms linear forwards`;
+        moodProgressFill.style.animationPlayState = paused ? 'paused' : 'running';
+    }
+
+    moodProgressFill.addEventListener('animationend', () => {
         if (heroHover) return;
         moodIdx = (moodIdx + 1) % MOODS.length;
         setHeroMood(moodIdx);
-    }, 1600);
+        runProgress(false);
+    });
+
+    setHeroMood(0);
+    runProgress(false);
 
     /* ──────────────────────────────────────────────────────────────
        TEAM CARDS — single ecstatic mascot per team (no animation
@@ -2069,15 +2105,19 @@
         MOODS.map(m => moodCell(ghostSVG(m), m, 'ghost')).join('');
 
     // Hovering a mood swatch drives the hero mood card — it shows that
-    // mascot in that mood and pauses the auto-cycle until the mouse
-    // leaves. moodIdx is synced so the cycle resumes from the hovered mood.
+    // mascot in that mood and freezes the loading bar at 0% until the
+    // mouse leaves, then the bar fills and the cycle resumes from there.
     document.querySelectorAll('.moods-grid-cell').forEach(cell => {
         cell.addEventListener('mouseenter', () => {
             heroHover = true;
             moodIdx = MOODS.indexOf(cell.dataset.mood);
             setHeroMood(moodIdx, cell.dataset.mascot);
+            runProgress(true);   // reset the bar to 0%, paused
         });
-        cell.addEventListener('mouseleave', () => { heroHover = false; });
+        cell.addEventListener('mouseleave', () => {
+            heroHover = false;
+            moodProgressFill.style.animationPlayState = 'running';
+        });
     });
 
     /* ──────────────────────────────────────────────────────────────
