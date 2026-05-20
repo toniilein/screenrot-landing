@@ -1185,13 +1185,23 @@
         .cta-h2 { font-size: 72px; }
         .mood-card-stage { height: 240px; }
         .mascot-stage { width: 260px; height: 260px; }
-        /* Stack the two iPhone mockups (fixed 320×680) and scale them
-           down to fit narrow screens. Negative margins collapse the
-           empty space the transform-scale leaves around each box. */
-        .phones { flex-direction: column; gap: 0; }
+        /* Stack the two iPhone mockups. Each wrapper is sized to the
+           SCALED phone footprint (320×680 × 0.7 = 224×476); the
+           .ios-device inside is scaled from its top-left corner so it
+           fills the wrapper exactly. No negative-margin hacks — those
+           don't collapse inside a flex container, they sum, which is
+           what caused the clipped/overlapping phones. */
+        .phones { flex-direction: column; gap: 36px; align-items: center; }
         .phone-tilt-l, .phone-tilt-r {
+            transform: none;
+            margin: 0;
+            width: 224px;
+            height: 476px;
+        }
+        .phone-tilt-l .ios-device,
+        .phone-tilt-r .ios-device {
             transform: scale(0.7);
-            margin: -100px 0;
+            transform-origin: top left;
         }
     }
     @media (max-width: 400px) {
