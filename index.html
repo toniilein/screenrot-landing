@@ -184,10 +184,8 @@
         background-size: 80px 100%;
     }
     .hero-inner {
-        display: grid;
-        grid-template-columns: 1fr 420px;
-        gap: 40px;
-        align-items: start;
+        /* Single column: tag → h1 → mood card → CTAs, all stacked. */
+        display: block;
     }
     .hero-tag {
         font-family: 'JetBrains Mono', monospace;
@@ -206,19 +204,6 @@
         margin-bottom: 24px;
     }
     .hero-mood-word { transition: color .4s; }
-    .hero-p-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 32px;
-        margin-top: 40px;
-        max-width: 720px;
-    }
-    .hero-p {
-        font-size: 17px;
-        line-height: 1.5;
-        opacity: 0.85;
-        text-transform: uppercase;
-    }
     .hero-ctas {
         margin-top: 48px;
         display: flex;
@@ -227,8 +212,10 @@
         flex-wrap: wrap;
     }
 
-    /* Mood card — right side of hero, mascot inside */
+    /* Mood card — sits between the h1 and the CTAs, mascot inside. */
     .mood-card {
+        max-width: 420px;
+        margin: 8px 0 0;
         background: var(--m-ecstatic-bg);
         color: var(--m-ecstatic-fg);
         border: 4px solid var(--fg);
@@ -1151,7 +1138,6 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
-        .hero-inner { grid-template-columns: 1fr; gap: 40px; }
         .hero-h1 { font-size: 100px; }
         .manifesto h2 { font-size: 56px; }
         .teams-split { grid-template-columns: 1fr; }
@@ -1180,7 +1166,6 @@
         .nav-links li:not(:last-child) { display: none; }
         .hero { padding: 40px 20px; }
         .hero-h1 { font-size: 52px; }
-        .hero-p-grid { grid-template-columns: 1fr; gap: 16px; }
         .manifesto, .teams-head, .mockup, .features, .how, .get-app, .cta { padding: 60px 20px; }
         .manifesto h2 { font-size: 36px; }
         .teams-h2 { font-size: 52px; }
@@ -1345,25 +1330,16 @@
      ──────────────────────────────────────────────────────────────── -->
 <section class="hero">
     <div class="hero-inner">
-        <div>
-            <div class="hero-tag">[01] ▸ INDEX/01 ▸ THE PRODUCT ▸ 2026.05</div>
-            <h1 class="hero-h1">
-                YOUR<br>
-                SCROLL<br>
-                HAS A<br>
-                <span class="hero-mood-word" id="moodWord">WITNESS.</span>
-            </h1>
-            <div class="hero-p-grid">
-                <p class="hero-p">A KRAKEN (OR GHOST) THAT FEELS YOUR DOOM SCROLL AND FIGHTS BACK. FOUR MOODS. THREE BLOCKING TOOLS. ZERO TELEMETRY.</p>
-                <p class="hero-p">BUILT ON APPLE'S FAMILY CONTROLS STACK. RUNS ENTIRELY ON YOUR DEVICE. NO SERVER. NO ACCOUNT. NO ADS.</p>
-            </div>
-            <div class="hero-ctas">
-                <a href="#get" class="br-cta">GET THE APP →</a>
-                <a href="#how" class="br-cta br-cta-alt">HOW IT WORKS</a>
-            </div>
-        </div>
+        <div class="hero-tag">[01] ▸ INDEX/01 ▸ HERO</div>
+        <h1 class="hero-h1">
+            YOUR<br>
+            SCROLL<br>
+            HAS A<br>
+            <span class="hero-mood-word" id="moodWord">WITNESS.</span>
+        </h1>
 
-        <!-- MOOD CARD — single mascot stage, kraken/ghost alternating per mood -->
+        <!-- MOOD CARD — single mascot stage, kraken/ghost alternating per
+             mood. Sits between the h1 and the CTA buttons. -->
         <div class="mood-card" id="moodCard" data-mood="ecstatic">
             <div class="mood-feed-row">
                 <span>LIVE FEED ●</span>
@@ -1378,6 +1354,11 @@
                 <span id="moodCardStatus">STATUS: UNDER 80%</span>
                 <span id="moodCardFig">FIG. 01/04</span>
             </div>
+        </div>
+
+        <div class="hero-ctas">
+            <a href="#get" class="br-cta">GET THE APP →</a>
+            <a href="#how" class="br-cta br-cta-alt">HOW IT WORKS</a>
         </div>
     </div>
 </section>
