@@ -610,7 +610,7 @@
     .phones {
         display: flex;
         justify-content: center;
-        gap: 24px;
+        gap: 0;
         align-items: center;
         position: relative;
         padding: 20px 0;
@@ -619,11 +619,18 @@
         transform: rotate(-2deg) scale(0.85);
         transform-origin: center;
         filter: drop-shadow(8px 8px 0 var(--fg));
+        position: relative;
+        z-index: 1;
     }
+    /* Right phone slides left to overlap the left one — fanned-deck look.
+       z-index puts it in front. */
     .phone-tilt-r {
         transform: rotate(2deg) scale(0.85) translateY(30px);
         transform-origin: center;
         filter: drop-shadow(8px 8px 0 var(--accent));
+        margin-left: -90px;
+        position: relative;
+        z-index: 2;
     }
 
     /* iOS device frame */
