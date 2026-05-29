@@ -1274,12 +1274,24 @@
         .how-cell + .how-cell { border-left: none; border-top: 2px solid var(--fg); }
     }
     @media (max-width: 640px) {
-        nav { padding: 16px 20px; }
-        /* Hide the section anchors on mobile — keeps the nav a single
-           clean row (logo + the filled GET THE APP button) instead of
-           wrapping that button onto its own line. */
-        .nav-links { gap: 0; }
-        .nav-links li:not(:last-child) { display: none; }
+        /* Mobile nav: logo top-left, CTA top-right, socials wrap to a
+           second row beneath. Section anchors stay hidden. */
+        nav {
+            padding: 14px 20px;
+            flex-wrap: wrap;
+            row-gap: 12px;
+        }
+        .nav-logo { font-size: 22px; }
+        .nav-links {
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        .nav-links li:not(:last-child):not(.nav-social) { display: none; }
+        /* Bump the icon squares up on mobile so they read clearly. */
+        .nav-links a.nav-social-link { width: 44px; height: 44px; }
+        .nav-links a.nav-social-link svg { width: 22px; height: 22px; }
         .hero { padding: 40px 20px; }
         .hero-h1 { font-size: 52px; }
         .manifesto, .teams-head, .mockup, .features, .how, .get-app, .cta { padding: 60px 20px; }
