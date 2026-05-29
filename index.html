@@ -1292,6 +1292,18 @@
         .nav-links a.nav-social-link { width: 44px; height: 44px; }
         .nav-links a.nav-social-link svg { width: 22px; height: 22px; }
         .hero { padding: 40px 20px; }
+        /* Side-by-side CTA buttons on mobile (instead of stacking). */
+        .hero-ctas { gap: 10px; flex-wrap: nowrap; }
+        .hero-ctas .br-cta {
+            flex: 1 1 0;
+            min-width: 0;
+            padding: 16px 12px;
+            font-size: 13px;
+            gap: 6px;
+            justify-content: center;
+            text-align: center;
+            white-space: nowrap;
+        }
         .hero-h1 { font-size: 52px; }
         .manifesto, .teams-head, .mockup, .features, .how, .get-app, .cta { padding: 60px 20px; }
         .manifesto h2 { font-size: 36px; }
