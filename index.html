@@ -1231,6 +1231,121 @@
         font-size: 22px;
     }
 
+    /* ── WHAT'S NEXT — NFC + WAITING LIST + KICKSTARTER ── */
+    .next {
+        padding: 96px 40px;
+        background: var(--bg);
+        border-top: 4px solid var(--fg);
+    }
+    .next-inner {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 56px;
+        align-items: center;
+    }
+    .next-tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        opacity: 0.6;
+        margin-bottom: 18px;
+        letter-spacing: 0.04em;
+    }
+    .next-badge {
+        display: inline-block;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        font-weight: 700;
+        background: var(--c-coral);
+        color: var(--bg);
+        padding: 5px 9px;
+        margin-bottom: 18px;
+        letter-spacing: 0.06em;
+    }
+    .next-h2 {
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: -0.04em;
+        line-height: 0.86;
+        font-size: 92px;
+        margin-bottom: 22px;
+    }
+    .next-h2 .hl-mint { color: var(--accent); }
+    .next-p {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1.6;
+        opacity: 0.85;
+        max-width: 460px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+    .next-p-sub {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1.55;
+        opacity: 0.55;
+        max-width: 460px;
+        text-transform: uppercase;
+    }
+    .next-ctas {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .next-cta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 24px 28px;
+        text-decoration: none;
+        color: var(--fg);
+        border: 3px solid var(--fg);
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: -0.01em;
+        transition: background 0.15s, color 0.15s, transform 0.15s;
+    }
+    .next-cta:hover { background: var(--fg); color: var(--bg); transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--fg); }
+    .next-cta-label { font-size: 20px; line-height: 1; }
+    .next-cta-meta {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        font-weight: 700;
+        opacity: 0.55;
+        text-transform: uppercase;
+        margin-top: 4px;
+    }
+    .next-cta-arrow { font-size: 28px; line-height: 1; }
+    .next-cta.primary {
+        background: var(--accent);
+        color: var(--bg);
+        border-color: var(--accent);
+    }
+    .next-cta.primary .next-cta-meta { color: #0A1F12; opacity: 0.65; }
+    .next-cta.primary:hover {
+        background: #0A1F12;
+        color: var(--accent);
+        border-color: #0A1F12;
+        box-shadow: 6px 6px 0 var(--accent);
+    }
+    @media (max-width: 1024px) {
+        .next-h2 { font-size: 72px; }
+        .next-inner { grid-template-columns: 1fr; gap: 36px; }
+    }
+    @media (max-width: 640px) {
+        .next { padding: 64px 20px; }
+        .next-h2 { font-size: 52px; }
+        .next-cta { padding: 20px 22px; }
+        .next-cta-label { font-size: 17px; }
+        .next-cta-arrow { font-size: 22px; }
+    }
+
     /* ── CTA ── */
     .cta {
         padding: 120px 40px;
@@ -2129,6 +2244,37 @@
                     <div class="app-btn-label">QR CODE</div>
                 </div>
                 <div class="app-btn-arrow">→</div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ────────────────────────────────────────────────────────────────
+     WHAT'S NEXT — NFC pookie tag teaser.
+     ──────────────────────────────────────────────────────────────── -->
+<section class="next" id="next">
+    <div class="next-inner">
+        <div>
+            <div class="next-tag">// SECTION 09 / WHAT'S NEXT</div>
+            <div class="next-badge">[IN DEVELOPMENT]</div>
+            <h2 class="next-h2">A POOKIE<br>YOU CAN<br><span class="hl-mint">TAP.</span></h2>
+            <p class="next-p">WE'RE BUILDING AN NFC POOKIE. TAP YOUR PHONE TO START A FOCUS SESSION, DROP A QUICK BLOCK, OR FEED THE POOKIE — NO APP-OPENING REQUIRED.</p>
+            <p class="next-p-sub">SHIPPING ON KICKSTARTER. JOIN THE WAITING LIST FOR EARLY-BIRD PRICING AND THE FIRST DROP.</p>
+        </div>
+        <div class="next-ctas">
+            <a class="next-cta primary" href="mailto:hi@pookiescroll.app?subject=NFC%20Waiting%20List&body=add%20me%20to%20the%20NFC%20pookie%20waiting%20list">
+                <div>
+                    <div class="next-cta-label">JOIN THE WAITING LIST</div>
+                    <div class="next-cta-meta">EARLY-BIRD PRICING · FIRST DROP</div>
+                </div>
+                <div class="next-cta-arrow">→</div>
+            </a>
+            <a class="next-cta" href="#" target="_blank" rel="noopener" aria-label="Kickstarter (coming soon)">
+                <div>
+                    <div class="next-cta-label">SEE THE KICKSTARTER</div>
+                    <div class="next-cta-meta">LAUNCH: COMING SOON</div>
+                </div>
+                <div class="next-cta-arrow">→</div>
             </a>
         </div>
     </div>
