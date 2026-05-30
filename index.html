@@ -960,6 +960,126 @@
         text-transform: uppercase;
     }
 
+    /* ── VS THE COMPETITION ── */
+    .vs {
+        padding: 96px 40px;
+        background: var(--bg);
+    }
+    .vs-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 32px;
+        margin-bottom: 36px;
+    }
+    .vs-tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        opacity: 0.6;
+        margin-bottom: 18px;
+        letter-spacing: 0.04em;
+    }
+    .vs-h2 {
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: -0.04em;
+        line-height: 0.86;
+        font-size: 78px;
+    }
+    .vs-h2 .hl-red { color: var(--c-coral); }
+    .vs-lede {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 13px;
+        font-weight: 700;
+        opacity: 0.7;
+        max-width: 320px;
+        line-height: 1.55;
+        text-transform: uppercase;
+        text-align: right;
+    }
+    .vs-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .vs-table {
+        border: 4px solid var(--fg);
+        min-width: 720px;
+    }
+    .vs-row {
+        display: grid;
+        grid-template-columns: 2.4fr 1.2fr repeat(4, 1fr);
+        border-bottom: 2px solid var(--fg);
+    }
+    .vs-row:last-child { border-bottom: none; }
+    .vs-cell {
+        padding: 16px 12px;
+        border-right: 2px solid var(--fg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        font-weight: 700;
+        text-align: center;
+        min-height: 60px;
+        line-height: 1.3;
+    }
+    .vs-cell:last-child { border-right: none; }
+    .vs-cell.vs-feature {
+        justify-content: flex-start;
+        text-align: left;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+    }
+    .vs-row.vs-header .vs-cell {
+        background: var(--fg);
+        color: var(--bg);
+        font-family: 'Archivo Black', sans-serif;
+        font-size: 13px;
+        letter-spacing: -0.01em;
+        text-transform: uppercase;
+        min-height: 72px;
+    }
+    .vs-row.vs-header .vs-cell.vs-us {
+        background: var(--accent);
+        color: var(--bg);
+    }
+    .vs-cell.vs-us {
+        background: var(--accent);
+        color: #0A1F12;
+    }
+    .vs-mark {
+        font-family: 'Archivo Black', sans-serif;
+        font-size: 22px;
+        line-height: 1;
+    }
+    .vs-mark.no    { opacity: 0.35; font-size: 26px; }
+    .vs-mark.part  { opacity: 0.6;  font-size: 22px; }
+    .vs-legend {
+        margin-top: 18px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        font-weight: 700;
+        opacity: 0.55;
+        text-align: center;
+        letter-spacing: 0.05em;
+    }
+    @media (max-width: 1024px) {
+        .vs-h2 { font-size: 60px; }
+    }
+    @media (max-width: 900px) {
+        .vs { padding: 72px 24px; }
+        .vs-head { flex-direction: column; align-items: flex-start; }
+        .vs-lede { text-align: left; max-width: 100%; }
+    }
+    @media (max-width: 640px) {
+        .vs { padding: 56px 16px; }
+        .vs-h2 { font-size: 44px; }
+        .vs-tag { font-size: 11px; margin-bottom: 14px; }
+        .vs-lede { font-size: 12px; }
+    }
+
     /* ── HOW IT WORKS ── */
     .how {
         padding: 100px 40px;
@@ -1867,10 +1987,100 @@
 </section>
 
 <!-- ────────────────────────────────────────────────────────────────
+     VS THE COMPETITION — brutalist comparison table.
+     ──────────────────────────────────────────────────────────────── -->
+<section class="vs" id="vs">
+    <div class="vs-head">
+        <div>
+            <div class="vs-tag">// SECTION 06 / VS</div>
+            <h2 class="vs-h2">EVERY OTHER<br>SCREEN-TIME APP<br>IS A <span class="hl-red">SPREADSHEET</span>.</h2>
+        </div>
+        <p class="vs-lede">APPLE'S BUILT-IN. OPAL. FOREST. ONE SEC. THEY ALL DO THE MATH RIGHT. NONE OF THEM HAVE A POOKIE.</p>
+    </div>
+    <div class="vs-table-wrap">
+        <div class="vs-table">
+            <div class="vs-row vs-header">
+                <div class="vs-cell vs-feature">FEATURE</div>
+                <div class="vs-cell vs-us">POOKIE<br>SCROLL</div>
+                <div class="vs-cell">APPLE<br>SCREEN TIME</div>
+                <div class="vs-cell">OPAL</div>
+                <div class="vs-cell">FOREST</div>
+                <div class="vs-cell">ONE SEC</div>
+            </div>
+            <div class="vs-row">
+                <div class="vs-cell vs-feature">LIVING MASCOT THAT REACTS TO YOUR USAGE</div>
+                <div class="vs-cell vs-us"><span class="vs-mark">★</span></div>
+                <div class="vs-cell"><span class="vs-mark no">—</span></div>
+                <div class="vs-cell"><span class="vs-mark no">—</span></div>
+                <div class="vs-cell"><span class="vs-mark part">~</span></div>
+                <div class="vs-cell"><span class="vs-mark no">—</span></div>
+            </div>
+            <div class="vs-row">
+                <div class="vs-cell vs-feature">GOAL-PERSONALIZED MOOD THRESHOLDS</div>
+                <div class="vs-cell vs-us"><span class="vs-mark">★</span></div>
+                <div class="vs-cell"><span class="vs-mark no">—</span></div>
+                <div class="vs-cell"><span class="vs-mark part">~</span></div>
+                <div class="vs-cell"><span class="vs-mark no">—</span></div>
+                <div class="vs-cell"><span class="vs-mark no">—</span></div>
+            </div>
+            <div class="vs-row">
+                <div class="vs-cell vs-feature">CUSTOM "ON STRIKE" SHIELD POSTER</div>
+                <div class="vs-cell vs-us"><span class="vs-mark">★</span></div>
+                <div class="vs-cell"><span class="vs-mark no">—</span></div>
+                <div class="vs-cell"><span class="vs-mark part">~</span></div>
+                <div class="vs-cell"><span class="vs-mark no">—</span></div>
+                <div class="vs-cell"><span class="vs-mark no">—</span></div>
+            </div>
+            <div class="vs-row">
+                <div class="vs-cell vs-feature">THREE BLOCKING MODES (PANIC · LIMITS · ROUTINES)</div>
+                <div class="vs-cell vs-us"><span class="vs-mark">★</span></div>
+                <div class="vs-cell"><span class="vs-mark part">~</span></div>
+                <div class="vs-cell"><span class="vs-mark">★</span></div>
+                <div class="vs-cell"><span class="vs-mark no">—</span></div>
+                <div class="vs-cell"><span class="vs-mark no">—</span></div>
+            </div>
+            <div class="vs-row">
+                <div class="vs-cell vs-feature">BRAINROT DEBT — ONE WEEKLY NUMBER</div>
+                <div class="vs-cell vs-us"><span class="vs-mark">★</span></div>
+                <div class="vs-cell"><span class="vs-mark no">—</span></div>
+                <div class="vs-cell"><span class="vs-mark no">—</span></div>
+                <div class="vs-cell"><span class="vs-mark no">—</span></div>
+                <div class="vs-cell"><span class="vs-mark no">—</span></div>
+            </div>
+            <div class="vs-row">
+                <div class="vs-cell vs-feature">HOME-SCREEN WIDGET WITH MOOD</div>
+                <div class="vs-cell vs-us"><span class="vs-mark">★</span></div>
+                <div class="vs-cell"><span class="vs-mark part">~</span></div>
+                <div class="vs-cell"><span class="vs-mark">★</span></div>
+                <div class="vs-cell"><span class="vs-mark part">~</span></div>
+                <div class="vs-cell"><span class="vs-mark no">—</span></div>
+            </div>
+            <div class="vs-row">
+                <div class="vs-cell vs-feature">100% ON-DEVICE · NO ACCOUNT · NO TRACKING</div>
+                <div class="vs-cell vs-us"><span class="vs-mark">★</span></div>
+                <div class="vs-cell"><span class="vs-mark">★</span></div>
+                <div class="vs-cell"><span class="vs-mark no">—</span></div>
+                <div class="vs-cell"><span class="vs-mark no">—</span></div>
+                <div class="vs-cell"><span class="vs-mark no">—</span></div>
+            </div>
+            <div class="vs-row">
+                <div class="vs-cell vs-feature">FREE · NO SUBSCRIPTION</div>
+                <div class="vs-cell vs-us"><span class="vs-mark">★</span></div>
+                <div class="vs-cell"><span class="vs-mark">★</span></div>
+                <div class="vs-cell"><span class="vs-mark no">—</span></div>
+                <div class="vs-cell"><span class="vs-mark part">~</span></div>
+                <div class="vs-cell"><span class="vs-mark part">~</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="vs-legend">★ = YES &nbsp;·&nbsp; — = NO &nbsp;·&nbsp; ~ = PARTIAL</div>
+</section>
+
+<!-- ────────────────────────────────────────────────────────────────
      HOW IT WORKS — 3 steps.
      ──────────────────────────────────────────────────────────────── -->
 <section class="how" id="how">
-    <div class="how-tag">// SECTION 06 / OPERATION</div>
+    <div class="how-tag">// SECTION 07 / OPERATION</div>
     <h2 class="how-h2">THREE STEPS.<br>NO DATA LEAVES.</h2>
     <div class="how-grid">
         <div class="how-cell">
@@ -1897,7 +2107,7 @@
 <section class="get-app" id="get">
     <div class="get-app-inner">
         <div>
-            <div class="get-app-tag">// SECTION 07 / DOWNLOAD</div>
+            <div class="get-app-tag">// SECTION 08 / DOWNLOAD</div>
             <h2 class="get-app-h2">GET<br>THE APP.</h2>
             <p class="get-app-p">FREE. iOS 17+. NO ACCOUNT. NO ADS. NO TRACKING. THE POOKIE MOVES IN, THE SCROLL MOVES OUT.</p>
         </div>
