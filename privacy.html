@@ -5,9 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PookieScroll — Privacy Policy</title>
 
-<!-- GA4 (G-FSJRFQ556N) — Consent Mode v2. See header comment in index.html
-     for the rationale (denied-by-default, wait_for_update 2000ms, no
-     anonymize_ip flag since GA4 anonymises IPs automatically). -->
+<!-- GA4 (G-FSJRFQ556N) — cookieless mode. See header comment in index.html. -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FSJRFQ556N"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -18,15 +16,8 @@
     'ad_personalization':   'denied',
     'analytics_storage':    'denied',
     'functionality_storage':'granted',
-    'security_storage':     'granted',
-    'wait_for_update':       2000
+    'security_storage':     'granted'
   });
-  try {
-    var saved = JSON.parse(localStorage.getItem('pookie_consent') || 'null');
-    if (saved && saved.analytics === 'granted') {
-      gtag('consent', 'update', { 'analytics_storage': 'granted' });
-    }
-  } catch (e) {}
   gtag('js', new Date());
   gtag('config', 'G-FSJRFQ556N');
 </script>
@@ -114,29 +105,6 @@
         h2 { font-size: 18px; }
         p, li { font-size: 15px; }
     }
-    /* Cookie consent banner. */
-    #cookie-banner { position: fixed; bottom: 16px; left: 16px; right: 16px; z-index: 9999; background: var(--bg); border: 3px solid var(--fg); font-family: 'JetBrains Mono', monospace; color: var(--fg); box-shadow: 8px 8px 0 #8CE0B3; }
-    #cookie-banner[hidden] { display: none; }
-    #cookie-banner .cb-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px 22px; flex-wrap: wrap; }
-    #cookie-banner .cb-text { font-size: 13px; font-weight: 700; line-height: 1.55; max-width: 720px; flex: 1 1 320px; }
-    #cookie-banner .cb-text .cb-tag { color: #8CE0B3; margin-right: 8px; }
-    #cookie-banner .cb-text a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
-    #cookie-banner .cb-btns { display: flex; gap: 10px; flex-shrink: 0; }
-    #cookie-banner .cb-btn { font-family: inherit; font-weight: 700; font-size: 12px; padding: 12px 20px; border: 2px solid var(--fg); background: transparent; color: var(--fg); text-transform: uppercase; letter-spacing: 0.02em; cursor: pointer; transition: background 0.15s, color 0.15s; }
-    #cookie-banner .cb-btn:hover { background: var(--fg); color: var(--bg); }
-    /* Equal weight on REJECT / ACCEPT — both solid fills, different hue. */
-    #cookie-banner .cb-reject { background: var(--fg); border-color: var(--fg); color: var(--bg); }
-    #cookie-banner .cb-reject:hover { background: var(--bg); color: var(--fg); }
-    #cookie-banner .cb-accept { background: #8CE0B3; border-color: #8CE0B3; color: #0A1F12; }
-    #cookie-banner .cb-accept:hover { background: #0A1F12; color: #8CE0B3; }
-    .cookie-settings-link { display: inline-block; margin-top: 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; opacity: 0.6; text-decoration: underline; }
-    @media (max-width: 640px) {
-        #cookie-banner { bottom: 8px; left: 8px; right: 8px; box-shadow: 4px 4px 0 #8CE0B3; }
-        #cookie-banner .cb-inner { padding: 14px 16px; gap: 14px; }
-        #cookie-banner .cb-text { font-size: 11.5px; }
-        #cookie-banner .cb-btns { width: 100%; gap: 8px; }
-        #cookie-banner .cb-btn { flex: 1; padding: 12px 8px; }
-    }
 </style>
 </head>
 <body>
@@ -151,23 +119,31 @@
         Pending human:   final sign-off by a qualified GDPR / DSG lawyer
                          before App Store submission goes live.
 
+        Current setup: Google Analytics 4 in COOKIELESS mode.
+        analytics_storage is permanently DENIED in Consent Mode v2, so GA4
+        sets no cookies and stores no client identifier. No cookie banner
+        is needed — there is nothing being stored on the user's device
+        that would trigger ePrivacy Art. 5(3) / TKG § 165.
+
         Addressed in this revision:
-          ✓ Schrems II / US transfer disclosure for Google LLC (GA4)
-          ✓ GA4 data-retention period named (Art. 13(2)(a))
+          ✓ GA4 switched to cookieless mode (no cookies, no identifiers,
+            no consent banner needed)
+          ✓ Schrems II / US transfer disclosure retained for the GA4 ping
+            itself (Google LLC still receives request metadata)
           ✓ Processor / recipient list (Google Ireland, Google LLC, GitHub)
           ✓ § 5 ECG Impressum placeholder (REPLACE before launch)
           ✓ Stronger children's-data section (Austrian DSG: age 14)
-          ✓ Equal-weight REJECT/ACCEPT cookie buttons (CNIL 2024 guidance)
-          ✓ Removed misleading anonymize_ip claim (it is a no-op in GA4)
+          ✓ Removed misleading anonymize_ip claim (no-op in GA4)
+          ✓ Legal basis switched from Art. 6(1)(a) consent (no longer
+            relevant — no cookies) to Art. 6(1)(f) legitimate interest
 
         Still pending — owner action:
           ☐ Replace [REPLACE …] placeholders in the Impressum block below
           ☐ Set EFFECTIVE date once a real lawyer signs off
           ☐ Remove the DRAFT banner immediately above
-          ☐ Decide whether to load gtag.js only after ACCEPT (stricter
-            "true blocking" mode — currently Consent Mode v2 only)
         ─────────────────────────────────────────────────────────────────
     -->
+
     <div class="draft">
         DRAFT — pending sign-off by a qualified GDPR / DSG lawyer. Items marked <code>[REPLACE …]</code> below must be filled in before publication.
     </div>
@@ -202,19 +178,14 @@
 
     <h2>Analytics &amp; tracking (this website)</h2>
     <p>This marketing website uses <strong>Google Analytics 4</strong> (property <code>G-FSJRFQ556N</code>) to count anonymous visits and understand which pages people read. <strong>The iOS app itself contains zero analytics code</strong>; this section only applies to the website.</p>
-
-    <h2>Cookies (this website)</h2>
-    <p>We use Google Consent Mode v2. When you first visit, analytics cookies are <strong>blocked by default</strong> until you tap ACCEPT in the consent banner. If you tap REJECT (or do nothing), no analytics or advertising cookies are set, and Google receives only an anonymous, cookie-less "ping" so we can see aggregate visitor counts. Google Analytics 4 anonymises IP addresses automatically on Google's servers; raw IPs are never stored.</p>
-    <p>Cookies that may be set <em>only</em> if you accept:</p>
+    <p>We run GA4 in <strong>cookieless mode</strong>: Google's <em>Consent Mode v2</em> is configured with <code>analytics_storage: 'denied'</code> permanently. In practice this means:</p>
     <ul>
-        <li><code>_ga</code> — distinguishes users · lifetime 2 years · set by Google Analytics</li>
-        <li><code>_ga_FSJRFQ556N</code> — session state for our GA4 property · lifetime 2 years · set by Google Analytics</li>
+        <li><strong>No cookies are set</strong> in your browser — no <code>_ga</code>, no <code>_ga_FSJRFQ556N</code>, none of the usual Google Analytics cookies.</li>
+        <li><strong>No persistent identifier</strong> (Client ID) is created for you. We can't recognise you across visits.</li>
+        <li><strong>No localStorage / IndexedDB / device-fingerprint</strong> is written by GA4.</li>
+        <li>Google receives an anonymous, aggregated "ping" per page-view: page URL, referrer, browser language, approximate device class. Your IP address is anonymised on Google's servers before storage.</li>
     </ul>
-    <p>Strictly-necessary client-side storage we always use (no opt-in required because it isn't tracking):</p>
-    <ul>
-        <li><code>pookie_consent</code> (localStorage) — remembers your consent choice so we don't ask again</li>
-    </ul>
-    <p><strong>Withdraw or change consent any time:</strong> use the <a href="#" data-cookie-settings>Cookie settings</a> link below, or install <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google's official opt-out browser add-on</a>.</p>
+    <p>Because nothing is stored on or read from your device, ePrivacy Art. 5(3) (Austrian TKG § 165) does not require a consent banner for this use. If you would still rather have no analytics ping go out at all, install <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google's official opt-out browser add-on</a>, or use a tracker-blocking browser (Brave, Firefox Strict, Safari with Privacy Report) — all standard ad-blockers will also block <code>googletagmanager.com</code>.</p>
 
     <h2>Recipients &amp; processors</h2>
     <p>If you tap ACCEPT in the cookie banner, pseudonymous analytics data is shared with the following processors (Art. 13(1)(e) GDPR):</p>
@@ -237,14 +208,14 @@
 
     <h2>Retention</h2>
     <ul>
-        <li><strong>Google Analytics 4 user / event data:</strong> 2 months in the GA4 admin "Data retention" setting (the default; we have not extended it).</li>
-        <li><strong>Cookies <code>_ga</code> / <code>_ga_FSJRFQ556N</code>:</strong> 2-year browser lifetime (Google default). Deleted earlier if you clear cookies or click REJECT in the cookie banner.</li>
+        <li><strong>Google Analytics 4 event data:</strong> 2 months (GA4 admin "Data retention" minimum, kept at default). Because no Client ID is set, GA4 cannot tie events together into a "user" anyway &mdash; the data is effectively aggregate from day one.</li>
         <li><strong>GitHub Pages access logs:</strong> 14 days, controlled by GitHub.</li>
-        <li><strong><code>pookie_consent</code> localStorage entry:</strong> stored until you clear browser storage. We do not transmit it anywhere.</li>
+        <li><strong>No cookies are set,</strong> so there is no cookie lifetime to disclose.</li>
     </ul>
 
     <h2>Legal basis (GDPR)</h2>
-    <p>For visitors in the EU / EEA / UK we rely on Art. 6(1)(a) GDPR &mdash; your <em>consent</em>, freely given through the cookie banner &mdash; for any analytics or marketing cookies. Strictly-necessary storage (page delivery via GitHub Pages, the <code>pookie_consent</code> localStorage entry) relies on Art. 6(1)(f) &mdash; our legitimate interest in operating and securing the website. For international transfers we additionally rely on Art. 45 GDPR (EU&ndash;US Data Privacy Framework) and Art. 46(2)(c) GDPR (Standard Contractual Clauses). You can withdraw consent at any time without affecting the lawfulness of processing before withdrawal.</p>
+    <p>For visitors in the EU / EEA / UK we rely on <strong>Art. 6(1)(f) GDPR &mdash; legitimate interest</strong> for the cookieless analytics ping (understanding aggregate visitor counts to a small marketing site). The balancing-of-interests test under Art. 6(1)(f) is favourable here because: no persistent identifier is created, no cross-site tracking is possible, IP addresses are anonymised, and a straightforward opt-out exists (any tracker-blocker). The same basis applies to GitHub Pages serving the static HTML.</p>
+    <p>For the international transfers involved (Google LLC and GitHub Inc. in the US receive request metadata) we additionally rely on Art. 45 GDPR (EU&ndash;US Data Privacy Framework adequacy decision) and Art. 46(2)(c) GDPR (Standard Contractual Clauses).</p>
 
     <h2>Your rights (GDPR Art. 15&ndash;22)</h2>
     <p>You have the right to: access (Art. 15), rectification (Art. 16), erasure (Art. 17), restriction of processing (Art. 18), data portability (Art. 20), and to object (Art. 21) &mdash; including the right to withdraw consent at any time (Art. 7(3)). To exercise any of these rights, email <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a>; we will respond within one month.</p>
@@ -280,45 +251,6 @@
     <p>Questions about this policy: <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a></p>
 
     <a class="back" href="index.html">← BACK TO POOKIESCROLL</a>
-    <div><a class="cookie-settings-link" href="#" data-cookie-settings>Cookie settings →</a></div>
 </main>
-
-<!-- Cookie consent banner -->
-<div id="cookie-banner" role="region" aria-label="Cookie consent" hidden>
-    <div class="cb-inner">
-        <div class="cb-text">
-            <span class="cb-tag">// COOKIES</span>
-            We use Google Analytics to count anonymous visits to this site. No ads, no profile-building, no third-party sharing — just traffic stats. Your call.
-            <a href="privacy.html">Read the policy →</a>
-        </div>
-        <div class="cb-btns">
-            <button type="button" class="cb-btn cb-reject">REJECT</button>
-            <button type="button" class="cb-btn cb-accept">ACCEPT</button>
-        </div>
-    </div>
-</div>
-<script>
-    (function () {
-        var KEY = 'pookie_consent';
-        var banner = document.getElementById('cookie-banner');
-        function save(state) {
-            try { localStorage.setItem(KEY, JSON.stringify({ analytics: state, ts: Date.now() })); } catch (e) {}
-            if (typeof gtag === 'function') gtag('consent', 'update', { 'analytics_storage': state });
-            if (banner) banner.hidden = true;
-        }
-        var saved = null;
-        try { saved = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
-        if (!saved && banner) banner.hidden = false;
-        document.addEventListener('click', function (e) {
-            var t = e.target;
-            if (t.classList && t.classList.contains('cb-accept')) save('granted');
-            else if (t.classList && t.classList.contains('cb-reject')) save('denied');
-            else if (t.closest && t.closest('[data-cookie-settings]')) {
-                e.preventDefault();
-                if (banner) banner.hidden = false;
-            }
-        });
-    })();
-</script>
 </body>
 </html>
