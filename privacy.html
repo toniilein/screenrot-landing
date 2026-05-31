@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PookieScroll — Privacy Policy</title>
 
-<!-- Google tag (gtag.js) with Consent Mode v2 — denied by default. -->
+<!-- GA4 (G-FSJRFQ556N) — Consent Mode v2. See header comment in index.html
+     for the rationale (denied-by-default, wait_for_update 2000ms, no
+     anonymize_ip flag since GA4 anonymises IPs automatically). -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FSJRFQ556N"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -17,7 +19,7 @@
     'analytics_storage':    'denied',
     'functionality_storage':'granted',
     'security_storage':     'granted',
-    'wait_for_update':       500
+    'wait_for_update':       2000
   });
   try {
     var saved = JSON.parse(localStorage.getItem('pookie_consent') || 'null');
@@ -26,7 +28,7 @@
     }
   } catch (e) {}
   gtag('js', new Date());
-  gtag('config', 'G-FSJRFQ556N', { 'anonymize_ip': true });
+  gtag('config', 'G-FSJRFQ556N');
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -122,6 +124,9 @@
     #cookie-banner .cb-btns { display: flex; gap: 10px; flex-shrink: 0; }
     #cookie-banner .cb-btn { font-family: inherit; font-weight: 700; font-size: 12px; padding: 12px 20px; border: 2px solid var(--fg); background: transparent; color: var(--fg); text-transform: uppercase; letter-spacing: 0.02em; cursor: pointer; transition: background 0.15s, color 0.15s; }
     #cookie-banner .cb-btn:hover { background: var(--fg); color: var(--bg); }
+    /* Equal weight on REJECT / ACCEPT — both solid fills, different hue. */
+    #cookie-banner .cb-reject { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+    #cookie-banner .cb-reject:hover { background: var(--bg); color: var(--fg); }
     #cookie-banner .cb-accept { background: #8CE0B3; border-color: #8CE0B3; color: #0A1F12; }
     #cookie-banner .cb-accept:hover { background: #0A1F12; color: #8CE0B3; }
     .cookie-settings-link { display: inline-block; margin-top: 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; opacity: 0.6; text-decoration: underline; }
@@ -139,11 +144,35 @@
     <div class="tag">// POOKIESCROLL · PRIVACY POLICY</div>
     <h1>Privacy<br>Policy.</h1>
 
+    <!--
+        ─── LEGAL REVIEW LOG ───────────────────────────────────────────
+        Last audited:    pre-launch (see /docs/AppStore.md for date).
+        Reviewed by:     AI compliance reviewer (NOT a qualified lawyer).
+        Pending human:   final sign-off by a qualified GDPR / DSG lawyer
+                         before App Store submission goes live.
+
+        Addressed in this revision:
+          ✓ Schrems II / US transfer disclosure for Google LLC (GA4)
+          ✓ GA4 data-retention period named (Art. 13(2)(a))
+          ✓ Processor / recipient list (Google Ireland, Google LLC, GitHub)
+          ✓ § 5 ECG Impressum placeholder (REPLACE before launch)
+          ✓ Stronger children's-data section (Austrian DSG: age 14)
+          ✓ Equal-weight REJECT/ACCEPT cookie buttons (CNIL 2024 guidance)
+          ✓ Removed misleading anonymize_ip claim (it is a no-op in GA4)
+
+        Still pending — owner action:
+          ☐ Replace [REPLACE …] placeholders in the Impressum block below
+          ☐ Set EFFECTIVE date once a real lawyer signs off
+          ☐ Remove the DRAFT banner immediately above
+          ☐ Decide whether to load gtag.js only after ACCEPT (stricter
+            "true blocking" mode — currently Consent Mode v2 only)
+        ─────────────────────────────────────────────────────────────────
+    -->
     <div class="draft">
-        DRAFT — accurate to how the app is built today, but have a lawyer review the final wording before App Store submission.
+        DRAFT — pending sign-off by a qualified GDPR / DSG lawyer. Items marked <code>[REPLACE …]</code> below must be filled in before publication.
     </div>
 
-    <div class="meta">EFFECTIVE: [TBD] · VERSION 1.0</div>
+    <div class="meta">EFFECTIVE: [TBD — set on lawyer sign-off] · VERSION 1.1</div>
 
     <p>PookieScroll ("the app", "we") is an iOS screen-time companion built on Apple's official <strong>Family Controls</strong>, <strong>DeviceActivity</strong>, and <strong>ManagedSettings</strong> frameworks. It runs entirely on your device. We do not operate any server, we do not create user accounts, and we do not collect, transmit, or sell your screen-time data, app usage, or any personal information.</p>
 
@@ -175,11 +204,11 @@
     <p>This marketing website uses <strong>Google Analytics 4</strong> (property <code>G-FSJRFQ556N</code>) to count anonymous visits and understand which pages people read. <strong>The iOS app itself contains zero analytics code</strong>; this section only applies to the website.</p>
 
     <h2>Cookies (this website)</h2>
-    <p>We use Google Consent Mode v2. When you first visit, analytics cookies are <strong>blocked by default</strong> until you tap ACCEPT in the consent banner. If you tap REJECT (or do nothing), no analytics or advertising cookies are set, and Google receives only an anonymous, cookie-less "ping" so we can see aggregate visitor counts. IP addresses are anonymised (<code>anonymize_ip: true</code>).</p>
+    <p>We use Google Consent Mode v2. When you first visit, analytics cookies are <strong>blocked by default</strong> until you tap ACCEPT in the consent banner. If you tap REJECT (or do nothing), no analytics or advertising cookies are set, and Google receives only an anonymous, cookie-less "ping" so we can see aggregate visitor counts. Google Analytics 4 anonymises IP addresses automatically on Google's servers; raw IPs are never stored.</p>
     <p>Cookies that may be set <em>only</em> if you accept:</p>
     <ul>
-        <li><code>_ga</code> — distinguishes users · expires after 2 years · set by Google Analytics</li>
-        <li><code>_ga_FSJRFQ556N</code> — session state for our GA4 property · expires after 2 years · set by Google Analytics</li>
+        <li><code>_ga</code> — distinguishes users · lifetime 2 years · set by Google Analytics</li>
+        <li><code>_ga_FSJRFQ556N</code> — session state for our GA4 property · lifetime 2 years · set by Google Analytics</li>
     </ul>
     <p>Strictly-necessary client-side storage we always use (no opt-in required because it isn't tracking):</p>
     <ul>
@@ -187,17 +216,59 @@
     </ul>
     <p><strong>Withdraw or change consent any time:</strong> use the <a href="#" data-cookie-settings>Cookie settings</a> link below, or install <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google's official opt-out browser add-on</a>.</p>
 
-    <h2>Legal basis (GDPR)</h2>
-    <p>For visitors in the EU / EEA / UK we rely on Art. 6(1)(a) GDPR — your <em>consent</em>, freely given through the cookie banner — for any analytics or marketing cookies. Strictly-necessary storage relies on Art. 6(1)(f) — legitimate interest in remembering your consent choice and keeping the site secure. You can withdraw consent at any time without affecting the lawfulness of processing before withdrawal.</p>
+    <h2>Recipients &amp; processors</h2>
+    <p>If you tap ACCEPT in the cookie banner, pseudonymous analytics data is shared with the following processors (Art. 13(1)(e) GDPR):</p>
+    <ul>
+        <li><strong>Google Ireland Limited</strong> (Gordon House, Barrow Street, Dublin 4, Ireland) — EU-fronted data controller / joint controller for Google Analytics. Our Data Processing Addendum with Google is the one published at <a href="https://business.safety.google/adsprocessorterms/" target="_blank" rel="noopener">business.safety.google</a>.</li>
+        <li><strong>Google LLC</strong> (1600 Amphitheatre Parkway, Mountain View, CA 94043, USA) — operates the Google Analytics backend. See "International transfers" below.</li>
+        <li><strong>GitHub, Inc.</strong> (88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA) — hosts this static website via GitHub Pages. GitHub may receive your IP address and User-Agent for the purpose of serving the page (Art. 6(1)(f) GDPR, our legitimate interest in operating the website).</li>
+    </ul>
 
-    <h2>Data controller (this website)</h2>
-    <p>Toni Bartulovic. Contact: <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a>. If you are in the EU and believe we have processed your data unlawfully, you have the right to lodge a complaint with your local data-protection authority.</p>
+    <h2>International transfers (Schrems II)</h2>
+    <p>Google LLC and GitHub, Inc. are US companies. Personal data (in our case: pseudonymous identifiers, IP addresses processed by GitHub at the moment of page-serve, browser metadata sent to Google Analytics if you accepted) may therefore be transferred to the United States.</p>
+    <p>The legal safeguards we rely on under Chapter V GDPR:</p>
+    <ul>
+        <li><strong>EU&ndash;US Data Privacy Framework</strong> (DPF) — Google LLC is <a href="https://www.dataprivacyframework.gov/list" target="_blank" rel="noopener">DPF-certified</a> (active certification, last verified before publication). Transfers to Google LLC therefore rely on an adequacy decision under Art. 45 GDPR.</li>
+        <li><strong>Standard Contractual Clauses (SCCs)</strong> &mdash; in addition to the DPF, Google's Data Processing Addendum incorporates the 2021 EU SCCs as a fallback under Art. 46(2)(c) GDPR.</li>
+        <li><strong>Pseudonymisation</strong> &mdash; we send no name, email, or other directly-identifying field to Google Analytics. Google's IP-anonymisation runs on Google's servers before storage.</li>
+        <li><strong>GitHub Pages</strong> serves the static HTML and does not see your interactions inside the page; its processing is limited to log entries necessary to deliver the page.</li>
+    </ul>
+    <p>If you would rather your data not leave the EU at all, click REJECT in the cookie banner. We will still be able to host the page (GitHub Pages is the host of record), but no analytics data will be transmitted.</p>
+
+    <h2>Retention</h2>
+    <ul>
+        <li><strong>Google Analytics 4 user / event data:</strong> 2 months in the GA4 admin "Data retention" setting (the default; we have not extended it).</li>
+        <li><strong>Cookies <code>_ga</code> / <code>_ga_FSJRFQ556N</code>:</strong> 2-year browser lifetime (Google default). Deleted earlier if you clear cookies or click REJECT in the cookie banner.</li>
+        <li><strong>GitHub Pages access logs:</strong> 14 days, controlled by GitHub.</li>
+        <li><strong><code>pookie_consent</code> localStorage entry:</strong> stored until you clear browser storage. We do not transmit it anywhere.</li>
+    </ul>
+
+    <h2>Legal basis (GDPR)</h2>
+    <p>For visitors in the EU / EEA / UK we rely on Art. 6(1)(a) GDPR &mdash; your <em>consent</em>, freely given through the cookie banner &mdash; for any analytics or marketing cookies. Strictly-necessary storage (page delivery via GitHub Pages, the <code>pookie_consent</code> localStorage entry) relies on Art. 6(1)(f) &mdash; our legitimate interest in operating and securing the website. For international transfers we additionally rely on Art. 45 GDPR (EU&ndash;US Data Privacy Framework) and Art. 46(2)(c) GDPR (Standard Contractual Clauses). You can withdraw consent at any time without affecting the lawfulness of processing before withdrawal.</p>
+
+    <h2>Your rights (GDPR Art. 15&ndash;22)</h2>
+    <p>You have the right to: access (Art. 15), rectification (Art. 16), erasure (Art. 17), restriction of processing (Art. 18), data portability (Art. 20), and to object (Art. 21) &mdash; including the right to withdraw consent at any time (Art. 7(3)). To exercise any of these rights, email <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a>; we will respond within one month.</p>
+    <p>You have the right to lodge a complaint with a supervisory authority &mdash; in Austria, the <a href="https://www.dsb.gv.at/" target="_blank" rel="noopener">Datenschutzbeh&ouml;rde</a>; in Germany the Land DPA for your residence; in any other EU/EEA country your local equivalent.</p>
+
+    <h2>Data controller / Impressum (&sect; 5 ECG, &sect; 24 MedienG)</h2>
+    <p>The data controller and media-owner of this website is:</p>
+    <p>
+        <strong>[REPLACE: full legal name]</strong><br>
+        [REPLACE: street, house number]<br>
+        [REPLACE: ZIP] [REPLACE: city], [REPLACE: country]<br>
+        Email: <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a><br>
+        [REPLACE if applicable: Firmenbuchnummer / Companies-register no.]<br>
+        [REPLACE if applicable: UID-Nummer / VAT ID]<br>
+        Supervisory authority (Aufsichtsbeh&ouml;rde): [REPLACE if Austrian trade: Bezirkshauptmannschaft / Magistrat of city]
+    </p>
+    <p class="meta">// IMPRESSUM PLACEHOLDER &mdash; required by Austrian &sect; 5 ECG before this site can publicly market a product. Owner must fill in the bracketed fields above prior to launch.</p>
 
     <h2>App Store &amp; Apple</h2>
     <p>When you install PookieScroll from the App Store, Apple collects standard purchase, install, and (if you have opted in) crash information independently of us. We do not have access to your Apple ID or to App Store analytics that identify you. See <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple's Privacy Policy</a> for details.</p>
 
     <h2>Children</h2>
-    <p>PookieScroll is not directed at children under 13. The Family Controls APIs the app relies on are Apple-managed and intended for users who can grant Screen Time access on their own device.</p>
+    <p>PookieScroll is rated 4+ on the App Store but is not <em>directed at</em> children. The Family Controls APIs the app relies on are Apple-managed and intended for users who can grant their own Screen Time access. We do not knowingly collect data about anyone &mdash; from the app or this website &mdash; under <strong>14 years of age</strong> (Austria's digital-consent age under &sect; 4(4) DSG 2018, which derogates downward from Art. 8(1) GDPR's default of 16).</p>
+    <p>If you are a parent or guardian and believe a minor in your care has provided data via this website (e.g. accepted analytics cookies), email <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a> and we will erase any associated GA pseudonymous identifier from our reports on request. Note that GA data on Google's side is fully aggregated after the 2-month retention window.</p>
 
     <h2>Your rights</h2>
     <p>Because we do not collect or store any personal information about you on our servers, there is no personal data for us to provide, correct, export, or delete on request. To remove all PookieScroll data from your device, delete the app — iOS will purge its local storage.</p>

@@ -5,9 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PookieScroll — Stop the Rot.</title>
 
-<!-- Google tag (gtag.js) with Consent Mode v2 — GDPR / ePrivacy compliant.
-     Defaults to DENIED for analytics + ad storage. Flipped to GRANTED only
-     when the user clicks ACCEPT in the cookie banner (see #cookie-banner). -->
+<!-- ─────────────────────────────────────────────────────────────────────
+     Google Analytics 4 (G-FSJRFQ556N) with Consent Mode v2.
+
+     Reviewed against GDPR / ePrivacy / Austrian DSG + ECG on the date in
+     /docs/AppStore.md "Legal review log". All four GA-relevant consent
+     flags (ad_storage, ad_user_data, ad_personalization, analytics_storage)
+     default to DENIED so no cookies/identifiers are set until the user
+     clicks ACCEPT in #cookie-banner. wait_for_update is 2000ms per
+     Google's official recommendation.
+
+     `anonymize_ip` is intentionally NOT set — it is deprecated in GA4
+     (the platform anonymises IPs automatically) and citing it as a
+     safeguard in a privacy policy is misleading.
+     ───────────────────────────────────────────────────────────────────── -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FSJRFQ556N"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -21,11 +32,11 @@
     'analytics_storage':    'denied',
     'functionality_storage':'granted',
     'security_storage':     'granted',
-    'wait_for_update':       500
+    'wait_for_update':       2000
   });
 
-  // 2. If the user already gave (or refused) consent, restore it from
-  //    localStorage so we don't ask again.
+  // 2. If the user already gave consent, restore it from localStorage
+  //    so we don't ask again. (Withdrawal flips it back via the banner.)
   try {
     var saved = JSON.parse(localStorage.getItem('pookie_consent') || 'null');
     if (saved && saved.analytics === 'granted') {
@@ -33,9 +44,8 @@
     }
   } catch (e) {}
 
-  // 3. Standard GA4 init — anonymize_ip is on for extra GDPR comfort.
   gtag('js', new Date());
-  gtag('config', 'G-FSJRFQ556N', { 'anonymize_ip': true });
+  gtag('config', 'G-FSJRFQ556N');
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1729,6 +1739,18 @@
         color: var(--bg);
         transform: translate(-1px, -1px);
     }
+    /* Equal visual weight on REJECT + ACCEPT — required by EU DPA
+       guidance (CNIL, Berlin BlnBDI 2024). Both are solid fills, only
+       hue differs: cream for REJECT, mint for ACCEPT. */
+    #cookie-banner .cb-reject {
+        background: var(--fg);
+        border-color: var(--fg);
+        color: var(--bg);
+    }
+    #cookie-banner .cb-reject:hover {
+        background: var(--bg);
+        color: var(--fg);
+    }
     #cookie-banner .cb-accept {
         background: var(--accent);
         border-color: var(--accent);
@@ -1924,8 +1946,8 @@
      ──────────────────────────────────────────────────────────────── -->
 <div class="ticker-row">
     <div class="ticker-inner">
-        <span>★ NOW ON THE APP STORE ★ STOP THE ROT ★ FEED THE POOKIE ★ 100% ON-DEVICE ★ NO ADS ★ NO TRACKING ★ APPLE SCREEN TIME ★ ACCENT: TOXIC MINT ★ NOW ON THE APP STORE ★ STOP THE ROT ★ FEED THE POOKIE ★ 100% ON-DEVICE ★ NO ADS ★ NO TRACKING ★ APPLE SCREEN TIME ★ ACCENT: TOXIC MINT ★ NOW ON THE APP STORE ★ STOP THE ROT ★ FEED THE POOKIE ★ 100% ON-DEVICE ★ NO ADS ★ NO TRACKING ★ APPLE SCREEN TIME ★ ACCENT: TOXIC MINT</span>
-        <span>★ NOW ON THE APP STORE ★ STOP THE ROT ★ FEED THE POOKIE ★ 100% ON-DEVICE ★ NO ADS ★ NO TRACKING ★ APPLE SCREEN TIME ★ ACCENT: TOXIC MINT ★ NOW ON THE APP STORE ★ STOP THE ROT ★ FEED THE POOKIE ★ 100% ON-DEVICE ★ NO ADS ★ NO TRACKING ★ APPLE SCREEN TIME ★ ACCENT: TOXIC MINT ★ NOW ON THE APP STORE ★ STOP THE ROT ★ FEED THE POOKIE ★ 100% ON-DEVICE ★ NO ADS ★ NO TRACKING ★ APPLE SCREEN TIME ★ ACCENT: TOXIC MINT</span>
+        <span>★ NOW ON THE APP STORE ★ STOP THE ROT ★ FEED THE POOKIE ★ APP IS 100% ON-DEVICE ★ NO ADS ★ APP DOES NOT TRACK YOU ★ APPLE SCREEN TIME ★ ACCENT: TOXIC MINT ★ NOW ON THE APP STORE ★ STOP THE ROT ★ FEED THE POOKIE ★ APP IS 100% ON-DEVICE ★ NO ADS ★ APP DOES NOT TRACK YOU ★ APPLE SCREEN TIME ★ ACCENT: TOXIC MINT ★ NOW ON THE APP STORE ★ STOP THE ROT ★ FEED THE POOKIE ★ APP IS 100% ON-DEVICE ★ NO ADS ★ APP DOES NOT TRACK YOU ★ APPLE SCREEN TIME ★ ACCENT: TOXIC MINT</span>
+        <span>★ NOW ON THE APP STORE ★ STOP THE ROT ★ FEED THE POOKIE ★ APP IS 100% ON-DEVICE ★ NO ADS ★ APP DOES NOT TRACK YOU ★ APPLE SCREEN TIME ★ ACCENT: TOXIC MINT ★ NOW ON THE APP STORE ★ STOP THE ROT ★ FEED THE POOKIE ★ APP IS 100% ON-DEVICE ★ NO ADS ★ APP DOES NOT TRACK YOU ★ APPLE SCREEN TIME ★ ACCENT: TOXIC MINT ★ NOW ON THE APP STORE ★ STOP THE ROT ★ FEED THE POOKIE ★ APP IS 100% ON-DEVICE ★ NO ADS ★ APP DOES NOT TRACK YOU ★ APPLE SCREEN TIME ★ ACCENT: TOXIC MINT</span>
     </div>
 </div>
 
@@ -2295,7 +2317,7 @@
                 <div class="vs-cell"><span class="vs-mark no">—</span></div>
             </div>
             <div class="vs-row">
-                <div class="vs-cell vs-feature">100% ON-DEVICE · NO ACCOUNT · NO TRACKING</div>
+                <div class="vs-cell vs-feature">APP: 100% ON-DEVICE · NO ACCOUNT · NO TRACKING</div>
                 <div class="vs-cell vs-us"><span class="vs-mark">★</span></div>
                 <div class="vs-cell"><span class="vs-mark">★</span></div>
                 <div class="vs-cell"><span class="vs-mark no">—</span></div>
@@ -2348,7 +2370,7 @@
         <div>
             <div class="get-app-tag">// SECTION 08 / DOWNLOAD</div>
             <h2 class="get-app-h2">GET<br>THE APP.</h2>
-            <p class="get-app-p">FREE. iOS 17+. NO ACCOUNT. NO ADS. NO TRACKING. THE POOKIE MOVES IN, THE SCROLL MOVES OUT.</p>
+            <p class="get-app-p">FREE. iOS 17+. NO ACCOUNT. NO ADS. THE APP DOESN'T TRACK YOU. THE POOKIE MOVES IN, THE SCROLL MOVES OUT.</p>
         </div>
         <div class="get-app-btns">
             <a href="#" class="app-btn primary">
