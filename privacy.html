@@ -5,13 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PookieScroll — Privacy Policy</title>
 
-<!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) with Consent Mode v2 — denied by default. -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FSJRFQ556N"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    'ad_storage':           'denied',
+    'ad_user_data':         'denied',
+    'ad_personalization':   'denied',
+    'analytics_storage':    'denied',
+    'functionality_storage':'granted',
+    'security_storage':     'granted',
+    'wait_for_update':       500
+  });
+  try {
+    var saved = JSON.parse(localStorage.getItem('pookie_consent') || 'null');
+    if (saved && saved.analytics === 'granted') {
+      gtag('consent', 'update', { 'analytics_storage': 'granted' });
+    }
+  } catch (e) {}
   gtag('js', new Date());
-  gtag('config', 'G-FSJRFQ556N');
+  gtag('config', 'G-FSJRFQ556N', { 'anonymize_ip': true });
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -97,6 +112,26 @@
         h2 { font-size: 18px; }
         p, li { font-size: 15px; }
     }
+    /* Cookie consent banner. */
+    #cookie-banner { position: fixed; bottom: 16px; left: 16px; right: 16px; z-index: 9999; background: var(--bg); border: 3px solid var(--fg); font-family: 'JetBrains Mono', monospace; color: var(--fg); box-shadow: 8px 8px 0 #8CE0B3; }
+    #cookie-banner[hidden] { display: none; }
+    #cookie-banner .cb-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px 22px; flex-wrap: wrap; }
+    #cookie-banner .cb-text { font-size: 13px; font-weight: 700; line-height: 1.55; max-width: 720px; flex: 1 1 320px; }
+    #cookie-banner .cb-text .cb-tag { color: #8CE0B3; margin-right: 8px; }
+    #cookie-banner .cb-text a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
+    #cookie-banner .cb-btns { display: flex; gap: 10px; flex-shrink: 0; }
+    #cookie-banner .cb-btn { font-family: inherit; font-weight: 700; font-size: 12px; padding: 12px 20px; border: 2px solid var(--fg); background: transparent; color: var(--fg); text-transform: uppercase; letter-spacing: 0.02em; cursor: pointer; transition: background 0.15s, color 0.15s; }
+    #cookie-banner .cb-btn:hover { background: var(--fg); color: var(--bg); }
+    #cookie-banner .cb-accept { background: #8CE0B3; border-color: #8CE0B3; color: #0A1F12; }
+    #cookie-banner .cb-accept:hover { background: #0A1F12; color: #8CE0B3; }
+    .cookie-settings-link { display: inline-block; margin-top: 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; opacity: 0.6; text-decoration: underline; }
+    @media (max-width: 640px) {
+        #cookie-banner { bottom: 8px; left: 8px; right: 8px; box-shadow: 4px 4px 0 #8CE0B3; }
+        #cookie-banner .cb-inner { padding: 14px 16px; gap: 14px; }
+        #cookie-banner .cb-text { font-size: 11.5px; }
+        #cookie-banner .cb-btns { width: 100%; gap: 8px; }
+        #cookie-banner .cb-btn { flex: 1; padding: 12px 8px; }
+    }
 </style>
 </head>
 <body>
@@ -137,8 +172,26 @@
     <p>None. The PookieScroll iOS app contains no analytics SDK, no crash-reporting SDK, no advertising SDK, and no third-party tracking code. It does not use Apple's App Tracking Transparency framework because it does not track you.</p>
 
     <h2>Analytics &amp; tracking (this website)</h2>
-    <p>This marketing website (<code>pookiescroll.app</code> / the GitHub Pages host) uses <strong>Google Analytics 4</strong> to count anonymous visits and understand which pages people read. Google may set cookies in your browser and process aggregated, IP-truncated traffic data on Google's servers. <strong>This is website-only and has nothing to do with the iOS app</strong> — the app itself contains zero analytics code.</p>
-    <p>If you would like to opt out of Google Analytics across all sites, install <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google's official opt-out browser add-on</a>, or use a tracker-blocking browser (Brave, Firefox with strict mode, Safari with Privacy Report, etc.).</p>
+    <p>This marketing website uses <strong>Google Analytics 4</strong> (property <code>G-FSJRFQ556N</code>) to count anonymous visits and understand which pages people read. <strong>The iOS app itself contains zero analytics code</strong>; this section only applies to the website.</p>
+
+    <h2>Cookies (this website)</h2>
+    <p>We use Google Consent Mode v2. When you first visit, analytics cookies are <strong>blocked by default</strong> until you tap ACCEPT in the consent banner. If you tap REJECT (or do nothing), no analytics or advertising cookies are set, and Google receives only an anonymous, cookie-less "ping" so we can see aggregate visitor counts. IP addresses are anonymised (<code>anonymize_ip: true</code>).</p>
+    <p>Cookies that may be set <em>only</em> if you accept:</p>
+    <ul>
+        <li><code>_ga</code> — distinguishes users · expires after 2 years · set by Google Analytics</li>
+        <li><code>_ga_FSJRFQ556N</code> — session state for our GA4 property · expires after 2 years · set by Google Analytics</li>
+    </ul>
+    <p>Strictly-necessary client-side storage we always use (no opt-in required because it isn't tracking):</p>
+    <ul>
+        <li><code>pookie_consent</code> (localStorage) — remembers your consent choice so we don't ask again</li>
+    </ul>
+    <p><strong>Withdraw or change consent any time:</strong> use the <a href="#" data-cookie-settings>Cookie settings</a> link below, or install <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google's official opt-out browser add-on</a>.</p>
+
+    <h2>Legal basis (GDPR)</h2>
+    <p>For visitors in the EU / EEA / UK we rely on Art. 6(1)(a) GDPR — your <em>consent</em>, freely given through the cookie banner — for any analytics or marketing cookies. Strictly-necessary storage relies on Art. 6(1)(f) — legitimate interest in remembering your consent choice and keeping the site secure. You can withdraw consent at any time without affecting the lawfulness of processing before withdrawal.</p>
+
+    <h2>Data controller (this website)</h2>
+    <p>Toni Bartulovic. Contact: <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a>. If you are in the EU and believe we have processed your data unlawfully, you have the right to lodge a complaint with your local data-protection authority.</p>
 
     <h2>App Store &amp; Apple</h2>
     <p>When you install PookieScroll from the App Store, Apple collects standard purchase, install, and (if you have opted in) crash information independently of us. We do not have access to your Apple ID or to App Store analytics that identify you. See <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple's Privacy Policy</a> for details.</p>
@@ -156,6 +209,45 @@
     <p>Questions about this policy: <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a></p>
 
     <a class="back" href="index.html">← BACK TO POOKIESCROLL</a>
+    <div><a class="cookie-settings-link" href="#" data-cookie-settings>Cookie settings →</a></div>
 </main>
+
+<!-- Cookie consent banner -->
+<div id="cookie-banner" role="region" aria-label="Cookie consent" hidden>
+    <div class="cb-inner">
+        <div class="cb-text">
+            <span class="cb-tag">// COOKIES</span>
+            We use Google Analytics to count anonymous visits to this site. No ads, no profile-building, no third-party sharing — just traffic stats. Your call.
+            <a href="privacy.html">Read the policy →</a>
+        </div>
+        <div class="cb-btns">
+            <button type="button" class="cb-btn cb-reject">REJECT</button>
+            <button type="button" class="cb-btn cb-accept">ACCEPT</button>
+        </div>
+    </div>
+</div>
+<script>
+    (function () {
+        var KEY = 'pookie_consent';
+        var banner = document.getElementById('cookie-banner');
+        function save(state) {
+            try { localStorage.setItem(KEY, JSON.stringify({ analytics: state, ts: Date.now() })); } catch (e) {}
+            if (typeof gtag === 'function') gtag('consent', 'update', { 'analytics_storage': state });
+            if (banner) banner.hidden = true;
+        }
+        var saved = null;
+        try { saved = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
+        if (!saved && banner) banner.hidden = false;
+        document.addEventListener('click', function (e) {
+            var t = e.target;
+            if (t.classList && t.classList.contains('cb-accept')) save('granted');
+            else if (t.classList && t.classList.contains('cb-reject')) save('denied');
+            else if (t.closest && t.closest('[data-cookie-settings]')) {
+                e.preventDefault();
+                if (banner) banner.hidden = false;
+            }
+        });
+    })();
+</script>
 </body>
 </html>
