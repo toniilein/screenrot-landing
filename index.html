@@ -1399,6 +1399,11 @@
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
+        /* Reset global `nav` rule — would otherwise add a 4px border-bottom
+           + 20px padding + dark bg meant for the top nav. */
+        padding: 0;
+        border-bottom: none;
+        background: transparent;
     }
     .footer-links a {
         padding: 6px 12px;
