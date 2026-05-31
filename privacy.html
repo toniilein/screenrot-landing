@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PookieScroll — Privacy Policy</title>
-<meta name="description" content="PookieScroll's privacy policy. The iOS app collects nothing — no analytics, no account, no server. The website uses cookieless Google Analytics under GDPR Art. 6(1)(f).">
+<meta name="description" content="PookieScroll's privacy policy. The iOS app processes screen-time data on your device and doesn't send it to us. No accounts, no analytics SDKs, no ads, no cross-app tracking.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#0A0A0A">
 <link rel="canonical" href="https://pookiescroll.app/privacy.html">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PookieScroll — Privacy Policy">
-<meta property="og:description" content="Plain-English privacy policy. The iOS app collects nothing. The website uses cookieless Google Analytics.">
+<meta property="og:description" content="Plain-English privacy policy. Screen-time data stays on your device. No accounts. No analytics SDKs. No ads.">
 <meta property="og:url" content="https://pookiescroll.app/privacy.html">
 <meta property="og:site_name" content="PookieScroll">
 
@@ -34,8 +34,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <style>
-    :root { --bg: #0A0A0A; --fg: #F2EFE6; --warn: #E63946; }
+    :root { --bg: #0A0A0A; --fg: #F2EFE6; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
         background: var(--bg);
@@ -77,23 +80,22 @@
     p strong { color: var(--fg); font-weight: 800; }
     ul { margin: 6px 0 18px 22px; }
     li { margin-bottom: 6px; font-size: 16px; opacity: 0.9; }
-    .draft {
-        background: rgba(230, 57, 70, 0.10);
-        border-left: 4px solid var(--warn);
-        padding: 14px 18px;
-        margin: 4px 0 32px;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 12px;
-        color: var(--warn);
-        font-weight: 700;
-        line-height: 1.55;
-    }
     .meta {
         font-family: 'JetBrains Mono', monospace;
         font-size: 12px;
         font-weight: 700;
         opacity: 0.7;
-        margin-bottom: 6px;
+        margin-bottom: 32px;
+    }
+    .contact-block {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1.6;
+        background: rgba(242, 239, 230, 0.05);
+        border-left: 3px solid var(--fg);
+        padding: 14px 18px;
+        margin: 4px 0 14px;
     }
     .back {
         display: inline-flex;
@@ -121,163 +123,190 @@
     <div class="tag">// POOKIESCROLL · PRIVACY POLICY</div>
     <h1>Privacy<br>Policy.</h1>
 
-    <!--
-        ─── LEGAL REVIEW LOG ───────────────────────────────────────────
-        Controller:      Lionscraft Pte. Ltd. (Singapore).
-        Last audited:    pre-launch (see /docs/AppStore.md for date).
-        Reviewed by:     AI compliance reviewer (NOT a qualified lawyer).
-        Pending human:   final sign-off by a qualified Singapore PDPA +
-                         GDPR lawyer before public launch.
+    <div class="meta">LAST UPDATED: 31 MAY 2026 · VERSION 1.0</div>
 
-        Two regimes apply at the same time:
-          1. Singapore PDPA — controller is established in Singapore;
-             § 11(3) DPO designation is reflected in the policy.
-          2. GDPR (Art. 3(2)) — the website offers a free service to EU
-             residents, so EU rules apply extraterritorially. Art. 27(2)
-             EU-representative exemption is claimed (occasional, low-risk
-             processing). Re-evaluate if traffic/scope grows.
+    <p>This Privacy Policy explains how <strong>Lionscraft Pte. Ltd.</strong> ("Lionscraft", "we", "us", or "our") handles information in connection with PookieScroll.</p>
 
-        Current analytics setup: Google Analytics 4 in COOKIELESS mode.
-        analytics_storage is permanently DENIED in Consent Mode v2, so
-        GA4 sets no cookies, stores no client identifier, and writes no
-        localStorage. No cookie banner is needed — there is nothing
-        being stored on the user's device that would trigger ePrivacy
-        Art. 5(3) or any equivalent.
+    <p>PookieScroll is designed to minimise data collection. We do not operate a backend server for user profiles, do not require user accounts, do not use analytics SDKs, do not show ads, and do not track users across apps or websites.</p>
 
-        Addressed in this revision:
-          ✓ Controller identified: Lionscraft Pte. Ltd., Singapore
-          ✓ Singapore PDPA DPO contact block added (§ 11(3))
-          ✓ EU representative exemption under GDPR Art. 27(2) claimed
-          ✓ Recipient list updated to include Google Asia Pacific Pte.
-            Ltd. as the likely SG-side Google entity
-          ✓ Schrems II / EU-US DPF + SCCs disclosure retained for Google
-            LLC and GitHub Inc.
-          ✓ Legal basis is Art. 6(1)(f) GDPR (legitimate interest) for
-            the cookieless analytics ping
-          ✓ Children's-data section retains Austrian DSG age 14 floor
-            since EU minors will visit; PDPA does not lower this
+    <p>PookieScroll is provided by Lionscraft Pte. Ltd., a company incorporated in Singapore.</p>
 
-        Controller block: minimal disclosure (entity name + Singapore
-        jurisdiction + hi@pookiescroll.app contact channel). Address,
-        UEN, and DPO name are deliberately NOT published — none of
-        them are legally required:
-          – GDPR Art. 13(1)(a) requires "identity AND contact details"
-            of the controller. An email address satisfies "contact".
-          – PDPA § 11(3) requires DPO contact info; a role mailbox
-            qualifies. A named individual is not required.
-          – ACRA UEN is a corporate-registration ID, not a public-
-            disclosure obligation.
-          – No equivalent of the Austrian § 5 ECG Impressum applies
-            to a Singapore entity.
+    <h2>1. Summary</h2>
+    <p>PookieScroll is an iOS app for digital wellbeing and screen time self-management.</p>
+    <p>In general:</p>
+    <ul>
+        <li>Your screen time usage data is processed on your device.</li>
+        <li>Your screen time usage data is not sent to Lionscraft.</li>
+        <li>We do not create user accounts.</li>
+        <li>We do not ask for your email address, phone number, or name inside the app.</li>
+        <li>We do not use advertising SDKs.</li>
+        <li>We do not use analytics SDKs.</li>
+        <li>We do not sell your personal data.</li>
+        <li>We do not share your personal data for cross-context behavioural advertising.</li>
+        <li>Limited subscription-related information may be processed by Apple and RevenueCat to provide purchases and subscription entitlement status.</li>
+    </ul>
 
-        Still pending — owner action:
-          ☐ Lawyer sign-off by a qualified Singapore PDPA + GDPR lawyer
-          ☐ Set EFFECTIVE date once that sign-off lands
-          ☐ Remove the DRAFT banner immediately above
-          ☐ (Not blocking) Confirm PDPA "Do Not Call" doesn't apply
-            (almost certainly not — no phone-number collection)
-        ─────────────────────────────────────────────────────────────────
-    -->
-
-    <div class="draft">
-        DRAFT — pending sign-off by a qualified GDPR / DSG lawyer. Items marked <code>[REPLACE …]</code> below must be filled in before publication.
+    <h2>2. Who Controls Your Data</h2>
+    <p>For the limited personal data we determine how and why to process, the data controller or responsible organisation is:</p>
+    <div class="contact-block">
+        Lionscraft Pte. Ltd.<br>
+        27 Jalan Sayang, #00-00<br>
+        Singapore 418645<br>
+        UEN: 202322784R<br>
+        Email: <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a>
     </div>
+    <p>For certain App Store purchase and Apple ID-related information, Apple may act as an independent controller under Apple's own privacy terms.</p>
+    <p>RevenueCat provides subscription entitlement infrastructure to us and generally acts as a service provider, processor, or data intermediary for subscription-related data it processes on our behalf.</p>
 
-    <div class="meta">EFFECTIVE: [TBD — set on lawyer sign-off] · VERSION 1.1</div>
-
-    <p>PookieScroll ("the app") is published by <strong>Lionscraft Pte. Ltd.</strong>, a company incorporated in Singapore ("Lionscraft", "we", "us"). It is an iOS screen-time companion built on Apple's official <strong>Family Controls</strong>, <strong>DeviceActivity</strong>, and <strong>ManagedSettings</strong> frameworks. It runs entirely on your device. We do not operate any server for the app, we do not create user accounts, and we do not collect, transmit, or sell your screen-time data, app usage, or any personal information from the app.</p>
-
-    <h2>What we collect</h2>
-    <p><strong>Nothing leaves your device.</strong> PookieScroll has no backend service. There is no analytics SDK, no advertising SDK, no crash-reporting SDK, no tracking pixel, and no third-party network code. The app never sends your usage data, your selected blocked apps, your goal, your mascot choice, or anything else, to us or any third party.</p>
-
-    <h2>Data stored on your device</h2>
-    <p>The following data is stored locally in iOS-managed storage (a shared app group accessible only to PookieScroll and its extensions):</p>
+    <h2>3. Information We Do Not Collect</h2>
+    <p>PookieScroll does not collect or send the following to Lionscraft:</p>
     <ul>
-        <li>Your daily screen-time goal</li>
-        <li>Your block routines (start/end times, target apps or categories, active weekdays)</li>
-        <li>Your usage limits (per-app or per-category caps)</li>
-        <li>Quick-block selections</li>
-        <li>Your chosen mascot (kraken or ghost)</li>
-        <li>UI preferences (theme, language, app icon variant)</li>
-        <li>Cached screen-time totals (so the widget and mascot can react quickly)</li>
+        <li>your screen time usage history;</li>
+        <li>the list of apps you use;</li>
+        <li>the amount of time you spend in specific apps;</li>
+        <li>your browsing history;</li>
+        <li>your messages;</li>
+        <li>your contacts;</li>
+        <li>your photos;</li>
+        <li>your precise location;</li>
+        <li>your health data;</li>
+        <li>your advertising identifier for tracking;</li>
+        <li>behavioural analytics events;</li>
+        <li>crash or diagnostic analytics through third-party SDKs;</li>
+        <li>user-generated posts or social content.</li>
+    </ul>
+    <p>PookieScroll does not use Firebase, Mixpanel, Sentry, ad networks, social tracking pixels, or similar analytics or advertising tools.</p>
+
+    <h2>4. Information Processed On Your Device</h2>
+    <p>PookieScroll may process information locally on your device to provide app functionality, including:</p>
+    <ul>
+        <li>screen time and device activity information made available through Apple's Screen Time, DeviceActivity, and Family Controls frameworks;</li>
+        <li>your selected routines, app limits, and blocking preferences;</li>
+        <li>your Pookie Score or similar in-app status indicators;</li>
+        <li>your app settings;</li>
+        <li>locally generated mood cards or share images.</li>
+    </ul>
+    <p>This information is used to operate the app on your device. It is stored on your device and/or in an Apple App Group container. It is not sent to Lionscraft.</p>
+    <p>You can revoke Screen Time / Family Controls permission at any time in iOS Settings.</p>
+    <p>PookieScroll does not use iCloud sync in this version.</p>
+
+    <h2>5. Subscription and Purchase Information</h2>
+    <p>PookieScroll uses Apple StoreKit for in-app purchases and RevenueCat to help manage subscription entitlement status.</p>
+    <p>Apple may process information associated with your Apple ID, payment method, App Store account, purchase history, tax, billing, and refund handling under Apple's own terms and privacy policy.</p>
+    <p>RevenueCat may process limited subscription-related information for entitlement management, such as an anonymous app user identifier, purchase or subscription events, product or entitlement information, subscription status, device type, operating system, Apple receipt information, last-seen time, and limited technical metadata associated with normal HTTPS requests, such as IP address or locale information where technically received.</p>
+    <p>PookieScroll does not use an advertising identifier (IDFA) and does not use this information, or any other information, to track you across apps or websites. We do not use advertising, attribution, or analytics SDKs.</p>
+    <p>RevenueCat does not process your payment card details for PookieScroll. Payments are processed by Apple.</p>
+
+    <h2>6. Support Communications</h2>
+    <p>If you contact us for support, we may process the information you choose to provide, such as:</p>
+    <ul>
+        <li>your email address;</li>
+        <li>your name, if you provide it;</li>
+        <li>the content of your message;</li>
+        <li>screenshots or diagnostic details you choose to send;</li>
+        <li>information needed to respond to your request.</li>
+    </ul>
+    <p>Please do not send us sensitive personal information unless it is necessary for your request.</p>
+
+    <h2>7. Local Sharing Through iOS Share Sheet</h2>
+    <p>PookieScroll may allow you to create a local image or mood card and share it using your device's native iOS share sheet.</p>
+    <p>You choose whether to share the image and which app or recipient to share it with. Lionscraft does not receive the shared image unless you separately send it to us.</p>
+    <p>Third-party apps or platforms you share content with are governed by their own terms and privacy policies.</p>
+
+    <h2>8. How We Use Information</h2>
+    <p>We use the limited information described in this Privacy Policy to:</p>
+    <ul>
+        <li>provide and operate PookieScroll;</li>
+        <li>enable subscriptions and paid features;</li>
+        <li>verify subscription entitlement status;</li>
+        <li>respond to support requests;</li>
+        <li>maintain app security and prevent fraud or abuse;</li>
+        <li>comply with legal, tax, accounting, App Store, and regulatory obligations;</li>
+        <li>protect our rights, users, and business.</li>
+    </ul>
+    <p>We do not use your information for targeted advertising or cross-app tracking.</p>
+
+    <h2>9. Legal Bases for EU/EEA/UK Users</h2>
+    <p>Where the GDPR or similar laws apply, we rely on the following legal bases:</p>
+    <ul>
+        <li><strong>Contract:</strong> to provide the app, subscriptions, and paid features you request.</li>
+        <li><strong>Legitimate interests:</strong> to maintain app functionality, respond to support requests, secure the service, prevent fraud, and manage our business, where those interests are not overridden by your rights.</li>
+        <li><strong>Legal obligation:</strong> to comply with applicable legal, tax, accounting, regulatory, and App Store obligations.</li>
+        <li><strong>Consent:</strong> where required by law, for example if we ever introduce optional features that require consent.</li>
     </ul>
 
-    <h2>Family Controls authorization</h2>
-    <p>When you first open the app, iOS asks you to grant Family Controls (Screen Time) authorization. This authorization is managed by Apple. With it, iOS reports your screen-time totals to PookieScroll and lets PookieScroll apply the shields you configure. The reports remain on your device. You can revoke this authorization at any time in iOS Settings → Screen Time.</p>
+    <h2>10. How We Share Information</h2>
+    <p>We may share limited information with:</p>
+    <p><strong>Apple:</strong> for App Store distribution, in-app purchases, subscriptions, billing, refunds, and Apple platform functionality.</p>
+    <p><strong>RevenueCat:</strong> for subscription entitlement management and purchase status syncing.</p>
+    <p><strong>Service providers:</strong> if we use providers for business operations such as email support, hosting of our public website or legal pages, or security, but only as needed for those purposes.</p>
+    <p><strong>Legal or safety recipients:</strong> if required to comply with law, legal process, enforce our rights, prevent fraud, protect users, or respond to lawful requests.</p>
+    <p><strong>Business transfers:</strong> if Lionscraft is involved in a merger, acquisition, financing, reorganisation, or sale of assets, information may be transferred as part of that transaction, subject to appropriate safeguards.</p>
+    <p>We do not sell personal data. We do not share personal data for cross-context behavioural advertising.</p>
 
-    <h2>Apple Family Activity Picker</h2>
-    <p>When you select apps to block or limit, iOS presents Apple's <em>FamilyActivityPicker</em>. Your selections are stored on your device as opaque tokens; PookieScroll does not learn the human-readable identities of the apps you pick beyond what iOS allows it to display.</p>
+    <h2>11. International Transfers</h2>
+    <p>Lionscraft is based in Singapore. RevenueCat and other service providers, including their subprocessors, may process limited information in the United States or other countries.</p>
+    <p>Where personal data is transferred outside Singapore, we take steps designed to ensure that overseas recipients are bound by legally enforceable obligations to provide a standard of protection comparable to the protection required under Singapore's Personal Data Protection Act 2012.</p>
+    <p>Where required by applicable law, we rely on appropriate safeguards for international transfers, such as contractual commitments, data processing terms, standard contractual clauses, or other legally recognised mechanisms.</p>
 
-    <h2>Analytics &amp; tracking (the iOS app)</h2>
-    <p>None. The PookieScroll iOS app contains no analytics SDK, no crash-reporting SDK, no advertising SDK, and no third-party tracking code. It does not use Apple's App Tracking Transparency framework because it does not track you.</p>
+    <h2>12. Retention</h2>
+    <p>We keep personal data only for as long as reasonably necessary for the purposes described in this Privacy Policy.</p>
+    <p>Because PookieScroll does not operate user accounts or a backend user profile system, most app settings and screen time-related data are stored locally on your device and can generally be removed by deleting the app, subject to iOS behaviour.</p>
+    <p>Subscription-related records may be retained by Apple, RevenueCat, or us for as long as needed to provide entitlement status, handle billing or refund issues, comply with legal obligations, resolve disputes, prevent fraud, and maintain business records.</p>
+    <p>RevenueCat may retain subscription-related records according to its own retention schedule, including where needed for legal, tax, accounting, fraud-prevention, security, or service-operation purposes.</p>
+    <p>Support emails may be retained for as long as reasonably necessary to respond to your request and maintain support records, unless a longer period is required or permitted by law.</p>
 
-    <h2>Analytics &amp; tracking (this website)</h2>
-    <p>This marketing website uses <strong>Google Analytics 4</strong> (property <code>G-FSJRFQ556N</code>) to count anonymous visits and understand which pages people read. <strong>The iOS app itself contains zero analytics code</strong>; this section only applies to the website.</p>
-    <p>We run GA4 in <strong>cookieless mode</strong>: Google's <em>Consent Mode v2</em> is configured with <code>analytics_storage: 'denied'</code> permanently. In practice this means:</p>
+    <h2>13. Deletion</h2>
+    <p>You may delete local app data by deleting PookieScroll from your device, subject to iOS behaviour.</p>
+    <p>Deleting the app does not cancel your Apple subscription. You must cancel subscriptions through your Apple ID account settings.</p>
+    <p>To request deletion of personal data that we control, contact us at <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a>. Because we do not maintain user accounts, we may need limited information from you to identify relevant records, such as your support email address or information needed to locate subscription-related records.</p>
+    <p>Because PookieScroll does not use accounts, we may not be able to identify subscription-related records from your name or email address alone. We may ask you to provide information available in the app or from your Apple subscription record so that we can locate the relevant RevenueCat entitlement record.</p>
+    <p>For Apple purchase records, you may need to contact Apple directly. For RevenueCat entitlement data, we may coordinate with RevenueCat where we are able to identify the relevant anonymous user record.</p>
+
+    <h2>14. Your Rights</h2>
+    <p>Depending on where you live, you may have rights to:</p>
     <ul>
-        <li><strong>No cookies are set</strong> in your browser — no <code>_ga</code>, no <code>_ga_FSJRFQ556N</code>, none of the usual Google Analytics cookies.</li>
-        <li><strong>No persistent identifier</strong> (Client ID) is created for you. We can't recognise you across visits.</li>
-        <li><strong>No localStorage / IndexedDB / device-fingerprint</strong> is written by GA4.</li>
-        <li>Google receives an anonymous, aggregated "ping" per page-view: page URL, referrer, browser language, approximate device class. Your IP address is anonymised on Google's servers before storage.</li>
+        <li>access personal data we hold about you;</li>
+        <li>request correction of inaccurate personal data;</li>
+        <li>request deletion of personal data;</li>
+        <li>request restriction of processing;</li>
+        <li>object to certain processing;</li>
+        <li>request portability of certain personal data;</li>
+        <li>withdraw consent where processing is based on consent;</li>
+        <li>lodge a complaint with a data protection authority.</li>
     </ul>
-    <p>Because nothing is stored on or read from your device, ePrivacy Art. 5(3) (Austrian TKG § 165) does not require a consent banner for this use. If you would still rather have no analytics ping go out at all, install <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google's official opt-out browser add-on</a>, or use a tracker-blocking browser (Brave, Firefox Strict, Safari with Privacy Report) — all standard ad-blockers will also block <code>googletagmanager.com</code>.</p>
+    <p>Singapore users may have rights under the Personal Data Protection Act 2012, including rights of access and correction, subject to applicable exceptions.</p>
+    <p>EU/EEA/UK users may have rights under GDPR or similar laws.</p>
+    <p>California users may have rights to know, access, correct, delete, and opt out of certain data practices. We do not sell personal information and do not share personal information for cross-context behavioural advertising.</p>
+    <p>Japan users may have rights under the Act on the Protection of Personal Information, subject to applicable conditions and exceptions.</p>
+    <p>To exercise your rights, contact us at <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a>.</p>
 
-    <h2>Recipients &amp; processors</h2>
-    <p>The following third parties receive request metadata when you visit this website (Art. 13(1)(e) GDPR / PDPA Notification Obligation):</p>
-    <ul>
-        <li><strong>Google Asia Pacific Pte. Ltd.</strong> (8 Marina View, #30-01 Asia Square Tower 1, Singapore 018960) and/or <strong>Google Ireland Limited</strong> (Gordon House, Barrow Street, Dublin 4, Ireland) &mdash; the Google entity contracting with us for Google Analytics. Our terms with Google are the standard Google Analytics Terms of Service and Data Processing Addendum at <a href="https://business.safety.google/adsprocessorterms/" target="_blank" rel="noopener">business.safety.google</a>.</li>
-        <li><strong>Google LLC</strong> (1600 Amphitheatre Parkway, Mountain View, CA 94043, USA) &mdash; operates the Google Analytics backend. See "International transfers" below.</li>
-        <li><strong>GitHub, Inc.</strong> (88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA) &mdash; hosts this static website via GitHub Pages. GitHub may receive your IP address and User-Agent for the purpose of serving the page (Art. 6(1)(f) GDPR &mdash; legitimate interest in operating the website).</li>
-    </ul>
+    <h2>15. Children's Privacy</h2>
+    <p>PookieScroll is not directed to children under 13 years old, or under 16 years old where that higher threshold applies under local law.</p>
+    <p>We do not knowingly collect personal data from children below the applicable minimum age. If you believe a child has provided personal data to us, contact us at <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a> and we will take appropriate steps.</p>
+    <p>PookieScroll is designed for self-management of screen time. It is not marketed as a child-monitoring or parental-control service in this version.</p>
 
-    <h2>International transfers (Schrems II)</h2>
-    <p>Google LLC and GitHub, Inc. are US companies. Personal data (in our case: pseudonymous identifiers, IP addresses processed by GitHub at the moment of page-serve, browser metadata sent to Google Analytics if you accepted) may therefore be transferred to the United States.</p>
-    <p>The legal safeguards we rely on under Chapter V GDPR:</p>
-    <ul>
-        <li><strong>EU&ndash;US Data Privacy Framework</strong> (DPF) — Google LLC is <a href="https://www.dataprivacyframework.gov/list" target="_blank" rel="noopener">DPF-certified</a> (active certification, last verified before publication). Transfers to Google LLC therefore rely on an adequacy decision under Art. 45 GDPR.</li>
-        <li><strong>Standard Contractual Clauses (SCCs)</strong> &mdash; in addition to the DPF, Google's Data Processing Addendum incorporates the 2021 EU SCCs as a fallback under Art. 46(2)(c) GDPR.</li>
-        <li><strong>Pseudonymisation</strong> &mdash; we send no name, email, or other directly-identifying field to Google Analytics. Google's IP-anonymisation runs on Google's servers before storage.</li>
-        <li><strong>GitHub Pages</strong> serves the static HTML and does not see your interactions inside the page; its processing is limited to log entries necessary to deliver the page.</li>
-    </ul>
-    <p>If you would rather your data not leave the EU at all, click REJECT in the cookie banner. We will still be able to host the page (GitHub Pages is the host of record), but no analytics data will be transmitted.</p>
+    <h2>16. Security</h2>
+    <p>We use reasonable technical and organisational measures to protect personal data we process. However, no app, device, platform, or transmission method is completely secure.</p>
+    <p>Because PookieScroll is designed to keep screen time data on-device, you should also protect your device using appropriate security settings, such as passcodes, biometric authentication, device updates, and Apple account protections.</p>
 
-    <h2>Retention</h2>
-    <ul>
-        <li><strong>Google Analytics 4 event data:</strong> 2 months (GA4 admin "Data retention" minimum, kept at default). Because no Client ID is set, GA4 cannot tie events together into a "user" anyway &mdash; the data is effectively aggregate from day one.</li>
-        <li><strong>GitHub Pages access logs:</strong> 14 days, controlled by GitHub.</li>
-        <li><strong>No cookies are set,</strong> so there is no cookie lifetime to disclose.</li>
-    </ul>
+    <h2>17. Cookies and Tracking</h2>
+    <p>The PookieScroll iOS app does not use cookies.</p>
+    <p>The app does not use tracking technologies, advertising SDKs, or analytics SDKs.</p>
+    <p>If our website at pookiescroll.app is used only to host static legal or product pages and does not use cookies, analytics, tracking pixels, advertising technologies, embedded marketing tools, or contact forms, we do not use cookies or tracking on that website. If that changes, we will update this Privacy Policy or provide a separate notice where required.</p>
 
-    <h2>Legal basis (GDPR)</h2>
-    <p>For visitors in the EU / EEA / UK we rely on <strong>Art. 6(1)(f) GDPR &mdash; legitimate interest</strong> for the cookieless analytics ping (understanding aggregate visitor counts to a small marketing site). The balancing-of-interests test under Art. 6(1)(f) is favourable here because: no persistent identifier is created, no cross-site tracking is possible, IP addresses are anonymised, and a straightforward opt-out exists (any tracker-blocker). The same basis applies to GitHub Pages serving the static HTML.</p>
-    <p>For the international transfers involved (Google LLC and GitHub Inc. in the US receive request metadata) we additionally rely on Art. 45 GDPR (EU&ndash;US Data Privacy Framework adequacy decision) and Art. 46(2)(c) GDPR (Standard Contractual Clauses).</p>
+    <h2>18. Changes to This Privacy Policy</h2>
+    <p>We may update this Privacy Policy from time to time. If we make material changes, we will take reasonable steps to notify you, such as updating the date above, posting the new policy, or providing in-app notice where appropriate.</p>
 
-    <h2>Your rights (GDPR Art. 15&ndash;22)</h2>
-    <p>You have the right to: access (Art. 15), rectification (Art. 16), erasure (Art. 17), restriction of processing (Art. 18), data portability (Art. 20), and to object (Art. 21) &mdash; including the right to withdraw consent at any time (Art. 7(3)). To exercise any of these rights, email <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a>; we will respond within one month.</p>
-    <p>You have the right to lodge a complaint with a supervisory authority &mdash; in Austria, the <a href="https://www.dsb.gv.at/" target="_blank" rel="noopener">Datenschutzbeh&ouml;rde</a>; in Germany the Land DPA for your residence; in any other EU/EEA country your local equivalent.</p>
-
-    <h2>Data controller</h2>
-    <p><strong>Lionscraft Pte. Ltd.</strong>, a company incorporated in Singapore. For all data-protection matters &mdash; including the Data Protection Officer contact required under Singapore PDPA &sect; 11(3) and the controller contact required under GDPR Art. 13(1)(a) &mdash; please write to <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a>.</p>
-    <p>We are established in Singapore and rely on the GDPR Art. 27(2)(a) exemption from designating an EU representative (occasional, low-risk processing).</p>
-
-    <h2>App Store &amp; Apple</h2>
-    <p>When you install PookieScroll from the App Store, Apple collects standard purchase, install, and (if you have opted in) crash information independently of us. We do not have access to your Apple ID or to App Store analytics that identify you. See <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple's Privacy Policy</a> for details.</p>
-
-    <h2>Children</h2>
-    <p>PookieScroll is rated 4+ on the App Store but is not <em>directed at</em> children. The Family Controls APIs the app relies on are Apple-managed and intended for users who can grant their own Screen Time access. We do not knowingly collect data about anyone &mdash; from the app or this website &mdash; under <strong>14 years of age</strong> (Austria's digital-consent age under &sect; 4(4) DSG 2018, which derogates downward from Art. 8(1) GDPR's default of 16).</p>
-    <p>If you are a parent or guardian and believe a minor in your care has provided data via this website (e.g. accepted analytics cookies), email <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a> and we will erase any associated GA pseudonymous identifier from our reports on request. Note that GA data on Google's side is fully aggregated after the 2-month retention window.</p>
-
-    <h2>Your rights</h2>
-    <p>Because we do not collect or store any personal information about you on our servers, there is no personal data for us to provide, correct, export, or delete on request. To remove all PookieScroll data from your device, delete the app — iOS will purge its local storage.</p>
-
-    <h2>Changes to this policy</h2>
-    <p>If we update this policy we will change the date above and publish the revised version at this URL.</p>
-
-    <h2>Related</h2>
-    <p>See also: <a href="terms.html">Terms of Service</a>.</p>
-
-    <h2>Contact</h2>
-    <p>Questions about this policy: <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a></p>
+    <h2>19. Contact Us</h2>
+    <p>If you have questions, requests, or complaints about this Privacy Policy or our handling of personal data, contact us at:</p>
+    <div class="contact-block">
+        Lionscraft Pte. Ltd.<br>
+        27 Jalan Sayang, #00-00<br>
+        Singapore 418645<br>
+        UEN: 202322784R<br>
+        Email: <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a>
+    </div>
 
     <a class="back" href="index.html">← BACK TO POOKIESCROLL</a>
 </main>

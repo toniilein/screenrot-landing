@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PookieScroll — Terms of Service</title>
-<meta name="description" content="PookieScroll's terms of service. Singapore-governed. The iOS app is free, runs on your device, comes with no warranty, and is licensed (not sold).">
+<meta name="description" content="PookieScroll's terms of service. Singapore-governed. Covers the iOS app, subscriptions (Apple StoreKit + RevenueCat), screen-time / blocking features, and standard disclaimers.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#0A0A0A">
 <link rel="canonical" href="https://pookiescroll.app/terms.html">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PookieScroll — Terms of Service">
-<meta property="og:description" content="Plain-English terms of service for the PookieScroll iOS app and website. Singapore-governed.">
+<meta property="og:description" content="Plain-English terms of service for the PookieScroll iOS app. Singapore-governed.">
 <meta property="og:url" content="https://pookiescroll.app/terms.html">
 <meta property="og:site_name" content="PookieScroll">
 
@@ -34,8 +34,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <style>
-    :root { --bg: #0A0A0A; --fg: #F2EFE6; --warn: #E63946; }
+    :root { --bg: #0A0A0A; --fg: #F2EFE6; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
         background: var(--bg);
@@ -77,23 +80,22 @@
     p strong { color: var(--fg); font-weight: 800; }
     ul { margin: 6px 0 18px 22px; }
     li { margin-bottom: 6px; font-size: 16px; opacity: 0.9; }
-    .draft {
-        background: rgba(230, 57, 70, 0.10);
-        border-left: 4px solid var(--warn);
-        padding: 14px 18px;
-        margin: 4px 0 32px;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 12px;
-        color: var(--warn);
-        font-weight: 700;
-        line-height: 1.55;
-    }
     .meta {
         font-family: 'JetBrains Mono', monospace;
         font-size: 12px;
         font-weight: 700;
         opacity: 0.7;
-        margin-bottom: 6px;
+        margin-bottom: 32px;
+    }
+    .contact-block {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1.6;
+        background: rgba(242, 239, 230, 0.05);
+        border-left: 3px solid var(--fg);
+        padding: 14px 18px;
+        margin: 4px 0 14px;
     }
     .back {
         display: inline-flex;
@@ -118,97 +120,136 @@
 </head>
 <body>
 <main>
-    <!--
-        ─── LEGAL REVIEW LOG ───────────────────────────────────────────
-        Controller / publisher:  Lionscraft Pte. Ltd. (Singapore).
-        Last drafted:            pre-launch (AI compliance pass).
-        Reviewer:                AI compliance reviewer (NOT a lawyer).
-        Pending human:           sign-off by a qualified Singapore lawyer
-                                 before public launch.
-
-        Drafting notes:
-          • Singapore-governed; SIAC arbitration default for non-EU users.
-          • EU consumers retain mandatory protections regardless.
-          • Apple End-User License Agreement (EULA) acknowledged because
-            the app is distributed via the App Store — Apple becomes a
-            third-party beneficiary of these Terms (Apple App Store
-            Connect requirement).
-          • Liability cap = €0 (price paid). Singapore Consumer Protection
-            (Fair Trading) Act 2003 + UCT clauses may override caps in
-            consumer scenarios; we don't try to override mandatory law.
-          • Acceptable-use rules avoid the surveillance / stalkerware
-            framing that Apple App Review is sensitive about.
-
-        Still pending — owner action:
-          ☐ Lawyer sign-off by a qualified Singapore lawyer
-          ☐ Set EFFECTIVE date once that sign-off lands
-          ☐ Remove the DRAFT banner immediately below
-          ☐ Decide whether to flip dispute resolution from SIAC to
-            Singapore courts (more accessible to small claimants)
-        ─────────────────────────────────────────────────────────────────
-    -->
     <div class="tag">// POOKIESCROLL · TERMS OF SERVICE</div>
     <h1>Terms of<br>Service.</h1>
 
-    <div class="draft">
-        DRAFT — pending sign-off by a qualified Singapore lawyer. Have a lawyer review the final wording before publication.
+    <div class="meta">LAST UPDATED: 31 MAY 2026 · VERSION 1.0</div>
+
+    <p>These Terms of Service ("Terms") govern your access to and use of the PookieScroll mobile application, including any related features, content, subscriptions, and services we provide through the app.</p>
+
+    <p>PookieScroll is provided by <strong>Lionscraft Pte. Ltd.</strong>, a company incorporated in Singapore ("Lionscraft", "we", "us", or "our").</p>
+
+    <p>By downloading, accessing, subscribing to, or using PookieScroll, you agree to these Terms. If you do not agree, do not use the app.</p>
+
+    <h2>1. About PookieScroll</h2>
+    <p>PookieScroll is a digital wellbeing and screen time self-management app. It helps users understand their own device usage, set personal routines and time limits, and use blocking features to support more intentional phone use.</p>
+    <p>PookieScroll is not a medical, therapeutic, clinical, emergency, safety-critical, or productivity-guarantee service. It is not a parental-control or child-monitoring service in this version.</p>
+
+    <h2>2. Eligibility</h2>
+    <p>You may use PookieScroll only if you are legally able to agree to these Terms and use the app in accordance with applicable laws.</p>
+    <p>PookieScroll is not directed to children. If you are below the age at which you may legally agree to these Terms, you may use PookieScroll only if permitted by your parent or legal guardian and applicable law.</p>
+
+    <h2>3. Your Use of the App</h2>
+    <p>Subject to your compliance with these Terms, Lionscraft grants you a limited, personal, non-exclusive, non-transferable, revocable licence to use PookieScroll on Apple-branded devices that you own or control, in accordance with these Terms and Apple's applicable terms.</p>
+    <p>You must not:</p>
+    <ul>
+        <li>use PookieScroll for unlawful, harmful, abusive, deceptive, or infringing purposes;</li>
+        <li>reverse engineer, decompile, disassemble, modify, or create derivative works of the app except where applicable law expressly permits this;</li>
+        <li>interfere with, damage, or bypass the app's functionality, security, or subscription controls;</li>
+        <li>use the app in a way that violates Apple's terms, applicable law, or third-party rights;</li>
+        <li>use PookieScroll as an emergency, safety-critical, medical, therapeutic, or legally required access-control tool.</li>
+    </ul>
+
+    <h2>4. Screen Time, Routines, and Blocking Features</h2>
+    <p>PookieScroll may allow you to set screen time goals, app limits, routines, or blocking windows. These features depend on Apple's iOS frameworks, your device settings, app permissions, operating system behaviour, and your own configuration.</p>
+    <p>PookieScroll uses Apple-provided iOS frameworks to support user-authorized, on-device screen time self-management, but it does not replace, restrict, or charge for Apple's own built-in Screen Time tools, which users may use separately.</p>
+    <p>You are responsible for choosing which apps to limit or block, when blocking should apply, and whether any exceptions or emergency access routes are needed.</p>
+    <p>Blocking features may not always work as expected. They may fail, be delayed, behave differently after iOS updates, depend on Apple permissions, or be affected by changes to your device, settings, apps, or operating system.</p>
+    <p>You must not rely on PookieScroll to guarantee access to or restriction of any app, service, communication, account, workplace tool, school tool, financial tool, authentication tool, transport tool, emergency service, or other time-sensitive or important function.</p>
+    <p>PookieScroll is not designed for supervising, monitoring, or controlling another person's device use.</p>
+    <p>To the fullest extent permitted by law, Lionscraft is not responsible for any loss, delay, missed communication, missed deadline, work disruption, academic issue, financial issue, travel issue, authentication issue, inability to access an app, or other consequence arising from your use, configuration, malfunction, non-function, or misunderstanding of PookieScroll's blocking, routine, limit, or screen time features.</p>
+
+    <h2>5. Subscriptions and Paid Features</h2>
+    <p>PookieScroll may offer free features and paid subscription features. Paid features may include access to blocking functionality and other premium features.</p>
+    <p>Subscriptions are purchased through Apple's in-app purchase system using your Apple ID. Lionscraft does not process your payment card details.</p>
+    <p>The available subscription options may include:</p>
+    <ul>
+        <li><strong>Monthly subscription:</strong> USD $2.99 per month, with a 7-day free trial where available.</li>
+        <li><strong>Annual subscription:</strong> USD $29.99 per year, with no free trial.</li>
+    </ul>
+    <p>Actual prices may vary by country, currency, tax treatment, storefront, promotion, or Apple pricing tier. The price shown to you in the App Store or purchase screen before confirmation is the applicable price for your purchase.</p>
+    <p>Subscriptions automatically renew unless cancelled at least 24 hours before the end of the current subscription period. Your Apple ID account may be charged for renewal within 24 hours before the end of the current period.</p>
+    <p>You can manage or cancel your subscription through your Apple ID account settings. Deleting the app does not cancel your subscription.</p>
+    <p>If a free trial is offered and you do not cancel before the trial ends, your subscription will automatically convert into a paid subscription at the price shown to you before purchase confirmation.</p>
+    <p>Features may vary by device, iOS version, permissions, and Apple framework availability.</p>
+
+    <h2>6. Refunds</h2>
+    <p>Purchases and refunds are handled by Apple under Apple's applicable App Store policies. Lionscraft cannot directly issue App Store refunds because payments are processed by Apple.</p>
+    <p>If you have a billing issue, you may contact us at <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a>, but refund requests may need to be submitted to Apple through Apple's refund process.</p>
+
+    <h2>7. Apple Terms</h2>
+    <p>Your use of PookieScroll is also subject to Apple's applicable terms, including the App Store terms and Apple Media Services terms. If there is a conflict between these Terms and Apple's mandatory terms for App Store apps, Apple's terms may apply to the extent required.</p>
+    <p>Apple is not responsible for providing support or maintenance for PookieScroll. To the extent required by Apple's terms, Apple and Apple's subsidiaries are third-party beneficiaries of these Terms and may enforce these Terms against you.</p>
+
+    <h2>8. Privacy</h2>
+    <p>Our Privacy Policy explains how we handle information in connection with PookieScroll. You should read it carefully.</p>
+    <p>PookieScroll is designed to minimise data collection. In particular, screen time usage data is intended to remain on your device and is not sent to Lionscraft. Limited subscription-related information may be processed by Apple and RevenueCat to support purchases and subscription entitlement status.</p>
+    <p>The Privacy Policy is available at: <a href="https://pookiescroll.app/privacy.html">https://pookiescroll.app/privacy.html</a></p>
+
+    <h2>9. Ownership and Intellectual Property</h2>
+    <p>PookieScroll, including the app, software, code, design, interface, characters, mascots, artwork, icons, names, logos, text, structure, and other content, is owned by Lionscraft or its licensors and is protected by intellectual property laws.</p>
+    <p>"PookieScroll", "Pookie", the PookieScroll mascots, and related branding are proprietary to Lionscraft.</p>
+    <p>These Terms do not transfer any ownership rights to you. You may not copy, modify, distribute, sell, lease, exploit, or create derivative works based on PookieScroll or its content except as expressly permitted by these Terms or applicable law.</p>
+
+    <h2>10. User Content and Sharing</h2>
+    <p>PookieScroll does not provide a public posting platform or social network.</p>
+    <p>The app may allow you to create a local image or mood card and share it using your device's native sharing features. You are responsible for what you choose to share and where you choose to share it. Lionscraft does not control third-party apps, platforms, or recipients you share content with.</p>
+
+    <h2>11. Third-Party Services</h2>
+    <p>PookieScroll may rely on third-party services or platforms, including Apple and RevenueCat, to provide app distribution, purchases, subscription management, entitlement status, or operating system functionality.</p>
+    <p>We are not responsible for third-party services, platforms, terms, policies, outages, delays, or decisions, except to the extent required by applicable law.</p>
+
+    <h2>12. Updates, Changes, and Availability</h2>
+    <p>We may update, modify, suspend, or discontinue PookieScroll or any feature at any time. We may also change free or paid features, subject to applicable law and Apple's subscription rules.</p>
+    <p>We do not guarantee that PookieScroll will always be available, uninterrupted, error-free, compatible with every iOS version, or compatible with every app or device setting.</p>
+
+    <h2>13. Disclaimers</h2>
+    <p>To the fullest extent permitted by law, PookieScroll is provided on an "as is" and "as available" basis.</p>
+    <p>We disclaim all warranties, representations, and conditions, whether express, implied, statutory, or otherwise, including warranties of merchantability, fitness for a particular purpose, non-infringement, availability, accuracy, reliability, and uninterrupted or error-free operation.</p>
+    <p>We do not warrant that PookieScroll will improve your wellbeing, productivity, focus, mental health, work performance, academic performance, or device usage habits.</p>
+    <p>Nothing in these Terms excludes warranties, rights, or remedies that cannot be excluded under applicable law.</p>
+
+    <h2>14. Limitation of Liability</h2>
+    <p>To the fullest extent permitted by law, Lionscraft and its directors, officers, employees, contractors, agents, affiliates, and licensors will not be liable for any indirect, incidental, special, consequential, exemplary, punitive, or lost-profit damages, or for loss of data, loss of goodwill, loss of opportunity, loss of business, loss of revenue, loss of use, missed communications, missed deadlines, or consequences of blocked or unavailable app access.</p>
+    <p>To the fullest extent permitted by law, Lionscraft's total aggregate liability arising out of or relating to PookieScroll or these Terms will not exceed the greater of:</p>
+    <ul>
+        <li>the amount you paid to Lionscraft through Apple for PookieScroll in the 12 months before the event giving rise to the claim; or</li>
+        <li>SGD 100.</li>
+    </ul>
+    <p>Some jurisdictions do not allow certain limitations of liability. In those jurisdictions, our liability is limited to the maximum extent permitted by law.</p>
+
+    <h2>15. Indemnity</h2>
+    <p>To the fullest extent permitted by law, you agree to indemnify and hold harmless Lionscraft and its directors, officers, employees, contractors, agents, affiliates, and licensors from and against any claims, losses, liabilities, damages, costs, and expenses arising out of or related to:</p>
+    <ul>
+        <li>your misuse of PookieScroll;</li>
+        <li>your breach of these Terms;</li>
+        <li>your violation of applicable law or third-party rights;</li>
+        <li>your configuration or use of blocking, routine, or limit features in a way that causes harm to you or another person.</li>
+    </ul>
+
+    <h2>16. Suspension and Termination</h2>
+    <p>We may suspend or terminate your access to PookieScroll if you breach these Terms, misuse the app, create legal risk for us, or if we are required to do so by law or Apple.</p>
+    <p>You may stop using PookieScroll at any time. If you have an active subscription, you must cancel it through your Apple ID account settings to stop future renewals.</p>
+    <p>Sections intended to survive termination will continue to apply, including ownership, disclaimers, limitation of liability, indemnity, governing law, and dispute terms.</p>
+
+    <h2>17. Changes to These Terms</h2>
+    <p>We may update these Terms from time to time. If we make material changes, we will take reasonable steps to notify you, such as by updating the date above, posting the new Terms, or providing notice in the app where appropriate.</p>
+    <p>Your continued use of PookieScroll after the updated Terms become effective means you accept the updated Terms.</p>
+
+    <h2>18. Governing Law and Disputes</h2>
+    <p>These Terms are governed by the laws of Singapore, without regard to conflict of law rules.</p>
+    <p>Subject to applicable consumer protection laws that may give you mandatory rights in your country of residence, the courts of Singapore will have jurisdiction over disputes arising out of or relating to these Terms or PookieScroll.</p>
+    <p>Nothing in these Terms limits any mandatory consumer rights you may have under applicable law.</p>
+
+    <h2>19. Contact</h2>
+    <p>If you have questions about these Terms, contact us at:</p>
+    <div class="contact-block">
+        Lionscraft Pte. Ltd.<br>
+        27 Jalan Sayang, #00-00<br>
+        Singapore 418645<br>
+        UEN: 202322784R<br>
+        Email: <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a>
     </div>
-
-    <div class="meta">EFFECTIVE: [TBD — set on lawyer sign-off] · VERSION 1.0</div>
-
-    <p>These Terms of Service ("Terms") govern your use of the <strong>PookieScroll</strong> iOS app, this website, and any related services (together, the "Service"). The Service is operated by <strong>Lionscraft Pte. Ltd.</strong>, a company incorporated in Singapore ("Lionscraft", "we", "us"). By installing the app or using the website you agree to these Terms. If you do not agree, do not use the Service.</p>
-
-    <h2>1. The Service</h2>
-    <p>PookieScroll is a free iOS screen-time tracker and app blocker built on Apple's Family Controls, DeviceActivity and ManagedSettings frameworks. It runs entirely on your device. We do not operate any backend server for the app, and we do not collect, store, or sell your screen-time data &mdash; see the <a href="privacy.html">Privacy Policy</a> for details.</p>
-
-    <h2>2. License</h2>
-    <p>We grant you a limited, non-exclusive, non-transferable, revocable licence to install and use PookieScroll on Apple devices that you own or control, solely for your personal, non-commercial use, subject to these Terms and to Apple's standard End-User License Agreement (the "<a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Apple EULA</a>"). You may not: (a) copy, modify, translate, adapt, or create derivative works of the app; (b) reverse-engineer, decompile, or disassemble the app, except where local law expressly allows it; (c) sublicense, sell, rent, lease, lend, or otherwise transfer the app; (d) remove or alter any copyright, trademark, or other proprietary notices; or (e) use the app in any way that violates applicable law or these Terms.</p>
-
-    <h2>3. Apple App Store</h2>
-    <p>The app is distributed through the Apple App Store. You acknowledge that the Apple EULA applies in addition to these Terms; if there is a conflict between the two, the more protective provision for you as the user prevails. <strong>Apple Inc. is a third-party beneficiary of these Terms</strong> and may enforce them against you. Apple has no obligation to provide support or maintenance for the app, has no warranty obligations, and is not responsible for any product-liability or intellectual-property claims relating to the app.</p>
-
-    <h2>4. Acceptable use</h2>
-    <p>PookieScroll is designed to help you manage <em>your own</em> screen-time on a device you own or control. You agree not to use it to monitor, surveil, or restrict the device or behaviour of another person without their knowledge and consent. You agree to use the Service only for its intended personal screen-time-management purpose and not for any unlawful or abusive purpose.</p>
-
-    <h2>5. Intellectual property</h2>
-    <p>The Service, including the source code, mascot artwork (kraken and ghost), brand name "PookieScroll", visual identity, taglines, copy, and documentation, is owned by Lionscraft Pte. Ltd. and is protected by copyright and trademark law. No rights are granted to you other than the limited licence in Section 2.</p>
-
-    <h2>6. Third-party services</h2>
-    <p>The Service uses Apple's Family Controls / DeviceActivity / ManagedSettings APIs. The marketing website is hosted by GitHub Pages (GitHub, Inc., USA) and uses Google Analytics 4 in cookieless mode (Google LLC, USA). Use of these third-party services is subject to their own terms; we have no control over their availability or behaviour.</p>
-
-    <h2>7. Disclaimers</h2>
-    <p>THE SERVICE IS PROVIDED <strong>"AS IS"</strong> AND <strong>"AS AVAILABLE"</strong>, WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED. TO THE MAXIMUM EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.</p>
-    <p>Blocking, usage limits, and shield routines depend on iOS's <code>DeviceActivityMonitor</code>, which is known to throttle its callbacks; we do not guarantee that a shield will activate within any particular time after a cap is reached. PookieScroll is a productivity tool, not a medical or mental-health service, and is not intended to diagnose, treat, or prevent any condition.</p>
-
-    <h2>8. Limitation of liability</h2>
-    <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, LIONSCRAFT WILL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL, OR PUNITIVE DAMAGES ARISING OUT OF OR RELATING TO THE SERVICE, INCLUDING LOSS OF DATA, LOSS OF PROFITS, OR DEVICE DAMAGE, EVEN IF ADVISED OF THE POSSIBILITY. OUR TOTAL CUMULATIVE LIABILITY TO YOU FOR ALL CLAIMS RELATED TO THE SERVICE WILL NOT EXCEED THE GREATER OF (A) THE AMOUNT YOU PAID US FOR THE SERVICE IN THE PRECEDING 12 MONTHS (CURRENTLY EUR 0) OR (B) EUR 50.</p>
-    <p>Nothing in this Section 8 limits liability that cannot be limited under applicable mandatory law &mdash; for example, the Singapore Consumer Protection (Fair Trading) Act, the EU Consumer Rights Directive, or comparable rules in your country of residence.</p>
-
-    <h2>9. Indemnification</h2>
-    <p>You agree to indemnify and hold Lionscraft, its directors, employees and contractors harmless from any claim or demand (including reasonable legal fees) arising out of your breach of these Terms or your misuse of the Service.</p>
-
-    <h2>10. Termination</h2>
-    <p>You may stop using the Service at any time by deleting the app from your device. We may suspend or terminate the Service, or your access to it, at any time and for any reason, including if you breach these Terms or if we cease to operate the Service. Sections 5 (IP), 7 (Disclaimers), 8 (Liability), 9 (Indemnification), 12 (Governing law) and 13 (Dispute resolution) survive termination.</p>
-
-    <h2>11. Changes to these Terms</h2>
-    <p>We may update these Terms from time to time. The current version is always published at <code>https://pookiescroll.app/terms.html</code> with an updated effective date. Continued use of the Service after an update constitutes acceptance of the revised Terms.</p>
-
-    <h2>12. Governing law</h2>
-    <p>These Terms are governed by and construed in accordance with the laws of the <strong>Republic of Singapore</strong>, excluding its conflict-of-laws rules and the United Nations Convention on Contracts for the International Sale of Goods.</p>
-    <p>If you are a consumer resident in the EU / EEA / UK, this choice of law does not deprive you of the protection of any mandatory provisions of consumer law that would otherwise apply in your country of habitual residence.</p>
-
-    <h2>13. Dispute resolution</h2>
-    <p>Any dispute arising out of or in connection with these Terms, including any question regarding their existence, validity or termination, will be referred to and finally resolved by arbitration administered by the <strong>Singapore International Arbitration Centre (SIAC)</strong> in accordance with the SIAC Rules in force at the time of commencement. The seat of arbitration is Singapore; the language is English; the tribunal is one arbitrator.</p>
-    <p>If you are a consumer resident in the EU / EEA / UK, you may instead bring an action in the courts of your country of habitual residence, and Singapore courts retain jurisdiction over actions Lionscraft may need to bring against you.</p>
-
-    <h2>14. Severability</h2>
-    <p>If any provision of these Terms is held to be invalid or unenforceable, the remaining provisions will remain in full force and effect.</p>
-
-    <h2>15. Entire agreement</h2>
-    <p>These Terms, together with the <a href="privacy.html">Privacy Policy</a>, constitute the entire agreement between you and Lionscraft regarding the Service and supersede any prior agreements on the same subject matter.</p>
-
-    <h2>16. Contact</h2>
-    <p>Questions about these Terms: <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a> &middot; Lionscraft Pte. Ltd., Singapore.</p>
 
     <a class="back" href="index.html">← BACK TO POOKIESCROLL</a>
 </main>
