@@ -114,33 +114,51 @@
 
     <!--
         ─── LEGAL REVIEW LOG ───────────────────────────────────────────
+        Controller:      Lionscraft Pte. Ltd. (Singapore).
         Last audited:    pre-launch (see /docs/AppStore.md for date).
         Reviewed by:     AI compliance reviewer (NOT a qualified lawyer).
-        Pending human:   final sign-off by a qualified GDPR / DSG lawyer
-                         before App Store submission goes live.
+        Pending human:   final sign-off by a qualified Singapore PDPA +
+                         GDPR lawyer before public launch.
 
-        Current setup: Google Analytics 4 in COOKIELESS mode.
-        analytics_storage is permanently DENIED in Consent Mode v2, so GA4
-        sets no cookies and stores no client identifier. No cookie banner
-        is needed — there is nothing being stored on the user's device
-        that would trigger ePrivacy Art. 5(3) / TKG § 165.
+        Two regimes apply at the same time:
+          1. Singapore PDPA — controller is established in Singapore;
+             § 11(3) DPO designation is reflected in the policy.
+          2. GDPR (Art. 3(2)) — the website offers a free service to EU
+             residents, so EU rules apply extraterritorially. Art. 27(2)
+             EU-representative exemption is claimed (occasional, low-risk
+             processing). Re-evaluate if traffic/scope grows.
+
+        Current analytics setup: Google Analytics 4 in COOKIELESS mode.
+        analytics_storage is permanently DENIED in Consent Mode v2, so
+        GA4 sets no cookies, stores no client identifier, and writes no
+        localStorage. No cookie banner is needed — there is nothing
+        being stored on the user's device that would trigger ePrivacy
+        Art. 5(3) or any equivalent.
 
         Addressed in this revision:
-          ✓ GA4 switched to cookieless mode (no cookies, no identifiers,
-            no consent banner needed)
-          ✓ Schrems II / US transfer disclosure retained for the GA4 ping
-            itself (Google LLC still receives request metadata)
-          ✓ Processor / recipient list (Google Ireland, Google LLC, GitHub)
-          ✓ § 5 ECG Impressum placeholder (REPLACE before launch)
-          ✓ Stronger children's-data section (Austrian DSG: age 14)
-          ✓ Removed misleading anonymize_ip claim (no-op in GA4)
-          ✓ Legal basis switched from Art. 6(1)(a) consent (no longer
-            relevant — no cookies) to Art. 6(1)(f) legitimate interest
+          ✓ Controller identified: Lionscraft Pte. Ltd., Singapore
+          ✓ Singapore PDPA DPO contact block added (§ 11(3))
+          ✓ EU representative exemption under GDPR Art. 27(2) claimed
+          ✓ Recipient list updated to include Google Asia Pacific Pte.
+            Ltd. as the likely SG-side Google entity
+          ✓ Schrems II / EU-US DPF + SCCs disclosure retained for Google
+            LLC and GitHub Inc.
+          ✓ Legal basis is Art. 6(1)(f) GDPR (legitimate interest) for
+            the cookieless analytics ping
+          ✓ Children's-data section retains Austrian DSG age 14 floor
+            since EU minors will visit; PDPA does not lower this
 
         Still pending — owner action:
-          ☐ Replace [REPLACE …] placeholders in the Impressum block below
+          ☐ Replace [REPLACE …] in Data Controller block:
+              - registered street + building + unit
+              - Singapore postal code
+              - UEN (ACRA Unique Entity Number)
+              - DPO name/role if a specific person is designated
           ☐ Set EFFECTIVE date once a real lawyer signs off
           ☐ Remove the DRAFT banner immediately above
+          ☐ Confirm with a Singapore lawyer whether PDPA "Do Not Call"
+            registry obligations apply (almost certainly not for a free
+            website with no phone-collection, but worth a paragraph)
         ─────────────────────────────────────────────────────────────────
     -->
 
@@ -150,7 +168,7 @@
 
     <div class="meta">EFFECTIVE: [TBD — set on lawyer sign-off] · VERSION 1.1</div>
 
-    <p>PookieScroll ("the app", "we") is an iOS screen-time companion built on Apple's official <strong>Family Controls</strong>, <strong>DeviceActivity</strong>, and <strong>ManagedSettings</strong> frameworks. It runs entirely on your device. We do not operate any server, we do not create user accounts, and we do not collect, transmit, or sell your screen-time data, app usage, or any personal information.</p>
+    <p>PookieScroll ("the app") is published by <strong>Lionscraft Pte. Ltd.</strong>, a company incorporated in Singapore ("Lionscraft", "we", "us"). It is an iOS screen-time companion built on Apple's official <strong>Family Controls</strong>, <strong>DeviceActivity</strong>, and <strong>ManagedSettings</strong> frameworks. It runs entirely on your device. We do not operate any server for the app, we do not create user accounts, and we do not collect, transmit, or sell your screen-time data, app usage, or any personal information from the app.</p>
 
     <h2>What we collect</h2>
     <p><strong>Nothing leaves your device.</strong> PookieScroll has no backend service. There is no analytics SDK, no advertising SDK, no crash-reporting SDK, no tracking pixel, and no third-party network code. The app never sends your usage data, your selected blocked apps, your goal, your mascot choice, or anything else, to us or any third party.</p>
@@ -188,11 +206,11 @@
     <p>Because nothing is stored on or read from your device, ePrivacy Art. 5(3) (Austrian TKG § 165) does not require a consent banner for this use. If you would still rather have no analytics ping go out at all, install <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google's official opt-out browser add-on</a>, or use a tracker-blocking browser (Brave, Firefox Strict, Safari with Privacy Report) — all standard ad-blockers will also block <code>googletagmanager.com</code>.</p>
 
     <h2>Recipients &amp; processors</h2>
-    <p>If you tap ACCEPT in the cookie banner, pseudonymous analytics data is shared with the following processors (Art. 13(1)(e) GDPR):</p>
+    <p>The following third parties receive request metadata when you visit this website (Art. 13(1)(e) GDPR / PDPA Notification Obligation):</p>
     <ul>
-        <li><strong>Google Ireland Limited</strong> (Gordon House, Barrow Street, Dublin 4, Ireland) — EU-fronted data controller / joint controller for Google Analytics. Our Data Processing Addendum with Google is the one published at <a href="https://business.safety.google/adsprocessorterms/" target="_blank" rel="noopener">business.safety.google</a>.</li>
-        <li><strong>Google LLC</strong> (1600 Amphitheatre Parkway, Mountain View, CA 94043, USA) — operates the Google Analytics backend. See "International transfers" below.</li>
-        <li><strong>GitHub, Inc.</strong> (88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA) — hosts this static website via GitHub Pages. GitHub may receive your IP address and User-Agent for the purpose of serving the page (Art. 6(1)(f) GDPR, our legitimate interest in operating the website).</li>
+        <li><strong>Google Asia Pacific Pte. Ltd.</strong> (8 Marina View, #30-01 Asia Square Tower 1, Singapore 018960) and/or <strong>Google Ireland Limited</strong> (Gordon House, Barrow Street, Dublin 4, Ireland) &mdash; the Google entity contracting with us for Google Analytics. Our terms with Google are the standard Google Analytics Terms of Service and Data Processing Addendum at <a href="https://business.safety.google/adsprocessorterms/" target="_blank" rel="noopener">business.safety.google</a>.</li>
+        <li><strong>Google LLC</strong> (1600 Amphitheatre Parkway, Mountain View, CA 94043, USA) &mdash; operates the Google Analytics backend. See "International transfers" below.</li>
+        <li><strong>GitHub, Inc.</strong> (88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA) &mdash; hosts this static website via GitHub Pages. GitHub may receive your IP address and User-Agent for the purpose of serving the page (Art. 6(1)(f) GDPR &mdash; legitimate interest in operating the website).</li>
     </ul>
 
     <h2>International transfers (Schrems II)</h2>
@@ -221,18 +239,26 @@
     <p>You have the right to: access (Art. 15), rectification (Art. 16), erasure (Art. 17), restriction of processing (Art. 18), data portability (Art. 20), and to object (Art. 21) &mdash; including the right to withdraw consent at any time (Art. 7(3)). To exercise any of these rights, email <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a>; we will respond within one month.</p>
     <p>You have the right to lodge a complaint with a supervisory authority &mdash; in Austria, the <a href="https://www.dsb.gv.at/" target="_blank" rel="noopener">Datenschutzbeh&ouml;rde</a>; in Germany the Land DPA for your residence; in any other EU/EEA country your local equivalent.</p>
 
-    <h2>Data controller / Impressum (&sect; 5 ECG, &sect; 24 MedienG)</h2>
-    <p>The data controller and media-owner of this website is:</p>
+    <h2>Data controller</h2>
+    <p>The data controller for this website and the PookieScroll iOS app is:</p>
     <p>
-        <strong>[REPLACE: full legal name]</strong><br>
-        [REPLACE: street, house number]<br>
-        [REPLACE: ZIP] [REPLACE: city], [REPLACE: country]<br>
+        <strong>Lionscraft Pte. Ltd.</strong><br>
+        [REPLACE: registered street, building, unit]<br>
+        Singapore [REPLACE: postal code]<br>
         Email: <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a><br>
-        [REPLACE if applicable: Firmenbuchnummer / Companies-register no.]<br>
-        [REPLACE if applicable: UID-Nummer / VAT ID]<br>
-        Supervisory authority (Aufsichtsbeh&ouml;rde): [REPLACE if Austrian trade: Bezirkshauptmannschaft / Magistrat of city]
+        UEN (ACRA Unique Entity Number): [REPLACE: e.g. 202412345A]
     </p>
-    <p class="meta">// IMPRESSUM PLACEHOLDER &mdash; required by Austrian &sect; 5 ECG before this site can publicly market a product. Owner must fill in the bracketed fields above prior to launch.</p>
+
+    <h2>Data Protection Officer (Singapore PDPA &sect; 11(3))</h2>
+    <p>Lionscraft Pte. Ltd. has designated the following contact for personal-data matters under the Singapore Personal Data Protection Act:</p>
+    <p>
+        DPO contact: <a href="mailto:hi@pookiescroll.app">hi@pookiescroll.app</a><br>
+        [REPLACE if known: DPO name / role]
+    </p>
+
+    <h2>EU representative (GDPR Art. 27)</h2>
+    <p>Lionscraft Pte. Ltd. is established in Singapore. To the extent we offer goods or services to data subjects in the EU / EEA (Art. 3(2) GDPR), we rely on the Art. 27(2)(a) exemption: our website processing is <em>occasional</em>, does not include large-scale processing of special categories under Art. 9 or criminal data under Art. 10, and is unlikely to result in a risk to the rights and freedoms of natural persons. We have therefore not designated an EU representative at this time. If our processing scales beyond that threshold, we will publish a representative's contact details here.</p>
+    <p class="meta">// CONTROLLER BLOCK &mdash; legal name + UEN are accurate. Postal address, postal code, and (if a specific DPO is named) DPO name still need to be filled in before public launch.</p>
 
     <h2>App Store &amp; Apple</h2>
     <p>When you install PookieScroll from the App Store, Apple collects standard purchase, install, and (if you have opted in) crash information independently of us. We do not have access to your Apple ID or to App Store analytics that identify you. See <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple's Privacy Policy</a> for details.</p>
