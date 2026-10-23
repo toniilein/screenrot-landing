@@ -968,7 +968,7 @@
         font-weight: 900;
     }
 
-    /* ── FEATURES (TEN WAYS TO NOT ROT) ── */
+    /* ── FEATURES (NINE WAYS TO NOT ROT) ── */
     .features { padding: 80px 40px; }
     .features-head {
         display: flex;
@@ -1636,10 +1636,11 @@
         .get-app-h2 { font-size: 88px; }
         .cta-h2 { font-size: 120px; }
         .features-grid { grid-template-columns: 1fr 1fr; }
-        .feature-cell:nth-child(3n+1),
-        .feature-cell:nth-child(3n+2) { border-right: none; }
-        .feature-cell { border-right: 2px solid var(--fg); border-bottom: 2px solid var(--fg); }
+        /* :nth-child(n) lifts specificity above the desktop 3n+1/3n+2
+           rules, so every left-column cell gets its divider. */
+        .feature-cell:nth-child(n) { border-right: 2px solid var(--fg); border-bottom: 2px solid var(--fg); }
         .feature-cell:nth-child(2n) { border-right: none; }
+        .feature-cell:last-child:nth-child(odd) { grid-column: 1 / -1; border-right: none; border-bottom: none; }
         .how-grid { grid-template-columns: 1fr; }
         .how-cell + .how-cell { border-left: none; border-top: 2px solid var(--fg); }
     }
@@ -1690,7 +1691,7 @@
         .how-h2 { font-size: 40px; }
         .get-app-h2 { font-size: 64px; }
         .features-grid { grid-template-columns: 1fr; }
-        .feature-cell { border-right: none; }
+        .feature-cell:nth-child(n) { border-right: none; }
         .features-head { flex-direction: column; gap: 16px; align-items: flex-start; }
         .cta-h2 { font-size: 72px; }
         .mood-card-stage { height: 240px; }
@@ -2120,15 +2121,15 @@
 </section>
 
 <!-- ────────────────────────────────────────────────────────────────
-     FEATURES — 10 cards as hard blocks with hover-to-color, analytics +
-     blocking first. (2026-10: dropped NFC — cut from the app; SHIELD and
-     PICK YOUR POOKIE — duplicated other cards / the Allegiance section.)
+     FEATURES — 9 cards as hard blocks with hover-to-color, analytics +
+     blocking first. The grid CSS assumes exactly 9 (3×3 desktop; 2-col
+     tablet with the 9th spanning) — change the count, fix the borders.
      ──────────────────────────────────────────────────────────────── -->
 <section class="features" id="features">
     <div class="features-head">
         <div>
             <div class="mockup-tag">// SECTION 05 / FEATURES</div>
-            <h2 class="features-h2">TEN<br>WAYS TO<br><span class="hl-red">NOT</span> ROT.</h2>
+            <h2 class="features-h2">NINE<br>WAYS TO<br><span class="hl-red">NOT</span> ROT.</h2>
         </div>
         <div class="features-side">FIVE LANGUAGES, FOUR ICONS, THREE SHIELDS, TWO MASCOTS, ONE CRANKY POOKIE.</div>
     </div>
@@ -2143,8 +2144,8 @@
         <div class="feature-cell" data-color="yellow">
             <div class="feature-cell-num">[02]</div>
             <div>
-                <h3 class="feature-cell-h">WHEN YOU SCROLL</h3>
-                <p class="feature-cell-d">HEAT-MAP OF THE HOURS YOU ACTUALLY LOSE.</p>
+                <h3 class="feature-cell-h">HEATMAP</h3>
+                <p class="feature-cell-d">THE HOURS YOU ACTUALLY LOSE, PEAK HOUR FLAGGED.</p>
             </div>
         </div>
         <div class="feature-cell" data-color="coral">
@@ -2165,39 +2166,32 @@
             <div class="feature-cell-num">[05]</div>
             <div>
                 <h3 class="feature-cell-h">BLOCK ROUTINES</h3>
-                <p class="feature-cell-d">TIME-WINDOW BLOCKS. SLEEP, DEEP WORK, WEEKENDS. OVERNIGHT TOO.</p>
+                <p class="feature-cell-d">TIME-WINDOW BLOCKS. SLEEP, DEEP WORK, WEEKENDS.</p>
             </div>
         </div>
         <div class="feature-cell" data-color="yellow">
             <div class="feature-cell-num">[06]</div>
             <div>
                 <h3 class="feature-cell-h">POOKIE SCORE</h3>
-                <p class="feature-cell-d">YOUR WEEK IN ONE NUMBER. WEEKLY TREND. PER-APP SPARKLINES.</p>
+                <p class="feature-cell-d">YOUR WEEK IN ONE NUMBER. WEEKLY TREND.</p>
             </div>
         </div>
         <div class="feature-cell" data-color="coral">
             <div class="feature-cell-num">[07]</div>
             <div>
-                <h3 class="feature-cell-h">SCREEN TIME HISTORY</h3>
+                <h3 class="feature-cell-h">HISTORY</h3>
                 <p class="feature-cell-d">EVERY DAY COLOR-CODED. TRENDS PAST iOS'S MONTH WINDOW.</p>
             </div>
         </div>
         <div class="feature-cell" data-color="paper">
             <div class="feature-cell-num">[08]</div>
             <div>
-                <h3 class="feature-cell-h">OVERVIEW</h3>
-                <p class="feature-cell-d">TODAY'S TIME AS YOUR POOKIE'S VIBE. PER-APP DEEP DIVE.</p>
-            </div>
-        </div>
-        <div class="feature-cell" data-color="mint">
-            <div class="feature-cell-num">[09]</div>
-            <div>
                 <h3 class="feature-cell-h">"ON STRIKE"</h3>
                 <p class="feature-cell-d">OPEN A BLOCKED APP, GET A POSTER. ANGRY POOKIE. PICKET SIGN.</p>
             </div>
         </div>
-        <div class="feature-cell" data-color="yellow">
-            <div class="feature-cell-num">[10]</div>
+        <div class="feature-cell" data-color="mint">
+            <div class="feature-cell-num">[09]</div>
             <div>
                 <h3 class="feature-cell-h">WIDGET</h3>
                 <p class="feature-cell-d">MINI POOKIE ON YOUR HOME SCREEN. ONE-TAP QUICK BLOCK.</p>
