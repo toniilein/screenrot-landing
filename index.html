@@ -968,7 +968,7 @@
         font-weight: 900;
     }
 
-    /* ── FEATURES (THIRTEEN WAYS TO NOT ROT) ── */
+    /* ── FEATURES (TEN WAYS TO NOT ROT) ── */
     .features { padding: 80px 40px; }
     .features-head {
         display: flex;
@@ -1624,6 +1624,10 @@
         .manifesto h2 { font-size: 56px; }
         .teams-split { grid-template-columns: 1fr; }
         .team-cell.kraken { border-right: none; border-bottom: 4px solid var(--fg); }
+        /* Stack the two 4-vibe rows here, not at 640px — side by side they
+           overflow the viewport anywhere between ~640 and ~1100px. */
+        .teams-moods { grid-template-columns: 1fr; }
+        .moods-cell.first { border-right: none; border-bottom: 4px solid var(--fg); }
         .mockup-inner { grid-template-columns: 1fr; gap: 40px; }
         .mockup-h2 { font-size: 56px; }
         .features-h2 { font-size: 56px; }
@@ -1836,7 +1840,6 @@
         <li><a href="#features">FEATURES</a></li>
         <li><a href="#teams">TEAMS</a></li>
         <li><a href="#how">HOW</a></li>
-        <li><a href="https://apps.apple.com/app/id6773321534" target="_blank" rel="noopener">GET THE APP</a></li>
         <li class="nav-social"><a class="nav-social-link" href="https://www.instagram.com/pookiescroll.app/" target="_blank" rel="noopener" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M7 2.5h10A4.5 4.5 0 0 1 21.5 7v10a4.5 4.5 0 0 1-4.5 4.5H7A4.5 4.5 0 0 1 2.5 17V7A4.5 4.5 0 0 1 7 2.5zm0 1.6A2.9 2.9 0 0 0 4.1 7v10A2.9 2.9 0 0 0 7 19.9h10a2.9 2.9 0 0 0 2.9-2.9V7A2.9 2.9 0 0 0 17 4.1H7zm10.5 1.4a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2zM12 7.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8zm0 1.7a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4z"/>
@@ -1868,7 +1871,7 @@
             LOSE.<br>
             <span class="hero-mood-word" id="moodWord">BLOCK IT.</span>
         </h1>
-        <p class="hero-p">A HEATMAP FINDS THE EXACT HOUR YOU DOOMSCROLL. DANGER ZONE CAPS IT IN ONE TAP, WITH A LIVE COUNTDOWN ON YOUR LOCK SCREEN. REAL APP + WEBSITE BLOCKING. A KRAKEN OR GHOST KEEPS SCORE. NO IN-APP TRACKING.</p>
+        <p class="hero-p">FINDS THE HOUR YOU LOSE. CAPS IT IN ONE TAP. BLOCKS APPS + WEBSITES. A KRAKEN OR GHOST KEEPS SCORE. NO IN-APP TRACKING.</p>
 
         <!-- MOOD CARD — single mascot stage, kraken/ghost alternating per
              mood. Right column on desktop; between h1 and CTAs on mobile. -->
@@ -1890,7 +1893,7 @@
 
         <div class="hero-ctas">
             <a href="https://apps.apple.com/app/id6773321534" class="br-cta" target="_blank" rel="noopener">GET THE APP →</a>
-            <a href="#different" class="br-cta br-cta-alt">HOW IT WORKS</a>
+            <a href="#how" class="br-cta br-cta-alt">HOW IT WORKS</a>
         </div>
     </div>
 </section>
@@ -1903,8 +1906,8 @@
      ──────────────────────────────────────────────────────────────── -->
 <div class="ticker-row">
     <div class="ticker-inner">
-        <span>★ NOW ON THE APP STORE ★ SEE THE HOUR YOU LOSE ★ CAP IT IN ONE TAP ★ BLOCK APPS + WEBSITES ★ YOUR DATA STAYS ON YOUR DEVICE ★ NO ADS ★ NO IN-APP TRACKING SDKS ★ ACCENT: TOXIC MINT ★ NOW ON THE APP STORE ★ SEE THE HOUR YOU LOSE ★ CAP IT IN ONE TAP ★ BLOCK APPS + WEBSITES ★ YOUR DATA STAYS ON YOUR DEVICE ★ NO ADS ★ NO IN-APP TRACKING SDKS ★ ACCENT: TOXIC MINT ★ NOW ON THE APP STORE ★ SEE THE HOUR YOU LOSE ★ CAP IT IN ONE TAP ★ BLOCK APPS + WEBSITES ★ YOUR DATA STAYS ON YOUR DEVICE ★ NO ADS ★ NO IN-APP TRACKING SDKS ★ ACCENT: TOXIC MINT</span>
-        <span>★ NOW ON THE APP STORE ★ SEE THE HOUR YOU LOSE ★ CAP IT IN ONE TAP ★ BLOCK APPS + WEBSITES ★ YOUR DATA STAYS ON YOUR DEVICE ★ NO ADS ★ NO IN-APP TRACKING SDKS ★ ACCENT: TOXIC MINT ★ NOW ON THE APP STORE ★ SEE THE HOUR YOU LOSE ★ CAP IT IN ONE TAP ★ BLOCK APPS + WEBSITES ★ YOUR DATA STAYS ON YOUR DEVICE ★ NO ADS ★ NO IN-APP TRACKING SDKS ★ ACCENT: TOXIC MINT ★ NOW ON THE APP STORE ★ SEE THE HOUR YOU LOSE ★ CAP IT IN ONE TAP ★ BLOCK APPS + WEBSITES ★ YOUR DATA STAYS ON YOUR DEVICE ★ NO ADS ★ NO IN-APP TRACKING SDKS ★ ACCENT: TOXIC MINT</span>
+        <span>★ NOW ON THE APP STORE ★ SEE THE HOUR YOU LOSE ★ CAP IT IN ONE TAP ★ YOUR DATA STAYS ON YOUR DEVICE ★ NO ADS ★ ACCENT: TOXIC MINT ★ NOW ON THE APP STORE ★ SEE THE HOUR YOU LOSE ★ CAP IT IN ONE TAP ★ YOUR DATA STAYS ON YOUR DEVICE ★ NO ADS ★ ACCENT: TOXIC MINT ★ NOW ON THE APP STORE ★ SEE THE HOUR YOU LOSE ★ CAP IT IN ONE TAP ★ YOUR DATA STAYS ON YOUR DEVICE ★ NO ADS ★ ACCENT: TOXIC MINT</span>
+        <span>★ NOW ON THE APP STORE ★ SEE THE HOUR YOU LOSE ★ CAP IT IN ONE TAP ★ YOUR DATA STAYS ON YOUR DEVICE ★ NO ADS ★ ACCENT: TOXIC MINT ★ NOW ON THE APP STORE ★ SEE THE HOUR YOU LOSE ★ CAP IT IN ONE TAP ★ YOUR DATA STAYS ON YOUR DEVICE ★ NO ADS ★ ACCENT: TOXIC MINT ★ NOW ON THE APP STORE ★ SEE THE HOUR YOU LOSE ★ CAP IT IN ONE TAP ★ YOUR DATA STAYS ON YOUR DEVICE ★ NO ADS ★ ACCENT: TOXIC MINT</span>
     </div>
 </div>
 
@@ -1917,41 +1920,11 @@
 </section>
 
 <!-- ────────────────────────────────────────────────────────────────
-     WHY IT'S DIFFERENT — differentiators-led, anti-clone (Guideline 4.3a).
-     Three pillars unique to PookieScroll: the time-of-day heatmap, the
-     Danger Zone one-tap windowed cap, and the unfakeable vibe. Lands
-     right after the thesis, before the mascot section, so a visitor (or a
-     reviewer) sees analytics + blocking before the personality layer.
-     ──────────────────────────────────────────────────────────────── -->
-<section class="how" id="different">
-    <div class="how-tag">// SECTION 03 / WHY IT'S DIFFERENT</div>
-    <h2 class="how-h2">NOT JUST<br>ANOTHER<br>SCREEN-TIME<br><span style="color: var(--accent);">APP.</span></h2>
-    <p class="features-side" style="max-width: 560px; margin: -32px 0 48px;">OTHER APPS HAND YOU A NUMBER AND A CHART. WE BUILT THREE THINGS THEY DON'T.</p>
-    <div class="how-grid">
-        <div class="how-cell">
-            <div class="how-cell-n">01</div>
-            <h3 class="how-cell-h">WHEN, NOT JUST HOW MUCH</h3>
-            <p class="how-cell-p">A TIME-OF-DAY HEATMAP OF THE HOURS YOU ACTUALLY LOSE — TODAY, AND AS YOUR TYPICAL WEEK. PEAK HOUR FLAGGED. PLUS A FULL HISTORY CALENDAR THAT KEEPS GOING PAST iOS'S ~MONTH WINDOW.</p>
-        </div>
-        <div class="how-cell">
-            <div class="how-cell-n">02</div>
-            <h3 class="how-cell-h">DANGER ZONE</h3>
-            <p class="how-cell-p">THE APP FINDS YOUR SINGLE WORST HOUR AUTOMATICALLY. ONE TAP SETS A USAGE CAP FOR EXACTLY THAT WINDOW — HIT IT AND THE APPS SHIELD. A LIVE COUNTDOWN SITS ON YOUR LOCK SCREEN AND DYNAMIC ISLAND SO YOU FEEL EVERY MINUTE TICK BY.</p>
-        </div>
-        <div class="how-cell">
-            <div class="how-cell-n">03</div>
-            <h3 class="how-cell-h">A VIBE YOU CAN'T FAKE</h3>
-            <p class="how-cell-p">YOUR POOKIE'S VIBE IS PEGGED TO YOUR GOAL. YOU CAN'T PET IT, FEED IT, OR TAP IT HAPPY. THE ONLY THING THAT MOVES IT FROM BRAINROT BACK TO ZEN IS REAL SCREEN TIME GOING DOWN.</p>
-        </div>
-    </div>
-</section>
-
-<!-- ────────────────────────────────────────────────────────────────
      PICK A SIDE — Team Kraken vs Team Ghost, with 4-moods grids.
      ──────────────────────────────────────────────────────────────── -->
 <section class="teams" id="teams">
     <div class="teams-head">
-        <div class="teams-tag">// SECTION 04 / ALLEGIANCE</div>
+        <div class="teams-tag">// SECTION 03 / ALLEGIANCE</div>
         <h2 class="teams-h2">PICK A<br>SIDE.</h2>
         <p class="teams-p">TWO POOKIES. SAME FOUR VIBE TIERS. SAME VIBE MATH. DIFFERENT LOOK. SWAP ANY TIME IN SETTINGS — THE WIDGET, SHARE CARD, AND ON-STRIKE POSTER ALL FOLLOW.</p>
     </div>
@@ -2021,7 +1994,7 @@
 <section class="mockup">
     <div class="mockup-inner">
         <div>
-            <div class="mockup-tag">// SECTION 05 / PRODUCT</div>
+            <div class="mockup-tag">// SECTION 04 / PRODUCT</div>
             <h2 class="mockup-h2">RAW<br>NUMBERS.<br><span class="big-type">BIG TYPE.</span></h2>
             <p class="mockup-p">EVERY SCREEN PUTS THE COLD FACT FIRST. HOW MANY HOURS. WHICH APP. HOW FAR PAST THE GOAL. THE POOKIE HANDLES THE FEELINGS.</p>
             <div class="mockup-list">
@@ -2147,14 +2120,15 @@
 </section>
 
 <!-- ────────────────────────────────────────────────────────────────
-     FEATURES — 13 cards as hard blocks with hover-to-color.
-     (NFC shields card removed 2026-10: NFC was cut from the shipped app.)
+     FEATURES — 10 cards as hard blocks with hover-to-color, analytics +
+     blocking first. (2026-10: dropped NFC — cut from the app; SHIELD and
+     PICK YOUR POOKIE — duplicated other cards / the Allegiance section.)
      ──────────────────────────────────────────────────────────────── -->
 <section class="features" id="features">
     <div class="features-head">
         <div>
-            <div class="mockup-tag">// SECTION 06 / FEATURES</div>
-            <h2 class="features-h2">THIRTEEN<br>WAYS TO<br><span class="hl-red">NOT</span> ROT.</h2>
+            <div class="mockup-tag">// SECTION 05 / FEATURES</div>
+            <h2 class="features-h2">TEN<br>WAYS TO<br><span class="hl-red">NOT</span> ROT.</h2>
         </div>
         <div class="features-side">FIVE LANGUAGES, FOUR ICONS, THREE SHIELDS, TWO MASCOTS, ONE CRANKY POOKIE.</div>
     </div>
@@ -2162,92 +2136,71 @@
         <div class="feature-cell" data-color="mint">
             <div class="feature-cell-num">[01]</div>
             <div>
-                <h3 class="feature-cell-h">OVERVIEW</h3>
-                <p class="feature-cell-d">TODAY'S TIME AS YOUR POOKIE'S VIBE. 7-DAY DAY STRIP. PER-APP DEEP DIVE.</p>
+                <h3 class="feature-cell-h">DANGER ZONE</h3>
+                <p class="feature-cell-d">YOUR WORST HOUR, CAPPED IN ONE TAP. LIVE COUNTDOWN.</p>
             </div>
         </div>
         <div class="feature-cell" data-color="yellow">
             <div class="feature-cell-num">[02]</div>
             <div>
-                <h3 class="feature-cell-h">POOKIE SCORE</h3>
-                <p class="feature-cell-d">ATTENTION SYSTEM IN ONE NUMBER. WEEKLY TREND. PER-APP SPARKLINES.</p>
+                <h3 class="feature-cell-h">WHEN YOU SCROLL</h3>
+                <p class="feature-cell-d">HEAT-MAP OF THE HOURS YOU ACTUALLY LOSE.</p>
             </div>
         </div>
         <div class="feature-cell" data-color="coral">
             <div class="feature-cell-num">[03]</div>
             <div>
-                <h3 class="feature-cell-h">SHIELD</h3>
-                <p class="feature-cell-d">COMMAND CENTER. QUICK BLOCK + USAGE LIMITS + BLOCK ROUTINES.</p>
+                <h3 class="feature-cell-h">QUICK BLOCK</h3>
+                <p class="feature-cell-d">ONE-TAP PANIC BUTTON. APPS, CATEGORIES, OR WEBSITES.</p>
             </div>
         </div>
         <div class="feature-cell" data-color="paper">
             <div class="feature-cell-num">[04]</div>
             <div>
-                <h3 class="feature-cell-h">QUICK BLOCK</h3>
-                <p class="feature-cell-d">ONE-TAP PANIC BUTTON. APPS, CATEGORIES, OR DOMAINS. SYSTEM-WIDE.</p>
+                <h3 class="feature-cell-h">USAGE LIMITS</h3>
+                <p class="feature-cell-d">DAILY CAPS. HIT ONE AND THE APP SHIELDS ITSELF.</p>
             </div>
         </div>
         <div class="feature-cell" data-color="mint">
             <div class="feature-cell-num">[05]</div>
             <div>
-                <h3 class="feature-cell-h">USAGE LIMITS</h3>
-                <p class="feature-cell-d">DAILY CAPS. iOS DEVICEACTIVITYMONITOR DROPS THE SHIELD AUTOMATICALLY.</p>
+                <h3 class="feature-cell-h">BLOCK ROUTINES</h3>
+                <p class="feature-cell-d">TIME-WINDOW BLOCKS. SLEEP, DEEP WORK, WEEKENDS. OVERNIGHT TOO.</p>
             </div>
         </div>
         <div class="feature-cell" data-color="yellow">
             <div class="feature-cell-num">[06]</div>
             <div>
-                <h3 class="feature-cell-h">BLOCK ROUTINES</h3>
-                <p class="feature-cell-d">TIME-WINDOW BLOCKS. DEEP WORK, SLEEP, WEEKENDS. OVERNIGHT SCHEDULES SUPPORTED.</p>
+                <h3 class="feature-cell-h">POOKIE SCORE</h3>
+                <p class="feature-cell-d">YOUR WEEK IN ONE NUMBER. WEEKLY TREND. PER-APP SPARKLINES.</p>
             </div>
         </div>
         <div class="feature-cell" data-color="coral">
             <div class="feature-cell-num">[07]</div>
             <div>
-                <h3 class="feature-cell-h">"ON STRIKE"</h3>
-                <p class="feature-cell-d">OPEN A BLOCKED APP, GET A POSTER. HAZARD TAPE. ANGRY POOKIE. PICKET SIGN.</p>
+                <h3 class="feature-cell-h">SCREEN TIME HISTORY</h3>
+                <p class="feature-cell-d">EVERY DAY COLOR-CODED. TRENDS PAST iOS'S MONTH WINDOW.</p>
             </div>
         </div>
         <div class="feature-cell" data-color="paper">
             <div class="feature-cell-num">[08]</div>
             <div>
-                <h3 class="feature-cell-h">WIDGET</h3>
-                <p class="feature-cell-d">MINI POOKIE ON THE HOME SCREEN. UPDATES EVERY MINUTE VIA WIDGETKIT.</p>
+                <h3 class="feature-cell-h">OVERVIEW</h3>
+                <p class="feature-cell-d">TODAY'S TIME AS YOUR POOKIE'S VIBE. PER-APP DEEP DIVE.</p>
             </div>
         </div>
         <div class="feature-cell" data-color="mint">
             <div class="feature-cell-num">[09]</div>
             <div>
-                <h3 class="feature-cell-h">PICK YOUR POOKIE</h3>
-                <p class="feature-cell-d">KRAKEN OR GHOST. SAME VIBE MATH. SWAP IN SETTINGS — WIDGET, ICONS, SHARE CARD FOLLOW.</p>
+                <h3 class="feature-cell-h">"ON STRIKE"</h3>
+                <p class="feature-cell-d">OPEN A BLOCKED APP, GET A POSTER. ANGRY POOKIE. PICKET SIGN.</p>
             </div>
         </div>
         <div class="feature-cell" data-color="yellow">
             <div class="feature-cell-num">[10]</div>
             <div>
-                <h3 class="feature-cell-h">QUICK BLOCK FROM HOME</h3>
-                <p class="feature-cell-d">RAISE YOUR SHIELD STRAIGHT FROM THE HOME SCREEN. WIDGET-DRIVEN. ONE TAP TO SUPPORT FOCUS &mdash; NO IN-APP NAVIGATION.</p>
-            </div>
-        </div>
-        <div class="feature-cell" data-color="coral">
-            <div class="feature-cell-num">[11]</div>
-            <div>
-                <h3 class="feature-cell-h">DANGER ZONE</h3>
-                <p class="feature-cell-d">YOUR PEAK-SCROLL HOUR, FOUND AUTOMATICALLY, CAPPED IN ONE TAP. LIVE COUNTDOWN ON THE LOCK SCREEN + DYNAMIC ISLAND.</p>
-            </div>
-        </div>
-        <div class="feature-cell" data-color="paper">
-            <div class="feature-cell-num">[12]</div>
-            <div>
-                <h3 class="feature-cell-h">WHEN YOU SCROLL</h3>
-                <p class="feature-cell-d">HEAT-MAP OF THE HOURS YOU ACTUALLY LOSE. SEE THE TIMES YOUR ATTENTION GOES, NOT JUST HOW MUCH.</p>
-            </div>
-        </div>
-        <div class="feature-cell" data-color="mint">
-            <div class="feature-cell-num">[13]</div>
-            <div>
-                <h3 class="feature-cell-h">SCREEN TIME HISTORY</h3>
-                <p class="feature-cell-d">LONG-RANGE TRENDS BEYOND iOS'S ~MONTH WINDOW. WATCH A WHOLE SEASON&rsquo;S WORTH OF ATTENTION SHIFT.</p>
+                <h3 class="feature-cell-h">WIDGET</h3>
+                <p class="feature-cell-d">MINI POOKIE ON YOUR HOME SCREEN. ONE-TAP QUICK BLOCK.</p>
             </div>
         </div>
     </div>
@@ -2265,40 +2218,38 @@
      control / monitoring app. The #1 addition for the rejection.
      ──────────────────────────────────────────────────────────────── -->
 <section class="manifesto" id="whose-phone" style="padding-bottom: 56px;">
-    <div class="manifesto-tag">// SECTION 07 / WHOSE PHONE</div>
+    <div class="manifesto-tag">// SECTION 06 / WHOSE PHONE</div>
     <h2 style="font-size: clamp(44px, 11vw, 72px); margin-bottom: 32px;">YOUR PHONE.<br>YOUR APPS.<br>YOUR <span class="cute">CALL.</span></h2>
-    <p style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; line-height: 1.6; text-transform: uppercase; max-width: 720px; margin-bottom: 36px;">POOKIESCROLL BLOCKS YOUR OWN APPS, FOR YOU. YOU SET THE GOAL. YOU PICK WHAT GETS SHIELDED. YOU CAN TURN IT OFF. IT'S YOUR DEVICE — YOU'RE THE ONE IN CHARGE, START TO FINISH.</p>
     <div class="mockup-list" style="border-color: var(--bg); max-width: 720px;">
         <div class="mockup-list-row" style="border-color: var(--bg);">
             <div class="mockup-list-num" style="border-color: var(--bg);">[01]</div>
             <div class="mockup-list-body">
                 <div class="mockup-list-t">ONE PHONE, ONE OWNER</div>
-                <div class="mockup-list-d" style="opacity: 0.75;">EVERYTHING YOU BLOCK IS ON THE DEVICE IN YOUR HAND.</div>
+                <div class="mockup-list-d" style="opacity: 0.75;">YOU BLOCK YOUR OWN APPS, ON YOUR OWN PHONE.</div>
             </div>
         </div>
         <div class="mockup-list-row" style="border-color: var(--bg);">
             <div class="mockup-list-num" style="border-color: var(--bg);">[02]</div>
             <div class="mockup-list-body">
                 <div class="mockup-list-t">NOT A WATCHER</div>
-                <div class="mockup-list-d" style="opacity: 0.75;">NOT A PARENTAL-CONTROL OR CHILD-MONITORING APP. NO ONE ELSE'S SCREEN. NO ONE ELSE'S DATA.</div>
+                <div class="mockup-list-d" style="opacity: 0.75;">NOT PARENTAL CONTROL. NO ONE ELSE'S SCREEN OR DATA.</div>
             </div>
         </div>
         <div class="mockup-list-row" style="border-color: var(--bg);">
             <div class="mockup-list-num" style="border-color: var(--bg);">[03]</div>
             <div class="mockup-list-body">
                 <div class="mockup-list-t">YOU HOLD THE KEYS</div>
-                <div class="mockup-list-d" style="opacity: 0.75;">SET A GOAL, RAISE A SHIELD, DROP IT WHENEVER. NOTHING'S LOCKED BEHIND ANYONE BUT YOU.</div>
+                <div class="mockup-list-d" style="opacity: 0.75;">SET IT, DROP IT, WHENEVER YOU WANT.</div>
             </div>
         </div>
     </div>
-    <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; opacity: 0.6; text-transform: uppercase; margin-top: 28px;">SELF-DIRECTED. SINGLE-PLAYER. INDIVIDUAL MODE — ON APPLE'S OWN SCREEN TIME PERMISSIONS.</p>
 </section>
 
 <!-- ────────────────────────────────────────────────────────────────
      HOW IT WORKS — 3 steps.
      ──────────────────────────────────────────────────────────────── -->
 <section class="how" id="how">
-    <div class="how-tag">// SECTION 08 / OPERATION</div>
+    <div class="how-tag">// SECTION 07 / OPERATION</div>
     <h2 class="how-h2">THREE STEPS.<br>NO DATA LEAVES.</h2>
     <div class="how-grid">
         <div class="how-cell">
@@ -2309,7 +2260,7 @@
         <div class="how-cell">
             <div class="how-cell-n">02</div>
             <h3 class="how-cell-h">FIND YOUR HOUR</h3>
-            <p class="how-cell-p">THE HEATMAP SHOWS WHEN YOU LOSE TIME. DANGER ZONE OFFERS TO CAP IT. YOUR POOKIE REACTS LIVE TO THE VIBE OF THE DAY.</p>
+            <p class="how-cell-p">THE HEATMAP SHOWS WHEN. DANGER ZONE OFFERS TO CAP IT. YOUR POOKIE REACTS LIVE.</p>
         </div>
         <div class="how-cell">
             <div class="how-cell-n">03</div>
@@ -2325,7 +2276,7 @@
 <section class="get-app" id="get">
     <div class="get-app-inner">
         <div>
-            <div class="get-app-tag">// SECTION 09 / DOWNLOAD</div>
+            <div class="get-app-tag">// SECTION 08 / DOWNLOAD</div>
             <h2 class="get-app-h2">GET<br>THE APP.</h2>
             <p class="get-app-p">START FREE. iOS 26.2+. NO ACCOUNT. NO ADS. NO IN-APP TRACKING SDKS. UPGRADE FOR POOKIESCROLL'S CUSTOM SHIELD WORKFLOWS ANYTIME.</p>
         </div>
@@ -2360,7 +2311,7 @@
 <section class="get-app" id="pricing" style="border-top: none;">
     <div class="get-app-inner">
         <div>
-            <div class="get-app-tag">// SECTION 10 / PRICING</div>
+            <div class="get-app-tag">// SECTION 09 / PRICING</div>
             <h2 class="get-app-h2" style="font-size: clamp(52px, 13vw, 96px);">START FREE.<br>GO <span style="color: var(--accent);">DEEPER.</span></h2>
             <p class="get-app-p">DOWNLOAD AND USE POOKIESCROLL FOR FREE. PREMIUM UNLOCKS THE POOKIESCROLL FEATURES THAT GO FURTHER — THE FULL POOKIE SCORE SYSTEM, LONG-RANGE SCREEN TIME HISTORY, AND CUSTOM SHIELD WORKFLOWS. NOT ACCESS TO APPLE'S SCREEN TIME, WHICH STAYS FREE.</p>
         </div>
